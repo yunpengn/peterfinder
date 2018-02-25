@@ -7,6 +7,6 @@
  */
 class Home extends Controller {
     public function index($data = array()) {
-        echo "Haha";
+        $this->show("index");
     }
 }

@@ -11,7 +11,7 @@ class Controller {
     /**
      * Displays a certain page to the user.
      *
-     * @param $page is the name for the page in view.
+     * @param $page
      * @param array $data is an optional parameter to pass in additional data.
      */
     public function show($page, $data = array()) {
