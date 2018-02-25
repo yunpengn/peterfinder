@@ -5,9 +5,13 @@
 </head>
 <body>
 <?php
-// Creates a router that acts as a facade for the whole application.
+/**
+ * Acts as a router with a facade for the whole application.
+ */
 require_once 'core/App.class.php';
-require_once 'app/controllers/Home.class.php';
+
+// Utilizes auto-loading here.
+spl_autoload_register(array("App", "myAutoLoader"));
 
 // Runs an instance of the main app delegate.
 try {

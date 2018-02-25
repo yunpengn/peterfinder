@@ -71,4 +71,25 @@ class App {
 
         return $result;
     }
+
+    /**
+     * Creates a customize auto-loader ready for use.
+     * @param $className
+     * @throws Exception if the given class name cannot be found.
+     */
+    public static function myAutoLoader($className) {
+        $controller = 'app/controllers/'.$className.'.class.php';
+        $model = 'app/models/'.$className.'.class.php';
+        $core = 'core/'.$className.'.class.php';
+
+        if(file_exists($controller)){
+            require_once $controller;
+        }else if(file_exists($model)){
+            require_once $model;
+        }else if(file_exists($core)){
+            require_once $core;
+        }else{
+            throw new Exception("The class named " . $className . " cannot be found.");
+        }
+    }
 }
