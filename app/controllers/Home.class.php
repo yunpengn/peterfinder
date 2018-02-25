@@ -5,8 +5,8 @@
  * Date: 2018/02/25
  * Time: 19:08
  */
-class Home {
-    public function index() {
+class Home extends Controller {
+    public function index($data = array()) {
         echo "Haha";
     }
 }
