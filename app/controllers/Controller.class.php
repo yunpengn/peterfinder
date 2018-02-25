@@ -13,6 +13,7 @@ class Controller {
      *
      * @param $page
      * @param array $data is an optional parameter to pass in additional data.
+     * @throws NotFoundException when the page is not found.
      */
     public function show($page, $data = array()) {
         $url = "app/views/" . $page . ".php";
@@ -20,6 +21,8 @@ class Controller {
         // Checks whether the page exists.
         if(file_exists($url)){
             require_once $url;
+        } else {
+            throw new NotFoundException("The given view " . $page . "cannot be found.");
         }
     }
 }

@@ -10,7 +10,7 @@ class App {
      * Runs the application when the user enters a URL.
      *
      * @param string $url is the URL being entered.
-     * @throws Exception when the controller or method is not found.
+     * @throws NotFoundException when the controller or method is not found.
      */
     public static function run(string $url) {
         $parsed = self::parseUrl($url);
@@ -23,7 +23,7 @@ class App {
         if (file_exists($url)) {
             $c = new $parsed["controller"];
         } else {
-            throw new Exception("The requested controller " . $parsed["controller"] . " does not exist.\n");
+            throw new NotFoundException("The requested controller " . $parsed["controller"] . " does not exist.\n");
         }
 
         // Calls the method in the controller class.
@@ -31,7 +31,7 @@ class App {
             $m = $parsed["method"];
             $c->$m($params);
         } else {
-            throw new Exception("The requested method " . $parsed["method"] . " does not exist.\n");
+            throw new NotFoundException("The requested method " . $parsed["method"] . " does not exist.\n");
         }
     }
 
@@ -43,25 +43,18 @@ class App {
     private static function parseUrl(string $url): array {
         // Only takes the part of the URI without query string.
         $documentPath = explode('?', $url);
-        // Divides the document path into two parts, controller name & method name. Omits the
-        // else if there are more than 2 parts.
+        // Divides the document path into two parts, controller name & method name.
         $path = explode('/', $documentPath[0]);
         // Stores the result in an associate array.
         $result = array();
 
-        // Checks whether the given URL contains the controller name.
-        if (isset($path[0])) {
+        // Checks whether the given URL contains the controller & method name.
+        if (count($path) == 2) {
             $result["controller"] = $path[0];
-        } else {
-            // Otherwise, loads the default one.
-            $result["controller"] = "Home";
-        }
-
-        // Checks whether the given URL contains the method name.
-        if (isset($path[1])) {
             $result["method"] = $path[1];
         } else {
             // Otherwise, loads the default one.
+            $result["controller"] = "Home";
             $result["method"] = "index";
         }
 
@@ -80,7 +73,7 @@ class App {
     /**
      * Creates a customize auto-loader ready for use.
      * @param $className
-     * @throws Exception if the given class name cannot be found.
+     * @throws NotFoundException if the given class name cannot be found.
      */
     public static function myAutoLoader($className) {
         $controller = 'app/controllers/'.$className.'.class.php';
@@ -94,7 +87,7 @@ class App {
         }else if(file_exists($core)){
             require_once $core;
         }else{
-            throw new Exception("The class named " . $className . " cannot be found.");
+            throw new NotFoundException("The class named " . $className . " cannot be found.");
         }
     }
 }

@@ -16,8 +16,8 @@ spl_autoload_register(array("App", "myAutoLoader"));
 // Runs an instance of the main app delegate.
 try {
     App::run($_GET['url']);
-} catch(Exception $e) {
-    echo $e->getMessage();
+} catch(NotFoundException $nfe) {
+    $nfe->showError();
 }
 ?>
 </body>

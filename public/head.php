@@ -6,6 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" href="favicon.ico" >
 
+<!-- Chrome can use this to set background color. -->
+<meta name="theme-color" content="#ededed">
+
 <!-- Information for search engine -->
 <meta name="description" content="Peter Finder"/>
 <meta name="keywords" content="Peter Finder">
