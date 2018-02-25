@@ -22,7 +22,7 @@ class App {
         if (file_exists($url)) {
             $c = new $parsed["controller"];
         } else {
-            throw new Exception("The requested controller " . $parsed["controller"] . " does not exist.");
+            throw new Exception("The requested controller " . $parsed["controller"] . " does not exist.\n");
         }
 
         // Calls the method in the controller class.
@@ -30,7 +30,7 @@ class App {
             $m = $parsed["method"];
             $c->$m();
         } else {
-            throw new Exception("The requested method " . $parsed["method"] . " does not exist.");
+            throw new Exception("The requested method " . $parsed["method"] . " does not exist.\n");
         }
     }
 
