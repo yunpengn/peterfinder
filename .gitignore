@@ -2,6 +2,15 @@ vendor/
 node_modules/
 npm-debug.log
 
+## Mac OS specific file
+.DS_Store
+
+## IDE specific files
+.idea/
+
+## Exclude the actual config file (to avoid committing database credential to GitHub)
+config.php
+
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/
