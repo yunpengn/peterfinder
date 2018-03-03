@@ -52,6 +52,11 @@ class App {
         if (count($path) == 2) {
             $result["controller"] = $path[0];
             $result["method"] = $path[1];
+        } else if (count($path) > 2) {
+            $controller = $path[count($path) - 2];
+            $method = $path[count($path) - 1];
+            header("Location: http://{$_SERVER['SERVER_NAME']}/peterfinder/{$controller}/{$method}");
+            die();
         } else {
             // Otherwise, loads the default one.
             $result["controller"] = "Home";
