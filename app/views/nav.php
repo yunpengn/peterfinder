@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -15,7 +15,7 @@
         </ul>
         <ul class="navbar-nav navbar-right">
         <?php
-        if ($_SESSION['authorized'] == true) {
+        if (isset($_SESSION['authorized']) && $_SESSION['authorized'] == true) {
         ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,14 +51,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="Home/login">
+                <form method="post" action="<?php echo APP_URL; ?>/Home/login">
                     <div class="form-group">
-                        <label for="loginEmail">Username</label>
-                        <input type="text" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter username">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" class="form-control" id="loginUsername" name="username" aria-describedby="emailHelp" placeholder="Enter username">
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>

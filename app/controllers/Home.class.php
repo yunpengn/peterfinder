@@ -6,6 +6,11 @@
  * Time: 19:08
  */
 class Home extends Controller {
+    public function __construct() {
+        // Utilizes auto-loading here.
+        spl_autoload_register(array("App", "myAutoLoader"));
+    }
+
     /**
      * The main page for the application.
      *
@@ -24,6 +29,8 @@ class Home extends Controller {
      */
     public function login($data = array()) {
         $_SESSION['authorized'] = true;
+        $user = User::find($_POST["username"]);
+        $_SESSION['username'] = $user['username'];
         $this->show("index", $data);
     }
 
@@ -41,7 +48,9 @@ class Home extends Controller {
             setcookie(session_name(), "", time() - 1, "/");
         }
         // Clear the data stored on the server.
-        session_destroy();
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
         $this->show("index", $data);
     }
 }

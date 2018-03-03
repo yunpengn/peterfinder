@@ -9,6 +9,7 @@
  * Acts as a router with a facade for the whole application.
  */
 require_once 'core/App.class.php';
+require_once 'config/config.php';
 
 // Utilizes auto-loading here.
 spl_autoload_register(array("App", "myAutoLoader"));
