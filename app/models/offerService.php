@@ -1,5 +1,3 @@
-<?php include "config/db-connection.php"; ?>
-
 <?php
 // With start_time, end_time, decision_deadline, expected_salary, add a row in service_offers
 // Start the session
@@ -14,11 +12,11 @@ if (isset($_SESSION['username'])) {
 $start_time = $_GET["start_time"];
 $end_time = $_GET["end_time"];
 $decision_deadline = $_GET["decision_deadline"];
-$expected_salarry = $_GET["expected_salary"];
+$expected_salary = $_GET["expected_salary"];
 
-$query = "INSERT INTO service_offers(provider,start_time,end_time,decision_deadline,expected_salary) VALUES(" . $username . ", " . $start_time . ", " . $end_time . ", " . $decision_deadline . ", " . $expected_salary . ");";
-$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-pg_free_result($result);
+$query = "INSERT INTO service_offers(provider,start_time,end_time,decision_deadline,expected_salary) VALUES(?, ?, ?, ?, ?);";
+$db = new Database();
+$result = db->query($query,array($username, $start_time, $end_time, $decision_deadline, $expected_salary));
 header("Location: nav.php");
 
 ?>
