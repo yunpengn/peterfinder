@@ -16,6 +16,7 @@ class Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function show($page, $data = array()) {
+        extract($data);
         $url = "app/views/" . $page . ".php";
 
         // Checks whether the page exists.

@@ -13,6 +13,7 @@ class Home extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-        $this->show("index");
+        $data["a"] = "b";
+        $this->show("index", $data);
     }
 }
