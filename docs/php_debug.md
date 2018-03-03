@@ -1,7 +1,7 @@
-## Avoid PHP cache in the development environment
+## Enable debug mode in PHP
 
-In the latest version of Bitnami WAPP/MAPP/LAPP, the stack is by default shipped with Zend OPCache extension to improve 
-the speed. Although this is useful in a production environment, this can be troublesome in a development environment.
+In the latest version of Bitnami WAPP/MAPP/LAPP, it is quire weird that Bitnami disables the debug mode of PHP. Most people 
+use Bitnami stacks in development environment, so it is important for them to see the error messages.
 
 For instance, you may find that after you change some codes in certain PHP file(s), the change does not take effects. In
 such cases, you have to manually restart the Apache server to see the changes.
