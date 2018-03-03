@@ -34,7 +34,14 @@ class Home extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function logout($data = array()) {
-        $_SESSION['authorized'] = false;
+        // Empty the whole _SESSION array.
+        $_SESSION = array();
+        // Clear the session ID saved in the local cookie if necessary.
+        if(isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), "", time() - 1, "/");
+        }
+        // Clear the data stored on the server.
+        session_destroy();
         $this->show("index", $data);
     }
 }
