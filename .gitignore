@@ -11,6 +11,9 @@ npm-debug.log
 ## Exclude the actual config file (to avoid committing database credential to GitHub)
 config.php
 
+## Exclude the Bitnami setting file (because the WAPP installation path may be different)
+httpd.conf
+
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/
