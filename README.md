@@ -24,6 +24,10 @@ Include "C:/WAPP/apps/peterfinder/config/httpd.conf"
 
 - Make sure you can use `psql` (Postgre's command-line user interface), which may be troublesome for Windows users. Thus, we have prepared the [guide](docs/psql_setup.md) for Windows users.
 - Run the scripts under `scripts` folder.
+```bash
+psql < create_table.sql
+psql < load_data.sql
+```
 
 ## Small tips
 
