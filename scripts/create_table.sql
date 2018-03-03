@@ -1,5 +1,7 @@
-DROP DATABASE peterfinder;
+DROP DATABASE IF EXISTS peterfinder;
+DROP SCHEMA public CASCADE;
 CREATE DATABASE peterfinder;
+CREATE SCHEMA public;
 
 CREATE TYPE user_type AS ENUM (
   'owner',
@@ -107,7 +109,7 @@ CREATE TABLE service_history (
 
 CREATE TABLE service_target (
   service_id int REFERENCES service_offers(service_id),
-  type int REFERENCES pet_types(type),
+  type varchar(255) REFERENCES pet_types(type),
   created_by varchar(255) REFERENCES users(username),
   created_at timestamp DEFAULT current_timestamp,
   updated_by varchar(255) REFERENCES users(username),
