@@ -16,9 +16,9 @@ CREATE TABLE users (
     bio varchar(511) DEFAULT '-',
     is_admin boolean NOT NULL DEFAULT false,
     is_active boolean NOT NULL DEFAULT true
-    created_by varchar(255),
+    created_by varchar(255) REFERENCES username,
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES username,
     updated_at timestamp DEFAULT current_timestamp
 );
 
@@ -26,9 +26,9 @@ CREATE TABLE user_profiles(
     username varchar(255) REFERENCES users(username),
     type char(1) DEFAULT 'b',
     score numeric DEFAULT 0,
-    created_by varchar(255),
+    created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp,
     PRIMARY KEY (username, type)
 );
@@ -37,9 +37,9 @@ CREATE TABLE pet_types (
     type varchar(255) PRIMARY KEY,
     root_type varchar(255),
     description varchar(255),
-    created_by varchar(255),
+    created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp
 );
 
@@ -51,9 +51,9 @@ CREATE TABLE pets (
     avatar varchar(255) DEFAULT 'Have not implemented',
     birthday timestamp,
     bio varchar(511) NOT NULL DEFAULT '-',
-    created_by varchar(255),
+    created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp,
     PRIMARY KEY (username, petname)
 );
@@ -69,9 +69,9 @@ CREATE TABLE service_offers (
     CONSTRAINT decision_deadline CHECK (decision_deadline > post_time),
     CONSTRAINT start_time CHECK (start_time > decision_deadline),
     CONSTRAINT end_time CHECK (end_time > start_time),
-    created_by varchar(255),
+    created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp
 );
 
@@ -83,18 +83,18 @@ CREATE TABLE service_history (
 	review_for_owner varchar(511),
 	rating_for_taker integer,
 	review_for_taker varchar(511),
-	created_by varchar(255),
+	created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp
 );
 
 CREATE TABLE service_target (
 	service_id int REFERENCES service_offers(service_id),
 	type int REFERENCES pet_types(type),
-	created_by varchar(255),
+	created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp,
     PRIMARY KEY (service_id, type)
 );
@@ -103,7 +103,7 @@ CREATE TABLE notification (
 	username varchar(255) REFERENCES users(username),
 	message varchar(511),
 	status integer DEFAULT 0, # 0:unread, 1:read
-	created_by varchar(255),
+	created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
 );
 
@@ -112,9 +112,9 @@ CREATE TABLE bidding (
 	service_id int REFERENCES service_offers(service_id),
 	points int DEFAULT 0,
 	status int DEFAULT 0, # 0:pending, 1:succeed, 2:fail, 3:cancel
-	created_by varchar(255),
+	created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255),
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp
 	PRIMARY KEY (username, service_id)
 );
