@@ -13,7 +13,28 @@ class Home extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-        $data["a"] = "b";
+        $this->show("index", $data);
+    }
+
+    /**
+     * Handles the user login logic.
+     *
+     * @param array $data is the parameters passed in.
+     * @throws NotFoundException when the page is not found.
+     */
+    public function login($data = array()) {
+        $_SESSION['authorized'] = true;
+        $this->show("index", $data);
+    }
+
+    /**
+     * Handles the user logout logic.
+     *
+     * @param array $data is the parameters passed in.
+     * @throws NotFoundException when the page is not found.
+     */
+    public function logout($data = array()) {
+        $_SESSION['authorized'] = false;
         $this->show("index", $data);
     }
 }

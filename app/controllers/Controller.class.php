@@ -17,6 +17,7 @@ class Controller {
      */
     public function show($page, $data = array()) {
         extract($data);
+        $this->includeNavigation();
         $url = "app/views/" . $page . ".php";
 
         // Checks whether the page exists.
@@ -24,6 +25,20 @@ class Controller {
             require_once $url;
         } else {
             throw new NotFoundException("The given view " . $page . "cannot be found.");
+        }
+    }
+
+    /**
+     * @throws NotFoundException when the page is not found.
+     */
+    private function includeNavigation() {
+        $url = "app/views/nav.php";
+
+        // Checks whether the page exists.
+        if(file_exists($url)){
+            require_once $url;
+        } else {
+            throw new NotFoundException("The navigation bar cannot be found.");
         }
     }
 }
