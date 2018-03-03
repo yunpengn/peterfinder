@@ -15,10 +15,10 @@ CREATE TABLE users (
     -- location int REFERENCES regions(username),
     bio varchar(511) DEFAULT '-',
     is_admin boolean NOT NULL DEFAULT false,
-    is_active boolean NOT NULL DEFAULT true
-    created_by varchar(255) REFERENCES username,
+    is_active boolean NOT NULL DEFAULT true,
+    created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
-    updated_by varchar(255) REFERENCES username,
+    updated_by varchar(255) REFERENCES users(username),
     updated_at timestamp DEFAULT current_timestamp
 );
 
@@ -90,32 +90,31 @@ CREATE TABLE service_history (
 );
 
 CREATE TABLE service_target (
-	service_id int REFERENCES service_offers(service_id),
-	type int REFERENCES pet_types(type),
+	service_id int PRIMARY KEY REFERENCES service_offers(service_id),
+	type varchar(255) REFERENCES pet_types(type),
 	created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
     updated_by varchar(255) REFERENCES users(username),
-    updated_at timestamp DEFAULT current_timestamp,
-    PRIMARY KEY (service_id, type)
+    updated_at timestamp DEFAULT current_timestamp
 );
 
 CREATE TABLE notification (
 	username varchar(255) REFERENCES users(username),
 	message varchar(511),
-	status integer DEFAULT 0, # 0:unread, 1:read
+	status integer DEFAULT 0, -- 0:unread, 1:read
 	created_by varchar(255) REFERENCES users(username),
-    created_at timestamp DEFAULT current_timestamp,
+    created_at timestamp DEFAULT current_timestamp
 );
 
 CREATE TABLE bidding (
 	username varchar(255) REFERENCES users(username),
 	service_id int REFERENCES service_offers(service_id),
 	points int DEFAULT 0,
-	status int DEFAULT 0, # 0:pending, 1:succeed, 2:fail, 3:cancel
+	status int DEFAULT 0, -- 0:pending, 1:succeed, 2:fail, 3:cancel
 	created_by varchar(255) REFERENCES users(username),
     created_at timestamp DEFAULT current_timestamp,
     updated_by varchar(255) REFERENCES users(username),
-    updated_at timestamp DEFAULT current_timestamp
+    updated_at timestamp DEFAULT current_timestamp,
 	PRIMARY KEY (username, service_id)
 );
 
