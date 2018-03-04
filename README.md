@@ -1,6 +1,6 @@
 ## Pet Finder
 
-We help you find the peter for your pet.
+We help you find the peter for your pet. This is a standard PHP+PostgreSQL project. [Bootstrap 4](https://getbootstrap.com/) is used as the front-end framework.
 
 ## To setup the project
 
@@ -24,10 +24,13 @@ Include "C:/WAPP/apps/peterfinder/config/httpd.conf"
 
 - Make sure you can use `psql` (Postgre's command-line user interface), which may be troublesome for Windows users. Thus, we have prepared the [guide](docs/psql_setup.md) for Windows users.
 - Run the scripts under `scripts` folder.
-```bash
-psql < create_table.sql
-psql < load_data.sql
-```
+    - For windows user: Type `setup.bat`
+    - For mac/linux user: Type `bash setup.sh`
+- Enter your password when appropriate.
+
+## Integrated Development Environment (IDE)
+
+We suggest you using [PhpStorm](https://www.jetbrains.com/phpstorm/) by JetBrains.
 
 ## Small tips
 
