@@ -46,6 +46,19 @@ class UserController extends Controller {
     }
 
     /**
+     * Handles the user signup logic.
+     *
+     * @param array $data is the parameters passed in.
+     * @throws NotFoundException when the page is not found.
+     */
+    public function signup($data = array()) {
+        if (!isset($_POST["username"]) || !isset($_POST["password"])) {
+            $this->show("User/signup", $data);
+            return;
+        }
+    }
+
+    /**
      * Handles the user logout logic.
      *
      * @param array $data is the parameters passed in.

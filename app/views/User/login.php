@@ -12,12 +12,13 @@
             </div>
             <?php } ?>
             <div class="form-group">
-                <label for="loginUsername">Username or Email Address</label>
-                <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Enter username">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" id="username" placeholder="Type username" accesskey="u" tabindex="1" required autofocus>
             </div>
+
             <div class="form-group">
-                <label for="loginPassword">Password</label>
-                <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Type password" accesskey="p" tabindex="2" required>
             </div>
             <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
