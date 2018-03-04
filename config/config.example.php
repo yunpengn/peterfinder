@@ -11,7 +11,6 @@ define('DB_PREFIX', '', true);
 // Settings that are required for connecting to the database server.
 define('DB_HOST', 'localhost', true);
 define('DB_PORT', '5432', true);
-define('DB_PREFIX', '', true);
 define('DB_NAME', 'peterfinder', true);
 define('DB_USER', 'postgres', true);
 define('DB_PASSWORD', '123456', true);
@@ -28,4 +27,5 @@ if (DB_TYPE != 'sqlsrv') {
 define('DSN', $dsn, true);
 
 // Defines the root path for this app.
+// Change to http://localhost:8080/peterfinder on Mac.
 define('APP_URL', 'http://localhost/peterfinder');
