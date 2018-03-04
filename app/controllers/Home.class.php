@@ -28,10 +28,25 @@ class Home extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function login($data = array()) {
-        $_SESSION['authorized'] = true;
-        $user = User::find($_POST["username"]);
-        $_SESSION['username'] = $user['username'];
+        $usernameOrEmail = $_POST["username"];
+        $password = $_POST["password"];
+
+        // Validates by username.
+        $result = User::validateByName($usernameOrEmail, $password);
+        if (!empty($result)) {
+            $_SESSION['authorized'] = true;
+            $_SESSION['username'] = $result['username'];
+        }
+
+        // Validates by email.
+        $result = User::validateByEmail($usernameOrEmail, $password);
+        if (!empty($result)) {
+            $_SESSION['authorized'] = true;
+            $_SESSION['username'] = $result['username'];
+        }
+
         $this->show("index", $data);
+        return;
     }
 
     /**

@@ -1,5 +1,6 @@
--- Use this user to login and test (admin account).
-
+-- Use this user to login and test (admin account). The password is "peterfinder".
+INSERT INTO users(username,email,password) VALUES ('test','guy@gmail.com','$2y$10$iyC9VyvuqjA11/WLKtQkreLLBJBdj83aXJsZHv.z6WYVMU8lSSlFS');
+-- Below are sample users, whose password is the same as the respective username.
 INSERT INTO users(username,email,password) VALUES ('user1','user1@wepet.com','user1');
 INSERT INTO users(username,email,password) VALUES ('user2','user2@wepet.com','user2');
 INSERT INTO users(username,email,password) VALUES ('user3','user3@wepet.com','user3');

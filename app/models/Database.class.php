@@ -21,7 +21,7 @@ class Database {
         }
     }
 
-    public function query($query, $variables = array()) {
+    public function query(string $query, $variables = array()): array {
         // Prepared statement for query to the database later (to avoid SQL injection attack).
         $stmt = $this->db->prepare($query);
 
@@ -33,8 +33,7 @@ class Database {
             die("Cannot query to the database. ". $e->getMessage() . "<br>");
         }
 
-        // Fetch the first row returned by the statement to an associate array.
-        // Avoid using $stmt->rowCount() here due to known compatibility issues.
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        // Fetch all the rows returned by the statement to an associate array.
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

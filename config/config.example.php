@@ -17,9 +17,9 @@ define('DB_PASSWORD', '123456', true);
 
 // Gets the DSN to help create connection to the database.
 // Notice that the DSN for Microsoft SQL Server is slightly different.
-if (DB_TYPE != 'sqlsrv') {
+if (DB_TYPE == 'sqlsrv') {
     $dsn = DB_TYPE . ":server=" . DB_HOST . ";database=" . DB_NAME;
-} else if (DB_TYPE != 'pgsql') {
+} else if (DB_TYPE == 'pgsql') {
     $dsn = DB_TYPE . ":host=" . DB_HOST . ";dbname=" . DB_NAME;
 } else {
     $dsn = DB_TYPE . ":server = tcp:" . DB_HOST . "; Database=" . DB_NAME;
