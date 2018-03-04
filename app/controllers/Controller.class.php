@@ -22,7 +22,7 @@ class Controller {
 
         // Checks whether the page exists.
         if(file_exists($url)){
-            require_once $url;
+            require $url;
         } else {
             throw new NotFoundException("The given view " . $page . "cannot be found.");
         }
@@ -36,7 +36,7 @@ class Controller {
 
         // Checks whether the page exists.
         if(file_exists($url)){
-            require_once $url;
+            require $url;
         } else {
             throw new NotFoundException("The navigation bar cannot be found.");
         }

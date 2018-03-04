@@ -50,7 +50,7 @@ class App {
 
         // Checks whether the given URL contains the controller & method name.
         if (count($path) == 2) {
-            $result["controller"] = $path[0];
+            $result["controller"] = $path[0] . "Controller";
             $result["method"] = $path[1];
         } else if (count($path) > 2) {
             $controller = $path[count($path) - 2];
@@ -59,7 +59,7 @@ class App {
             die();
         } else {
             // Otherwise, loads the default one.
-            $result["controller"] = "Home";
+            $result["controller"] = "HomeController";
             $result["method"] = "index";
         }
 

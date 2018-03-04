@@ -2,25 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: neiln
- * Date: 2018/02/25
- * Time: 19:08
+ * Date: 2018/03/05
+ * Time: 01:25
  */
-class Home extends Controller {
-    public function __construct() {
-        // Utilizes auto-loading here.
-        spl_autoload_register(array("App", "myAutoLoader"));
-    }
-
-    /**
-     * The main page for the application.
-     *
-     * @param array $data is the parameters passed in.
-     * @throws NotFoundException when the page is not found.
-     */
-    public function index($data = array()) {
-        $this->show("index", $data);
-    }
-
+class UserController extends Controller {
     /**
      * Handles the user login logic.
      *
@@ -28,14 +13,20 @@ class Home extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function login($data = array()) {
+        if (!isset($_POST["username"]) || !isset($_POST["password"])) {
+            $this->show("User/login", $data);
+            return;
+        }
         $usernameOrEmail = $_POST["username"];
         $password = $_POST["password"];
+        $authorized = false;
 
         // Validates by username.
         $result = User::validateByName($usernameOrEmail, $password);
         if (!empty($result)) {
             $_SESSION['authorized'] = true;
             $_SESSION['username'] = $result['username'];
+            $authorized = true;
         }
 
         // Validates by email.
@@ -43,10 +34,15 @@ class Home extends Controller {
         if (!empty($result)) {
             $_SESSION['authorized'] = true;
             $_SESSION['username'] = $result['username'];
+            $authorized = true;
         }
 
-        $this->show("index", $data);
-        return;
+        if (!$authorized) {
+            $data["errorMessage"] = "You have entered an invalid username/email address or password";
+            $this->show("User/login", $data);
+        } else {
+            $this->show("index", $data);
+        }
     }
 
     /**
