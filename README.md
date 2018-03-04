@@ -28,6 +28,10 @@ Include "C:/WAPP/apps/peterfinder/config/httpd.conf"
     - For mac/linux user: Type `bash setup.sh`
 - Enter your password when appropriate.
 
+**Notice**: If you use the default sample data, the account for testing is as follows:
+- Username: `test`
+- Password: `peterfinder`
+
 ## Integrated Development Environment (IDE)
 
 We suggest you using [PhpStorm](https://www.jetbrains.com/phpstorm/) by JetBrains.
