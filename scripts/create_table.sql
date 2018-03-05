@@ -1,8 +1,3 @@
-DROP DATABASE IF EXISTS peterfinder;
-DROP SCHEMA public CASCADE;
-CREATE DATABASE peterfinder;
-CREATE SCHEMA public;
-
 CREATE TYPE user_type AS ENUM (
   'owner',
   'peter');
