@@ -56,6 +56,11 @@ class UserController extends Controller {
             $this->show("User/signup", $data);
             return;
         }
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        echo $_POST["type"];
+        $this->show("User/signup", $data);
     }
 
     /**

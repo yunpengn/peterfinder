@@ -27,9 +27,9 @@
                 <label for="type">User Type</label>
                 <select name="type" class="form-control" id="type">
                     <option selected disabled>Choose...</option>
-                    <option>Pet owner</option>
-                    <option>Care taker</option>
-                    <option>Both</option>
+                    <option value="owner">Pet owner</option>
+                    <option value="taker">Care taker</option>
+                    <option value="both">Both</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
