@@ -56,6 +56,22 @@ class UserController extends Controller {
             $this->show("User/signup", $data);
             return;
         }
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $type = $_POST["type"];
+
+        $result = User::signup($username, $email, $password, $type);
+        if ($result) {
+        	$_SESSION['authorized'] = true;
+            $_SESSION['username'] = $result['username'];
+            $this->show("index", $data);
+        } else {
+        	$data["errorMessage"] = "Username/email address has registered.";
+        	$data["username"] = $username;
+        	$data["email"] = $email;
+        	$this->show("User/signup", $data);
+        }
     }
 
     /**
