@@ -25,8 +25,8 @@
             </div>
             <div class="form-group">
                 <label for="type">User Type</label>
-                <select name="type" class="form-control" id="type">
-                    <option selected disabled>Choose...</option>
+                <select name="type" class="form-control" id="type" required>
+                    <option selected disabled value>Choose...</option>
                     <option value="owner">Pet owner</option>
                     <option value="taker">Care taker</option>
                     <option value="both">Both</option>

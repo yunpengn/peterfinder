@@ -12,7 +12,7 @@
             </div>
             <?php } ?>
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Username or Email Address</label>
                 <input type="text" name="username" class="form-control" id="username" placeholder="Type username" accesskey="u" tabindex="1" required autofocus>
             </div>
 

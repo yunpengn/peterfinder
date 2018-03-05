@@ -64,6 +64,33 @@ class UserController extends Controller {
     }
 
     /**
+     * Handles the user forget password logic.
+     *
+     * @param array $data is the parameters passed in.
+     * @throws NotFoundException when the page is not found.
+     */
+    public function forgetPassword($data = array()) {
+        if (!isset($_POST["email"])) {
+            $this->show("User/forgetPassword", $data);
+            return;
+        }
+        $email = $_POST["email"];
+        $subject = "Forget Password - Peter Finder";
+        $body = "This is a request to change your password for your account at Peter Finder.";
+
+        if (User::hasByEmail($email)) {
+            try {
+                Mailer::email($email, $subject, $body);
+                $data["successMessage"] = "An email has been sent to your email.";
+            } catch (Exception $e) {
+                $data["errorMessage"] = "Unable to sent the email." . $e->getMessage();
+            }
+        }
+
+        $this->show("User/forgetPassword", $data);
+    }
+
+    /**
      * Handles the user logout logic.
      *
      * @param array $data is the parameters passed in.
