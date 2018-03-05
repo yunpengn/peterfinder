@@ -109,4 +109,14 @@ class UserController extends Controller {
         }
         $this->show("index", $data);
     }
+
+    /**
+     * Handles the user settings logic.
+     *
+     * @param array $data is the parameters passed in.
+     * @throws NotFoundException when the page is not found.
+     */
+    public function settings($data = array()) {
+
+    }
 }

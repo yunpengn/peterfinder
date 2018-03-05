@@ -1,3 +1,8 @@
+<?php
+if (hasLogin()) {
+    header("Location:" . APP_URL);
+}
+?>
 <div class="container">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-4 offset-md-4 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
         <h1>Create New Account</h1>
