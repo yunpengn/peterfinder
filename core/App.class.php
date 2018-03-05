@@ -84,6 +84,7 @@ class App {
         $controller = 'app/controllers/'.$className.'.class.php';
         $model = 'app/models/'.$className.'.class.php';
         $core = 'core/'.$className.'.class.php';
+        $mailer = 'mailer/' . $className . '.class.php';
 
         if(file_exists($controller)){
             require_once $controller;
@@ -91,6 +92,8 @@ class App {
             require_once $model;
         }else if(file_exists($core)){
             require_once $core;
+        }else if(file_exists($mailer)){
+            require_once $mailer;
         }else{
             throw new NotFoundException("The class named " . $className . " cannot be found.");
         }

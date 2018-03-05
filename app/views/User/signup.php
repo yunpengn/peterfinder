@@ -1,6 +1,6 @@
 <?php
 if (hasLogin()) {
-    header("Location:".APP_URL);
+    header("Location:" . APP_URL);
 }
 ?>
 <div class="container">

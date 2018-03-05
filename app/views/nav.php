@@ -13,7 +13,7 @@ function hasLogin() {
         <ul class="navbar-nav mr-auto">
         <?php if (hasLogin()) { ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">My Pets</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/Pet/index">My Pets</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>">Service Offers</a>
@@ -33,9 +33,9 @@ function hasLogin() {
                     Welcome back, <?php echo $_SESSION['username']; ?><b class="cavet"></b>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="<?php echo APP_URL; ?>/User/settings">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="User/logout">Sign out</a>
+                    <a class="dropdown-item" href="<?php echo APP_URL; ?>/User/logout">Sign out</a>
                 </div>
             </li>
         <?php } else { ?>
@@ -46,4 +46,4 @@ function hasLogin() {
         </ul>
     </div>
 </nav>
-<br><br><br>
+<br>
