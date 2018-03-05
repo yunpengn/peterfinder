@@ -13,7 +13,7 @@ function hasLogin() {
         <ul class="navbar-nav mr-auto">
         <?php if (hasLogin()) { ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">My Pets</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/Pet/index">My Pets</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>">Service Offers</a>
@@ -46,4 +46,4 @@ function hasLogin() {
         </ul>
     </div>
 </nav>
-<br><br><br>
+<br>
