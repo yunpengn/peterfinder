@@ -59,9 +59,19 @@ class UserController extends Controller {
         $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
-        echo $_POST["type"];
-        $this->show("User/signup", $data);
-    }
+        $type = $_POST["type"];
+
+        $result = User::signup($username, $email, $password, $type);
+        if ($result) {
+        	$_SESSION['authorized'] = true;
+            $_SESSION['username'] = $result['username'];
+            $this->show("index", $data);
+        } else {
+        	$data["errorMessage"] = "Username/email address has registered.";
+        	$data["username"] = $username;
+        	$data["email"] = $email;
+        	$this->show("User/signup", $data);
+        }
 
     /**
      * Handles the user forget password logic.

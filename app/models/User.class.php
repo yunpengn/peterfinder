@@ -81,4 +81,32 @@ class User {
             return array();
         }
     }
+
+    /**
+     * Signs up 
+     * @param string $username to insert
+     * @param string $email to insert
+     * @param string $password to insert
+     * @param string $type to insert
+     * @return true if sign up success.
+     */
+    public static function signup(string $username, string $email, string $password, string $type): bool {
+        $db = new Database();
+        $query = "INSERT INTO users(username, password, email) VALUES (?, ?, ?)";
+        $resUser = $db->insert($query, array($username, password_hash($password, PASSWORD_BCRYPT), $email));
+
+        if ($resUser) {
+            $query = "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?)";
+            if ($type == "owner") {
+                $resProfile = $db->insert($query, array($username, 'owner', 0));
+            } else if ($type == "taker") {
+                $resProfile = $db->insert($query, array($username, 'peter', 0));
+            } else {
+                $resProfile = $db->insert($query, array($username, 'owner', 0))
+                           && $db->insert($query, array($username, 'peter', 0));
+            }
+        }
+
+        return $resUser && $resProfile;
+    }
 }
