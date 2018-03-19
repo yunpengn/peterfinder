@@ -39,6 +39,8 @@ class UserController extends Controller {
 
         if (!$authorized) {
             $data["errorMessage"] = "You have entered an invalid username/email address or password";
+            $data["username"] = $usernameOrEmail;
+            $data["password"] = $password;
             $this->show("User/login", $data);
         } else {
             $this->show("index", $data);
