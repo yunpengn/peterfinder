@@ -128,6 +128,6 @@ class UserController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function settings($data = array()) {
-
+        $this->show("User/settings", $data);
     }
 }
