@@ -18,11 +18,11 @@ if (hasLogin()) {
             <?php } ?>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" id="username" placeholder="Type username" accesskey="u" tabindex="1" required autofocus value="<?php echo $username; ?>">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Type username" accesskey="u" tabindex="1" required autofocus value="<?php if (isset($username)) { echo $username; } ?>">
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="someone@example.com" accesskey="e" tabindex="2" required value="<?php echo $email; ?>">
+                <input type="email" name="email" class="form-control" id="email" placeholder="someone@example.com" accesskey="e" tabindex="2" required value="<?php if (isset($email)) { echo $email; } ?>">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
