@@ -6,5 +6,5 @@
  * Time: 00:49
  */
 class Offer {
-    
+
 }
