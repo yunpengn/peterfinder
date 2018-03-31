@@ -127,4 +127,14 @@ class User {
         $result = $db->query($query, array($_SESSION['username']));
         return $result[0];
     }
+
+    public static function updateCurrentUserInfo(string $last_name, string $first_name, string $gender, string $telephone, string $bio): bool {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
+        $db = new Database();
+        $query = "UPDATE users SET last_name = ?, first_name = ?, gender = ?, telephone = ?, bio = ? WHERE username = ?";
+        $params = array($last_name, $first_name, $gender, $telephone, $bio, $_SESSION['username']);
+        return $db->insertOrUpdate($query, $params);
+    }
 }

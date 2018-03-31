@@ -16,6 +16,14 @@ if (!hasLogin()) {
                 </button>
             </div>
             <?php } ?>
+            <?php if (isset($successMessage)) { ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $successMessage; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php } ?>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" name="username" class="form-control" id="username" value="<?php if (isset($username)) { echo $username; } ?>" placeholder="Type username" accesskey="u" tabindex="1" required autofocus disabled>
@@ -34,6 +42,15 @@ if (!hasLogin()) {
             <div class="form-group">
                 <label for="username">First Name</label>
                 <input type="text" name="first_name" class="form-control" id="name" value="<?php if (isset($first_name)) { echo $first_name; } ?>" placeholder="Type your first (given) name" accesskey="f" tabindex="4">
+            </div>
+
+            <div class="form-group">
+                <label for="type">Gender</label>
+                <select name="type" class="form-control" id="type">
+                	<option <?php if (!isset($gender) || $gender == "unknown") { echo "selected"; } ?> disabled value>Choose...</option>
+                    <option value="male" <?php if (isset($gender) && $gender == "male") { echo "selected"; } ?>>Male</option>
+                    <option value="female" <?php if (isset($gender) && $gender == "female") { echo "selected"; } ?>>Female</option>
+                </select>
             </div>
 
             <div class="form-group">

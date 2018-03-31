@@ -72,6 +72,7 @@ class UserController extends Controller {
             $data["errorMessage"] = "Username/email address has registered.";
             $data["username"] = $username;
             $data["email"] = $email;
+            $data["type"] = $type;
             $this->show("User/signup", $data);
         }
     }
@@ -130,9 +131,20 @@ class UserController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function settings($data = array()) {
+        if (!empty($_POST)) {
+            $last_name = isset($_POST["last_name"]) ? $_POST["last_name"] : "";
+            $first_name = isset($_POST["first_name"]) ? $_POST["first_name"] : "";
+            $gender = isset($_POST["gender"]) ? $_POST["gender"] : "unknown";
+            $telephone = isset($_POST["telephone"]) ? $_POST["telephone"] : "";
+            $bio = isset($_POST["bio"]) ? $_POST["bio"] : "";
+            User::updateCurrentUserInfo($last_name, $first_name, $gender, $telephone, $bio);
+        }
         $info = User::getCurrentUserInfo();
         // We should not reveal the hashed password to the client side. This can be dangerous.
         unset($info["password"]);
+        if (!empty($_POST)) {
+            $data["successMessage"] = "Your profile has been updated successfully.";
+        }
         $this->show("User/settings", array_merge($data, $info));
     }
 }

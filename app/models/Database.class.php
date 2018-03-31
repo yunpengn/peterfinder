@@ -37,10 +37,16 @@ class Database {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insert(string $query, $variables = array()): bool {
+    /**
+     * Executes a single insert or update statement.
+     *
+     * @param string $query
+     * @param array $variables
+     * @return bool true if the statement executes successfully.
+     */
+    public function insertOrUpdate(string $query, $variables = array()): bool {
         // Prepared statement for query to the database later (to avoid SQL injection attack).
         $stmt = $this->db->prepare($query);
-
         // Query to the database or report error.
         try {
             $stmt->execute($variables);
