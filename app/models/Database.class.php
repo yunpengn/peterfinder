@@ -49,4 +49,31 @@ class Database {
             return false;
         }
     }
+
+    /**
+     * Executes a series of queries as a transaction to ensure atomicity.
+     *
+     * @param array $query an array of queries to be executed within the transaction block.
+     * @param array $params a 2D array containing the parameters for the queries.
+     * @return bool true if the transaction is committed; false otherwise (rollback).
+     */
+    public function transact(array $query, array $params): bool {
+        // Query to the database or report error.
+        try {
+            $this->db->beginTransaction();
+
+            // Inserts statements into the transaction one-by-one.
+            for ($i = 0; $i < count($query); $i++) {
+                // Prepared statement for query to the database later (to avoid SQL injection attack).
+                $stmt = $this->db->prepare($query[$i]);
+                $stmt->execute($params[$i]);
+            }
+
+            $this->db->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
 }

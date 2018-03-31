@@ -90,23 +90,41 @@ class User {
      * @param string $type to insert
      * @return true if sign up success.
      */
-    public static function signup(string $username, string $email, string $password, string $type): bool {
+    public static function signUp(string $username, string $email, string $password, string $type): bool {
         $db = new Database();
-        $query = "INSERT INTO users(username, password, email) VALUES (?, ?, ?)";
-        $resUser = $db->insert($query, array($username, password_hash($password, PASSWORD_BCRYPT), $email));
+        $query = array();
+        $params = array();
 
-        if ($resUser) {
-            $query = "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?)";
-            if ($type == "owner") {
-                $resProfile = $db->insert($query, array($username, 'owner', 0));
-            } else if ($type == "taker") {
-                $resProfile = $db->insert($query, array($username, 'peter', 0));
-            } else {
-                $resProfile = $db->insert($query, array($username, 'owner', 0))
-                           && $db->insert($query, array($username, 'peter', 0));
-            }
+        // Creates a new row in the user table.
+        array_push($query, "INSERT INTO users(username, password, email) VALUES (?, ?, ?)");
+        array_push($params, array($username, password_hash($password, PASSWORD_BCRYPT), $email));
+
+        // Creates a new owner row in the profile table.
+        if ($type == "owner" || $type == "both") {
+            array_push($query, "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?)");
+            array_push($params, array($username, "owner", 0));
         }
 
-        return $resUser && $resProfile;
+        // Creates a new care taker row in the profile table.
+        if ($type == "peter" || $type == "both") {
+            array_push($query, "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?)");
+            array_push($params, array($username, "peter", 0));
+        }
+
+        // Uses a transaction here to ensure atomicity.
+        return $db->transact($query, $params);
+    }
+
+    /**
+     * @return array of the user row in database; empty array if not signed in.
+     */
+    public static function getCurrentUserInfo(): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
+        $db = new Database();
+        $query = "SELECT * FROM users WHERE username = ?";
+        $result = $db->query($query, array($_SESSION['username']));
+        return $result[0];
     }
 }

@@ -33,7 +33,7 @@ if (hasLogin()) {
                 <select name="type" class="form-control" id="type" required>
                     <option selected disabled value>Choose...</option>
                     <option value="owner">Pet owner</option>
-                    <option value="taker">Care taker</option>
+                    <option value="peter">Care taker</option>
                     <option value="both">Both</option>
                 </select>
             </div>

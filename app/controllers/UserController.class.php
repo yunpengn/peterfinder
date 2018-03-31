@@ -63,10 +63,10 @@ class UserController extends Controller {
         $password = $_POST["password"];
         $type = $_POST["type"];
 
-        $result = User::signup($username, $email, $password, $type);
+        $result = User::signUp($username, $email, $password, $type);
         if ($result) {
             $_SESSION['authorized'] = true;
-            $_SESSION['username'] = $result['username'];
+            $_SESSION['username'] = $username;
             $this->show("index", $data);
         } else {
             $data["errorMessage"] = "Username/email address has registered.";
@@ -130,6 +130,9 @@ class UserController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function settings($data = array()) {
-        $this->show("User/settings", $data);
+        $info = User::getCurrentUserInfo();
+        // We should not reveal the hashed password to the client side. This can be dangerous.
+        unset($info["password"]);
+        $this->show("User/settings", array_merge($data, $info));
     }
 }

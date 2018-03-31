@@ -40,7 +40,7 @@ function hasLogin() {
             </li>
         <?php } else { ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>/User/login">Sign in</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/User/login">Sign in/up</a>
             </li>
         <?php } ?>
         </ul>
