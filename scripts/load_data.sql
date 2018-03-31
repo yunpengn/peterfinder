@@ -1,26 +1,26 @@
 -- Use this user to login and test (admin account). The password is "peterfinder".
-INSERT INTO users(username, email, password) VALUES ('test', 'guy@gmail.com', '$2y$10$DAI/0y8Cwp9wuoJnQYZJiuJRJc1ndj1a9MWsDNfSiMh5irDp9DE5y');
+INSERT INTO users(username, email, password) VALUES ('test', 'guy@gmail.com', '$2y$10$YxaoA76mPQKIQKH51ibtJOSagQ5kBmalj7RW6j3Zw/Qsxali6bUMC');
 -- Below are sample users, whose password is the same as the respective username.
-INSERT INTO users(username, email, password) VALUES ('user0', 'user0@wepet.com', '$2y$10$5GsggKZ/qv6MpHu2e.HgY.iUB08GGYVKx86MPUicG9XJHvNe6qtGi');
-INSERT INTO users(username, email, password) VALUES ('user1', 'user1@wepet.com', '$2y$10$qNtXjcwJhrEJdjcH4yH4IubJp7pdSTCVvZeXDVBaqqnXmk./gEeRy');
-INSERT INTO users(username, email, password) VALUES ('user2', 'user2@wepet.com', '$2y$10$wv8QBaUf74UWR04SqfWGfOtMM20BrlcWUKldonkmacz/.TC8/XD.C');
-INSERT INTO users(username, email, password) VALUES ('user3', 'user3@wepet.com', '$2y$10$4b.1snBSRQv56.OMGKq9Uuuj5zWQsOgVxcbIEQw28lDAMbhzWOC86');
-INSERT INTO users(username, email, password) VALUES ('user4', 'user4@wepet.com', '$2y$10$uOVE4AUBVMGYB1758H/alOLxNpC8zLpxB84tQ934dy/NSj1mCD2s.');
-INSERT INTO users(username, email, password) VALUES ('user5', 'user5@wepet.com', '$2y$10$R3yA7I1QpLvWe0DhK8FgXOQqeQZWgAAMOsfW3n5LIxwu75/sBU8DW');
-INSERT INTO users(username, email, password) VALUES ('user6', 'user6@wepet.com', '$2y$10$wCnoEKWikke4IVIZpvR/puA9Jf6Fs161UhcrZrxa/iC/DGqMHYlbK');
-INSERT INTO users(username, email, password) VALUES ('user7', 'user7@wepet.com', '$2y$10$khf8TsvJMnbm13i43sX3oeMOtXvxiiBQlvL8Oe4W8WOH3ZZLFaR26');
-INSERT INTO users(username, email, password) VALUES ('user8', 'user8@wepet.com', '$2y$10$ToeAktmC2uhOdtTtEGoPoeGxsa/1SspEzoisMMJqh8ml2Lm9MDueu');
-INSERT INTO users(username, email, password) VALUES ('user9', 'user9@wepet.com', '$2y$10$SPtMnSS4M9n6qKoIN16uEukQ.GTbstgTh72S3d1ILAOPogGIXCGqm');
-INSERT INTO users(username, email, password) VALUES ('user10', 'user10@wepet.com', '$2y$10$JRedv4bBtoIvGwxYJYAvp.rY9.RIF92/J2MJ53ukAlXp3b71bdyrG');
-INSERT INTO users(username, email, password) VALUES ('user11', 'user11@wepet.com', '$2y$10$1kF7dp/JOqpDQME2C5eeYujoUI56mfCHDo4m1V3DBbWQQtFPQhedG');
-INSERT INTO users(username, email, password) VALUES ('user12', 'user12@wepet.com', '$2y$10$sFpphG6Z7Ly3BkykB2GqOeit6hJLv90zJqJHGGpaE.zId4/qcSvz2');
-INSERT INTO users(username, email, password) VALUES ('user13', 'user13@wepet.com', '$2y$10$eEsWJzXx/M0HeJ6dfzWtyOuCsOthDl/50hAbq7JVasxZPe6MTi/4O');
-INSERT INTO users(username, email, password) VALUES ('user14', 'user14@wepet.com', '$2y$10$4oDFdz2.k4O7JD6rs1RKkeQbjKTAv0Bvnf.chN42V5NVmIElM6N8C');
-INSERT INTO users(username, email, password) VALUES ('user15', 'user15@wepet.com', '$2y$10$By6Pwnmtb/ryHzKd.Px8ROIXUzZYVcgv94Cc/hcW8zIExx7ObjmgK');
-INSERT INTO users(username, email, password) VALUES ('user16', 'user16@wepet.com', '$2y$10$7Rw0Gf5L6G8EF76.ISvgQ./bvzAbb.0vq3bs1FR1sBgyjKW1Nv3GC');
-INSERT INTO users(username, email, password) VALUES ('user17', 'user17@wepet.com', '$2y$10$N/VYoFdPf0B6Gwv5k1eSF.rKGmyy7x8eR.a7yFlhqDpE3OUdNS.pK');
-INSERT INTO users(username, email, password) VALUES ('user18', 'user18@wepet.com', '$2y$10$iXFMlt6EfG6vFGkztbMek.O/B9Y6rHbFth5sUUx/KZy2tEnAIoc0W');
-INSERT INTO users(username, email, password) VALUES ('user19', 'user19@wepet.com', '$2y$10$fOpnX8iTV8pyC0ONAc2UzuY60rXZnArFb8YkdWah4vUkaKqD4fMpS');
+INSERT INTO users(username, email, password) VALUES ('user0', 'user0@wepet.com', '$2y$10$iZA9Jx1nFd8Iw1N.Ds/NSeMcvsyFO375BVO0mqY2.ce/GiqHFctbq');
+INSERT INTO users(username, email, password) VALUES ('user1', 'user1@wepet.com', '$2y$10$xLzbgbgXKy7d5h0msyb0fug52Z6BqmGL63iho249KQeLiUWNERA.2');
+INSERT INTO users(username, email, password) VALUES ('user2', 'user2@wepet.com', '$2y$10$AA7IRLfQ5.vdHMlqlzoaueqCb6Zo531MHgmdGr4kVlZmGbxs8jVfS');
+INSERT INTO users(username, email, password) VALUES ('user3', 'user3@wepet.com', '$2y$10$R0fGETTBxejN60.U19NJteV7k/M/v8iJI75TUt8ExomC2bF5jmmDO');
+INSERT INTO users(username, email, password) VALUES ('user4', 'user4@wepet.com', '$2y$10$tVmx5mJQP3AenYQOHgjfwOfnECrMknKQHMrahAZg0pfEjjh2Hp8x6');
+INSERT INTO users(username, email, password) VALUES ('user5', 'user5@wepet.com', '$2y$10$CLUzUsiltjWid8oW2aWmYO6hDCZnsTwy5VGmjdKfaSYJnqPPxkCUa');
+INSERT INTO users(username, email, password) VALUES ('user6', 'user6@wepet.com', '$2y$10$t66FAhL6MLc/oSeZIL/80Ochzwn3XWlIuzouLmE.0wuzcu/a87dAW');
+INSERT INTO users(username, email, password) VALUES ('user7', 'user7@wepet.com', '$2y$10$LbRGTH8we03TsXg2K8a8j.LfJXxq5A7pMry23l.Gxn7NRAOHwqj96');
+INSERT INTO users(username, email, password) VALUES ('user8', 'user8@wepet.com', '$2y$10$nGLn6BF4e8lS.1fe..ZUmO.BCJRgleGO.RaNthcErEBvDS3/79q0G');
+INSERT INTO users(username, email, password) VALUES ('user9', 'user9@wepet.com', '$2y$10$MKC7Xq0K65bCQ4DeFg1is.UGv6oCZAclw81Q/qjwtPpAW/jZ16QrC');
+INSERT INTO users(username, email, password) VALUES ('user10', 'user10@wepet.com', '$2y$10$tEcL97yV05t03YY5psVIo.GEaPFr93S8JnS6iY7FJ/FeVw0ecfxjy');
+INSERT INTO users(username, email, password) VALUES ('user11', 'user11@wepet.com', '$2y$10$K5A4m63vazjWZGi3FPu.VeVxgVVhX.42LJKVzxSQHsnLiJ65rPC8i');
+INSERT INTO users(username, email, password) VALUES ('user12', 'user12@wepet.com', '$2y$10$xUyuY4J.pei2tm87Fwxj9OPgP01Mfhj3u40N/TPd0BsD/uz3WtFJy');
+INSERT INTO users(username, email, password) VALUES ('user13', 'user13@wepet.com', '$2y$10$pM1TrrPiiy/u97m4UEPIBOHKX.rt6Ik/lt/tn/VpmQ5v8nW14kwrG');
+INSERT INTO users(username, email, password) VALUES ('user14', 'user14@wepet.com', '$2y$10$093emZ2oikHChutDSrKyhOmyQM4BcgNnadN9OxkdQB2qa0yxcpXRW');
+INSERT INTO users(username, email, password) VALUES ('user15', 'user15@wepet.com', '$2y$10$h/aocsd9lpskE9VEv2UtqeLXDu3a7fhc4GElaRgDQr8f/2YLSOU.G');
+INSERT INTO users(username, email, password) VALUES ('user16', 'user16@wepet.com', '$2y$10$pgFCDRyiKp9uYLbb79j5e.rUZEB9n5rFIKgBnHOGVDsj0xzRGByzO');
+INSERT INTO users(username, email, password) VALUES ('user17', 'user17@wepet.com', '$2y$10$vf7BUZYIERL1LSKOqLcRV.wjOztSLHoYCNVe.6Fr4lbbJodbunII.');
+INSERT INTO users(username, email, password) VALUES ('user18', 'user18@wepet.com', '$2y$10$ViAKMplLTvsgXR3cK8tfL.0mymYTpef4PsaWfr5u4TXwHPkVJDaQG');
+INSERT INTO users(username, email, password) VALUES ('user19', 'user19@wepet.com', '$2y$10$M8mC.SDuAUCQ/SUQbi1JQO15C.kJnIjcJksmzc1NEO.t7Umx3lrWy');
 
 -- Admin user is both owner and taker.
 INSERT INTO user_profiles(username, type) VALUES ('test', 'owner');

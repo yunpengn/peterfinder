@@ -4,7 +4,7 @@
 
 echo '-- Use this user to login and test (admin account). The password is "peterfinder".<br>';
 $username = "test";
-$hashed = password_hash($username, PASSWORD_BCRYPT);
+$hashed = password_hash("peterfinder", PASSWORD_BCRYPT);
 $query = "INSERT INTO users(username, email, password) VALUES ('" . $username . "', 'guy@gmail.com', '" . $hashed . "');";
 echo $query . "<br>";
 
