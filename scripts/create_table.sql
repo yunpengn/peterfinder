@@ -68,8 +68,7 @@ CREATE TABLE pets (
   created_at timestamp DEFAULT current_timestamp,
   updated_by varchar(255) REFERENCES users(username),
   updated_at timestamp DEFAULT current_timestamp,
-  PRIMARY KEY (username, petname),
-  CONSTRAINT valid_user_type CHECK (EXISTS (SELECT 1 FROM user_profiles p WHERE p.username))
+  PRIMARY KEY (username, petname)
 );
 
 CREATE TABLE service_offers (
@@ -85,7 +84,7 @@ CREATE TABLE service_offers (
   updated_at timestamp DEFAULT current_timestamp,
   CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > updated_at),
   CONSTRAINT "Service start time must be after decision deadline." CHECK (start_date > decision_deadline),
-  CONSTRAINT end_time CHECK (end_date > start_date)
+  CONSTRAINT "Service end time must be after start time." CHECK (end_date > start_date)
 );
 
 CREATE TABLE service_history (
