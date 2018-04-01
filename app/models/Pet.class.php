@@ -6,6 +6,9 @@
  * Time: 11:17
  */
 class Pet {
+    /**
+     * @return array 2D-array representing all pets belonging to the current user.
+     */
     public static function myPets(): array {
         if (!isset($_SESSION['username'])) {
             return array();

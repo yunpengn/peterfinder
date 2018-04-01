@@ -6,8 +6,9 @@ BEGIN
 	SELECT COUNT(*) INTO count FROM user_profiles p WHERE p.username = NEW.username AND p.type = 'owner';
 	IF count <= 0 THEN
 		RAISE EXCEPTION '% is not a pet owner.', NEW.username;
+		RETURN NULL;
 	END IF;
-	RETURN NULL;
+	RETURN NEW;
 END; $$
 LANGUAGE PLPGSQL;
 
