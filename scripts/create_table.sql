@@ -60,7 +60,7 @@ CREATE TABLE pets (
   username varchar(255) REFERENCES users(username),
   petname varchar(255) NOT NULL,
   gender gender_type NOT NULL DEFAULT 'unknown',
-  type varchar(255) REFERENCES pet_types(type),
+  type varchar(255) REFERENCES pet_types(type) NOT NULL,
   avatar varchar(255),
   birthday date,
   bio varchar(511),

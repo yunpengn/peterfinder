@@ -51,3 +51,16 @@ for ($i = 0; $i < 4; $i++) {
 	$query = "INSERT INTO pet_types(type, root_type, description) VALUES ('" . $name2[$i] . "', '" . $name[$i] . "', '" . $desp[$i] . "');";
 	echo $query . "<br>";
 }
+echo "<br>";
+
+echo "-- Generate some fake data for pets.<br>";
+$username = array("test", "test", "user0", "user2");
+$petname = array("John", "Tommy", "John", "Swify");
+$type = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird");
+$bio = array("A very nice dog", "My pet really loves sleeping", "He is quite quite.", "Please give her enough food. Please!");
+for ($i = 0; $i < 4; $i++) {
+	$query = "INSERT INTO pets(username, petname, type, bio) VALUES ('" . 
+			  $username[$i] . "', '" . $petname[$i] . "', '" . $type[$i] . "', '" . $bio[$i] . "');";
+	echo $query . "<br>";
+}
+echo "<br>";
