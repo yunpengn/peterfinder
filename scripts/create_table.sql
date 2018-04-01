@@ -26,7 +26,6 @@ CREATE TABLE users (
   first_name varchar(255),
   gender gender_type NOT NULL DEFAULT 'unknown',
   telephone varchar(15),
-  -- location int REFERENCES regions(username),
   bio varchar(511),
   is_admin boolean NOT NULL DEFAULT false,
   is_active boolean NOT NULL DEFAULT true,

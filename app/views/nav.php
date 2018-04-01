@@ -16,7 +16,7 @@ function hasLogin() {
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Pet/index">My Pets</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">Service Offers</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/Offer/index">Service Offers</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>">Service Biddings</a>
@@ -40,7 +40,7 @@ function hasLogin() {
             </li>
         <?php } else { ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>/User/login">Sign in</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/User/login">Sign in/up</a>
             </li>
         <?php } ?>
         </ul>

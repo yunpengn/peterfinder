@@ -37,15 +37,48 @@ class Database {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insert(string $query, $variables = array()): bool {
+    /**
+     * Executes a single insert or update statement.
+     *
+     * @param string $query
+     * @param array $variables
+     * @return bool true if the statement executes successfully.
+     */
+    public function insertOrUpdate(string $query, $variables = array()): bool {
         // Prepared statement for query to the database later (to avoid SQL injection attack).
         $stmt = $this->db->prepare($query);
-
         // Query to the database or report error.
         try {
             $stmt->execute($variables);
             return true;
         } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Executes a series of queries as a transaction to ensure atomicity.
+     *
+     * @param array $query an array of queries to be executed within the transaction block.
+     * @param array $params a 2D array containing the parameters for the queries.
+     * @return bool true if the transaction is committed; false otherwise (rollback).
+     */
+    public function transact(array $query, array $params): bool {
+        // Query to the database or report error.
+        try {
+            $this->db->beginTransaction();
+
+            // Inserts statements into the transaction one-by-one.
+            for ($i = 0; $i < count($query); $i++) {
+                // Prepared statement for query to the database later (to avoid SQL injection attack).
+                $stmt = $this->db->prepare($query[$i]);
+                $stmt->execute($params[$i]);
+            }
+
+            $this->db->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->db->rollBack();
             return false;
         }
     }

@@ -31,10 +31,10 @@ if (hasLogin()) {
             <div class="form-group">
                 <label for="type">User Type</label>
                 <select name="type" class="form-control" id="type" required>
-                    <option selected disabled value>Choose...</option>
-                    <option value="owner">Pet owner</option>
-                    <option value="taker">Care taker</option>
-                    <option value="both">Both</option>
+                    <option <?php if (!isset($type)) { echo "selected"; } ?> disabled value>Choose...</option>
+                    <option value="owner" <?php if (isset($type) && $type == "owner") { echo "selected"; } ?>>Pet owner</option>
+                    <option value="peter" <?php if (isset($type) && $type == "peter") { echo "selected"; } ?>>Care taker</option>
+                    <option value="both" <?php if (isset($type) && $type == "both") { echo "selected"; } ?>>Both</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
