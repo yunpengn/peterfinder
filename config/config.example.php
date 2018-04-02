@@ -31,5 +31,8 @@ define('DSN', $dsn, true);
 define('APP_URL', 'http://localhost/peterfinder');
 
 // Settings for sending non-reply emails.
-define('EMAIL_ADDRESS', 'randomy@gmail.com', true);
+define('EMAIL_ADDRESS', 'random@gmail.com', true);
 define('EMAIL_PASSWORD', '123456', true);
+
+// Settings for datetime format.
+define('DATE_FORMAT', 'd M, Y', true);

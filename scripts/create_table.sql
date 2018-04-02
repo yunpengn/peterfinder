@@ -60,7 +60,7 @@ CREATE TABLE pets (
   username varchar(255) REFERENCES users(username),
   petname varchar(255) NOT NULL,
   gender gender_type NOT NULL DEFAULT 'unknown',
-  type varchar(255) REFERENCES pet_types(type),
+  type varchar(255) REFERENCES pet_types(type) NOT NULL,
   avatar varchar(255),
   birthday date,
   bio varchar(511),
@@ -81,10 +81,10 @@ CREATE TABLE service_offers (
   created_by varchar(255) REFERENCES users(username),
   created_at timestamp DEFAULT current_timestamp,
   updated_by varchar(255) REFERENCES users(username),
-  updated_at timestamp DEFAULT current_timestamp
-  CONSTRAINT decision_deadline CHECK (decision_deadline > updated_at),
-  CONSTRAINT start_time CHECK (start_date > decision_deadline),
-  CONSTRAINT end_time CHECK (end_date > start_date)
+  updated_at timestamp DEFAULT current_timestamp,
+  CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > updated_at),
+  CONSTRAINT "Service start time must be after decision deadline." CHECK (start_date > decision_deadline),
+  CONSTRAINT "Service end time must be after start time." CHECK (end_date > start_date)
 );
 
 CREATE TABLE service_history (
