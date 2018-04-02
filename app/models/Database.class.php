@@ -52,6 +52,7 @@ class Database {
             $stmt->execute($variables);
             return true;
         } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
