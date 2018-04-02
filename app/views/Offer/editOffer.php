@@ -5,9 +5,9 @@ if (!hasLogin()) {
 ?>
 <div class="container">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-4 offset-md-4 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
-        <h1>Create New Offer</h1>
+        <h1>Edit Your Offer</h1>
         <br>
-        <form method="post" action="<?php echo APP_URL; ?>/Offer/createOffer">
+        <form method="post" action="<?php echo APP_URL; ?>/Offer/editOffer?service_id=<?php echo $service_id; ?>">
             <?php if (isset($errorMessage)) { ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo $errorMessage; ?>
@@ -26,11 +26,22 @@ if (!hasLogin()) {
             </div>
             <div class="form-group">
                 <label for="decision_deadline">Decision Deadline</label>
-                <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo $decision_deadline; } ?>">
+                <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo substr($decision_deadline, 0, strpos($decision_deadline, " ")); } ?>">
             </div>
             <div class="form-group">
                 <label for="expected_salary">Expected Salary</label>
                 <input type="text" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
+            </div>
+            <div class="form-group">
+                <label for="type_selected">Pets Type</label>
+                <select name="type_selected[]" class="form-control" id="type_selected" required multiple>
+                    <option <?php if (!isset($type_selected)) { echo "selected"; } ?> disabled value>Choose...</option>
+                    <?php
+                    for ($i = 0; $i < count($pet_types); $i++) {
+                        echo "<option value='".$pet_types[$i]["type"]."'>".$pet_types[$i]["type"]."</option>";
+                    }
+                    ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

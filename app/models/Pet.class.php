@@ -22,4 +22,11 @@ class Pet {
     public static function add(): bool {
         return true;
     }
+
+    public static function queryType(): array {
+    	$db = new Database();
+        $query = "SELECT type FROM pet_types";
+        
+        return $db->query($query, array());
+    }
 }
