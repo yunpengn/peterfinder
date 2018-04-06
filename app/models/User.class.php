@@ -138,3 +138,4 @@ class User {
         return $db->insertOrUpdate($query, $params);
     }
 }
+

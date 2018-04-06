@@ -148,3 +148,4 @@ class UserController extends Controller {
         $this->show("User/settings", array_merge($data, $info));
     }
 }
+

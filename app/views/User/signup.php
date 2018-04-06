@@ -44,3 +44,4 @@ if (hasLogin()) {
         <a href="<?php echo APP_URL; ?>/User/forgetPassword">Forget Password?</a>
     </div>
 </div>
+
