@@ -36,3 +36,4 @@ define('EMAIL_PASSWORD', '123456', true);
 
 // Settings for datetime format.
 define('DATE_FORMAT', 'd M, Y', true);
+
