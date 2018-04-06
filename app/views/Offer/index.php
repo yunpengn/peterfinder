@@ -15,7 +15,7 @@ if (!hasLogin()) {
                 </button>
             </div>
         <?php } ?>
-        <table id="table_id" class="table table-responive table-striped table-bordered display">
+        <table id="table_id" class="table table-responsive table-striped table-bordered display">
 		    <thead>
 		        <tr>
 		            <th>Column 1</th>
