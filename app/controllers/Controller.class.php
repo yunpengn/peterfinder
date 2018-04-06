@@ -48,3 +48,4 @@ class Controller {
         file_put_contents($logFile, $msg, FILE_APPEND);
     }
 }
+
