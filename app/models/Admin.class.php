@@ -25,3 +25,4 @@ class Admin {
         return $db->query($query, array());
     }
 }
+

@@ -8,7 +8,8 @@ class AdminController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-        $data["pets"] = Pet::myPets();
-        $this->show("Pet/index", $data);
+        $data["pets"] = Admin::myPets();
+        $this->show("Admin/index", $data);
     }
 }
+
