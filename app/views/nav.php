@@ -24,6 +24,12 @@ function hasLogin() {
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>">Service History</a>
             </li>
+
+            <?php if ($_SESSION['username'] == "test") { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo APP_URL; ?>"/Admin/index>Admin Page</a>
+                </li>
+            <?php } ?>
         <?php } ?>
         </ul>
         <ul class="navbar-nav navbar-right">
