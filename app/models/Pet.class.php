@@ -29,5 +29,15 @@ class Pet {
         
         return $db->query($query, array());
     }
+
+    public static function getPetInfo(string $petName): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
+        $db = new Database();
+        $query = "SELECT * FROM pets WHERE username = ? AND petname = ?";
+        $result = $db->query($query, array($_SESSION['username'], $petName));
+        return $result[0];
+    }
 }
 

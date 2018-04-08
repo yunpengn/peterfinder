@@ -16,5 +16,21 @@ class PetController extends Controller {
         $data["pets"] = Pet::myPets();
         $this->show("Pet/index", $data);
     }
+
+    /**
+     * Edits the information about an existing pet.
+     *
+     * @param array $data
+     * @throws NotFoundException
+     */
+    public function edit($data = array()) {
+        if (!isset($data["petname"])) {
+            $this->index($data);
+            return;
+        }
+        $petName = $data["petname"];
+        $data = array_merge($data, Pet::getPetInfo($petName));
+        $this->show("Pet/edit", $data);
+    }
 }
 

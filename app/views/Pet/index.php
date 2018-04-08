@@ -15,7 +15,7 @@ if (!hasLogin()) {
 		            <th>Type</th>
 		            <th>Birthday</th>
 		            <th>Bio</th>
-		            <th></th>
+		            <th class="nosort">Edit</th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -26,9 +26,9 @@ if (!hasLogin()) {
 		            <td><?php echo isset($pet["type"]) ? ucfirst($pet["type"]) : ""; ?></td>
 		            <td><?php echo isset($pet["birthday"]) ? date_format(date_create($pet["birthday"]), DATE_FORMAT) : ""; ?></td>
 		            <td><?php echo isset($pet["bio"]) ? $pet["bio"] : ""; ?></td>
-		            <td><button type="button" class="btn btn-success">
+		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Pet/edit?petname=<?php echo $pet['petname']; ?>">
 		            	<i class="far fa-edit"></i>
-		            </button></td>
+		            </a></td>
 		        </tr>
 		    	<?php } ?>
 		    </tbody>
@@ -40,4 +40,3 @@ if (!hasLogin()) {
 		</script>
     </div>
 </div>
-
