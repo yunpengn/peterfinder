@@ -7,7 +7,7 @@ if (!hasLogin()) {
     <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
         <h1>My Pets</h1>
         <br>
-        <table id="myPets" class="table table-responive table-striped table-bordered display">
+        <table id="myPets" class="table table-responsive table-striped table-bordered display">
 		    <thead>
 		        <tr>
 		            <th>Pet Name</th>
@@ -40,3 +40,4 @@ if (!hasLogin()) {
 		</script>
     </div>
 </div>
+

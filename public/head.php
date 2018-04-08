@@ -47,3 +47,4 @@ if ((!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') && $_SERVER['HTTP_H
     exit();
 }
 ?>
+

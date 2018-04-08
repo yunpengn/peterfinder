@@ -56,3 +56,4 @@ class Offer {
 		return $db->insertOrUpdate($query, array($service_id));
 	}
 }
+

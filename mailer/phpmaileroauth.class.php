@@ -195,3 +195,4 @@ class PHPMailerOAuth extends PHPMailer
         return false;
     }
 }
+

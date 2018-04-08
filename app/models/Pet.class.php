@@ -30,3 +30,4 @@ class Pet {
         return $db->query($query, array());
     }
 }
+

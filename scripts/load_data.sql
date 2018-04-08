@@ -84,3 +84,7 @@ INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('user9','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('user10','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('test','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('test','2018-04-26 08:05:00','2018-04-30 20:55:00','2018-04-21 23:59:59');

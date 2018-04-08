@@ -49,3 +49,4 @@ if (!hasLogin()) {
         <a href="<?php echo APP_URL; ?>/Offer">Cancel</a>
     </div>
 </div>
+
