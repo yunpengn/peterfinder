@@ -64,27 +64,27 @@ INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'Tommy', 'Cat', 
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('user0', 'John', 'Dog', 'He is quite quite.');
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('user2', 'Swify', 'Budgies Bird', 'Please give her enough food. Please!');
 
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user1','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user2','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user3','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user4','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user5','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user6','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user7','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user8','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user9','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('user10','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('test','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
--- INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
--- VALUES('test','2018-04-26 08:05:00','2018-04-30 20:55:00','2018-04-21 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user1','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user2','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user3','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user4','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user5','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user6','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user7','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user8','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user9','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('user10','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('test','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
+INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
+VALUES('test','2018-04-26 08:05:00','2018-04-30 20:55:00','2018-04-21 23:59:59');

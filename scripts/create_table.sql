@@ -74,7 +74,8 @@ CREATE TABLE service_offers (
   updated_at timestamp DEFAULT current_timestamp,
   CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > updated_at),
   CONSTRAINT "Service start time must be after decision deadline." CHECK (start_date > decision_deadline),
-  CONSTRAINT "Service end time must be after start time." CHECK (end_date > start_date)
+  CONSTRAINT "Service end time must be after start time." CHECK (end_date > start_date),
+  CONSTRAINT "Expected salary must be positive." CHECK (expected_salary > 0)
 );
 
 CREATE TABLE service_target (
@@ -92,7 +93,8 @@ CREATE TABLE bidding (
   status bidding_status DEFAULT 'pending',
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
-  PRIMARY KEY (bidder, service_id)
+  PRIMARY KEY (bidder, service_id),
+  CONSTRAINT "Bidding points must be positive." CHECK (points > 0)
 );
 
 CREATE TABLE service_history (

@@ -54,6 +54,7 @@ for ($i = 0; $i < 4; $i++) {
 echo "<br>";
 
 echo "-- Generate some fake data for pets.<br>";
+$deadline = strtotime("+2 weeks");
 $username = array("test", "test", "user0", "user2");
 $petname = array("John", "Tommy", "John", "Swify");
 $type = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird");
@@ -65,3 +66,5 @@ for ($i = 0; $i < 4; $i++) {
 }
 echo "<br>";
 
+echo "-- Generate some fake data for service offers.<br>";
+echo "<br>";
