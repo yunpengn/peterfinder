@@ -19,7 +19,6 @@ class OfferController extends Controller {
         $this->show("Offer/index", $data);
     }
 
-
 	/**
      * Handles the offer creating logic.
      *
@@ -47,7 +46,7 @@ class OfferController extends Controller {
     	$result = Offer::createOffer($username, $start_date, $end_date, $decision_deadline, $expected_salary, $type_selected);
     	if ($result) {
     		$message = "?message=Successfully creating new offer!";
-    		header("Location:" . APP_URL."/Offer/index".$message);
+    		header("Location:" . APP_URL . "/Offer/index" . $message);
     	} else {
     		$data["errorMessage"] = "invalid input data";
     		$data["username"] = $username;
