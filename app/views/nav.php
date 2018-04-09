@@ -46,5 +46,5 @@ function hasLogin() {
         </ul>
     </div>
 </nav>
-<br>
+<br id="break-after-navbar">
 
