@@ -88,3 +88,28 @@ INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('test','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('test','2018-04-26 08:05:00','2018-04-30 20:55:00','2018-04-21 23:59:59');
+
+INSERT INTO bidding(bidder, service_id, points)
+SELECT 'test', service_id, 10
+FROM service_offers
+WHERE provider = 'user1';
+INSERT INTO bidding(bidder, service_id, points)
+SELECT 'test', service_id, 30
+FROM service_offers
+WHERE provider = 'user2';
+INSERT INTO bidding(bidder, service_id, points)
+SELECT 'test', service_id, 50
+FROM service_offers
+WHERE provider = 'user3';
+INSERT INTO bidding(bidder, service_id, points)
+SELECT 'user1', service_id, 30
+FROM service_offers
+WHERE provider = 'test' AND decision_deadline = '2018-04-20 23:59:59';
+INSERT INTO bidding(bidder, service_id, points)
+SELECT 'user2', service_id, 50
+FROM service_offers
+WHERE provider = 'test' AND decision_deadline = '2018-04-20 23:59:59';
+INSERT INTO bidding(bidder, service_id, points)
+SELECT 'user3', service_id, 40
+FROM service_offers
+WHERE provider = 'test' AND decision_deadline = '2018-04-21 23:59:59';
