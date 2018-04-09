@@ -1,0 +1,5 @@
+# Rewrite the path so that we can use index.php as the router
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FIELNAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
