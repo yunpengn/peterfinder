@@ -45,6 +45,10 @@ We have prepared the following tips to help you with the development:
 
 We hope you are happy with development!
 
+## Acknowledgements
+
+- Pexels [https://www.pexels.com/]
+
 ## Licence
 
 [GNU General Public Licence 3.0](LICENSE)
