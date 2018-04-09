@@ -6,6 +6,10 @@ function hasLogin(): bool {
 function formatDate(string $date): string {
     return date_format(date_create($date), DATE_FORMAT);
 }
+
+function formatNumber(string $number): string {
+    return number_format((float) $number, 2, '.', ' ');
+}
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="<?php echo APP_URL; ?>">Peter Finder</a>

@@ -94,7 +94,7 @@ class OfferController extends Controller {
     		$data["decision_deadline"], $data["expected_salary"], $data["type_selected"]);
     	if ($result) {
     		$message = "?successMessage=Successfully editing the offer!";
-    		header("Location:" . APP_URL."/Offer/index".$message);
+    		header("Location:" . APP_URL."/Offer/myOffers" . $message);
     	} else {
     		$data["errorMessage"] = "Invalid input data. Cannot edit the offer";
     		$this->show("Offer/edit", $data);
