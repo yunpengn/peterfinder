@@ -1,5 +1,5 @@
 <?php
-if (!hasLogin()) {
+if (!hasLogin() || !(isset($_SESSION["isPeter"]) && $_SESSION["isPeter"])) {
     header("Location:" . APP_URL);
 }
 ?>
@@ -7,14 +7,12 @@ if (!hasLogin()) {
     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
         <div class="row">
     		<div class="col">
-    			<h1>Opening Offers</h1>
+    			<h1>My Offers</h1>
     		</div>
-    		<?php if (isset($_SESSION["isPeter"]) && $_SESSION["isPeter"]) { ?>
     		<div class="col"><div class="float-right">
-    			<a role="button" class="btn btn-info" href="<?php echo APP_URL; ?>/Offer/myOffers">View My Offers</a>
+    			<a role="button" class="btn btn-info" href="<?php echo APP_URL; ?>/Offer/index">View All Offers</a>
 				<a role="button" class="btn btn-primary" href="<?php echo APP_URL; ?>/Offer/create">Create New Offer</a>
 		    </div></div>
-		    <?php } ?>
     	</div>
 
         <br>
@@ -26,17 +24,9 @@ if (!hasLogin()) {
             </button>
         </div>
         <?php } ?>
-        <?php if (isset($errorMessage)) { ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo $errorMessage; ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <?php } ?>
         <br>
 
-		<table id="offers" class="table table-responsive table-striped table-bordered display">
+        <table id="myOffers" class="table table-responsive table-striped table-bordered display">
 		    <thead>
 		        <tr>
 		            <th>Provider</th>
@@ -44,10 +34,8 @@ if (!hasLogin()) {
 		            <th>End Date</th>
 		            <th>Decision Deadline</th>
 		            <th>Expected Salary</th>
-		            <th>Target Pet Types</th>
-		            <?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
+		            <th>Target Pets</th>
 		            <th>Action</th>
-		            <?php } ?>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -57,18 +45,25 @@ if (!hasLogin()) {
 		            <td><?php echo isset($offer["start_date"]) ? formatDate($offer["start_date"]) : ""; ?></td>
 		            <td><?php echo isset($offer["end_date"]) ? formatDate($offer["end_date"]) : ""; ?></td>
 		            <td><?php echo isset($offer["decision_deadline"]) ? $offer["decision_deadline"] : ""; ?></td>
-		            <td><?php echo isset($offer["expected_salary"]) ? formatNumber($offer["expected_salary"]) : ""; ?></td>
+		            <td><?php echo isset($offer["expected_salary"]) ? $offer["expected_salary"] : ""; ?></td>
 		            <td><?php echo isset($offer["target"]) ? $offer["target"] : ""; ?></td>
-		            <?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
-		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/add?service_id=<?php echo $offer['service_id']; ?>"><i class="fas fa-shopping-cart"></i></a></td>
-		        	<?php } ?>
+		            <td><div class="row">
+		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Offer/edit?service_id=<?php echo $offer['service_id']; ?>"><i class="far fa-edit"></i></a>&nbsp;
+		            	<a role="button" class="btn btn-danger btn-delete-offer" href="<?php echo APP_URL; ?>/Offer/delete?service_id=<?php echo $offer['service_id']; ?>"><i class="fas fa-trash"></i></a>
+		        	</div></td>
 		        </tr>
 		    	<?php } ?>
 		    </tbody>
 		</table>
 		<script type="text/javascript">
 			$(document).ready(function () {
-    			$('#offers').DataTable();
+    			$('#myOffers').DataTable();
+			});
+
+			$('.btn-delete-offer').click(function(event) {
+				if (!confirm("Are you sure to delete this offer? This cannot be undone.")) {
+					event.preventDefault();
+				}
 			});
 		</script>
     </div>
