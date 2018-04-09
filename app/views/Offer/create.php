@@ -7,7 +7,7 @@ if (!hasLogin()) {
     <div class="col-12 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
         <h1>New Service Offer</h1>
         <br>
-        <form method="post" action="<?php echo APP_URL; ?>/Offer/createOffer">
+        <form method="post" action="<?php echo APP_URL; ?>/Offer/create">
             <?php if (isset($errorMessage)) { ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo $errorMessage; ?>
@@ -36,16 +36,14 @@ if (!hasLogin()) {
                 <label for="expected_salary">Expected Salary</label>
                 <input type="number" min="0.00" step="any" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
             </div>
-            
+
             <div class="form-group">
                 <label for="type_selected">Target Pet Types</label>
                 <select name="type_selected[]" class="form-control" id="type_selected" required multiple>
                     <option <?php if (!isset($type_selected)) { echo "selected"; } ?> disabled value>Choose...</option>
-                    <?php
-                    for ($i = 0; $i < count($pet_types); $i++) {
-                        echo "<option value='".$pet_types[$i]["type"]."'>".$pet_types[$i]["type"]."</option>";
-                    }
-                    ?>
+                    <?php foreach ($pet_types as $myType) { ?>
+                    <option value="<?php echo $myType['type']; ?>"><?php echo $myType['type']; ?></option>
+                    <?php } ?>
                 </select>
             </div>
 

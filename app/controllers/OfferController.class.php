@@ -40,8 +40,8 @@ class OfferController extends Controller {
     	$type_selected = $_POST["type_selected"];
 
     	if (Offer::create($username, $start_date, $end_date, $decision_deadline, $expected_salary, $type_selected)) {
-    		$message = "?message=Successfully creating new offer!";
-    		header("Location:" . APP_URL . "/Offer/index" . $message);
+            $data["successMessage"] = "Your service offer has been created.";
+            $this->index($data);
     	} else {
     		$data["errorMessage"] = "Some input data is invalid. Please check again.";
     		$data["username"] = $username;
@@ -50,6 +50,7 @@ class OfferController extends Controller {
     		$data["decision_deadline"] = $decision_deadline;
     		$data["expected_salary"] = $expected_salary;
     		$data["type_selected"] = $type_selected;
+            $data["pet_types"] = PetType::getAllTypes();
     		$this->show("Offer/create", $data);
     	}
     }

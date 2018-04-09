@@ -7,14 +7,15 @@ if (!hasLogin()) {
     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
         <h1>Opening Offers</h1>
         <br>
-        <?php if (isset($message)) { ?>
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <?php echo $message; ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <?php if (isset($successMessage)) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $successMessage; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <?php } ?>
+        <br>
         <table id="table_id" class="table table-responsive table-striped table-bordered display">
 		    <thead>
 		        <tr>

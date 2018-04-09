@@ -26,9 +26,9 @@ RETURNS TRIGGER AS $$
 DECLARE
 	count integer;
 BEGIN
-	SELECT COUNT(*) INTO count FROM user_profiles p WHERE p.username = NEW.username AND p.type = 'peter';
+	SELECT COUNT(*) INTO count FROM user_profiles p WHERE p.username = NEW.provider AND p.type = 'peter';
 	IF count <= 0 THEN
-		RAISE EXCEPTION '% is not a care taker.', NEW.username;
+		RAISE EXCEPTION '% is not a care taker.', NEW.provider;
 		RETURN NULL;
 	END IF;
 	RETURN NEW;
@@ -48,9 +48,9 @@ RETURNS TRIGGER AS $$
 DECLARE
 	count integer;
 BEGIN
-	SELECT COUNT(*) INTO count FROM user_profiles p WHERE p.username = NEW.username AND p.type = 'owner';
+	SELECT COUNT(*) INTO count FROM user_profiles p WHERE p.username = NEW.bidder AND p.type = 'owner';
 	IF count <= 0 THEN
-		RAISE EXCEPTION '% is not a care taker, thus he/she cannot participate in bidding.', NEW.username;
+		RAISE EXCEPTION '% is not a care taker, thus he/she cannot participate in bidding.', NEW.bidder;
 		RETURN NULL;
 	END IF;
 	RETURN NEW;

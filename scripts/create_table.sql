@@ -66,9 +66,9 @@ CREATE TABLE pets (
 CREATE TABLE service_offers (
   service_id SERIAL PRIMARY KEY,
   provider varchar(255) REFERENCES users(username),
-  start_date date,
-  end_date date,
-  decision_deadline timestamp,
+  start_date date NOT NULL,
+  end_date date NOT NULL,
+  decision_deadline timestamp NOT NULL,
   expected_salary numeric NOT NULL DEFAULT 100,
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,

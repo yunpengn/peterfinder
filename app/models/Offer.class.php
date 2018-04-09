@@ -24,7 +24,7 @@ class Offer {
         $query = "INSERT INTO service_offers (provider, start_date, end_date, decision_deadline, expected_salary)"
             . " VALUES (?, ?, ?, ?, ?) RETURNING service_id";
         $params = array($username, $start_date, $end_date, $decision_deadline, $expected_salary);
-        $service_id = $db->query($query, $params)["service_id"];
+        $service_id = $db->query($query, $params)[0]["service_id"];
 
         // Then inserts each selected type into the service_target table.
         $queries = array();
