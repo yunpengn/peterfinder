@@ -13,10 +13,6 @@ class OfferController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-    	if (isset($_GET["message"])) {
-    		$data["message"] = $_GET["message"];
-    	}
-
         if (isset($_SESSION["isPeter"]) && $_SESSION["isPeter"]) {
             $my_result = Offer::queryOfferByProvider($_SESSION["username"]);
             $my_target = array();
@@ -30,7 +26,7 @@ class OfferController extends Controller {
 
                 $temp_str = $temp_target[0]["type"];
                 for ($j = 1; $j < count($temp_target); $j++) {
-                    $temp_str = $temp_str.", ".$temp_target[$j]["type"];
+                    $temp_str = $temp_str . ", " . $temp_target[$j]["type"];
                 }
                 $my_target[$service_id] = $temp_str;
             }
