@@ -19,7 +19,6 @@ class Offer {
 	public static function create(string $username, string $start_date, string $end_date,
                                   string $decision_deadline, string $expected_salary, array $type_selected): bool {
 		$db = new Database();
-
 		// First inserts a new row into service_offers table and returns the resulting service_id.
         $query = "INSERT INTO service_offers (provider, start_date, end_date, decision_deadline, expected_salary)"
             . " VALUES (?, ?, ?, ?, ?) RETURNING service_id";
@@ -44,8 +43,22 @@ class Offer {
 		return $db->query($query, $params);
 	}
 
+	public static function queryOfferByProvider(string $username):array {
+		$db = new Database();
+		$query = "SELECT * FROM service_offers WHERE provider = ?";
+		$params = array($username);
+
+		return $db->query($query, $params);
+	}
+
+	public static function queryAllOfferExceptSelf(string $username):array {
+		$db = new Database();
+		$query = "SELECT * FROM service_offers WHERE provider <> ?";
+		return $db->query($query, array($username));
+	}
+
 	public static function editOffer(string $service_id, string $start_date, string $end_date,
-		string $decision_deadline, string $expected_salary, array $type_selected): bool {
+		string $decision_deadline, string $expected_salary, array $type_selected):bool {
 		$db = new Database();
 		$query = "UPDATE service_offers SET start_date = ?, end_date = ?, decision_deadline = ?, expected_salary = ?".
 			"WHERE service_id = ?";
@@ -54,16 +67,22 @@ class Offer {
 		return $db->insertOrUpdate($query, $params);
 	}
 
-	public static function checkOfferCreator(string $service_id, string $username): bool {
+	public static function checkOfferCreator(string $service_id, string $username):bool {
 		$db = new Database();
 		$query = "SELECT 1 FROM service_offers WHERE service_id = ? AND provider = ?";
 		return !empty($db->query($query, array($service_id, $username)));
 	}
 
-	public static function deleteOffer(string $service_id) {
+	public static function deleteOffer(string $service_id):bool {
 		$db = new Database();
 		$query = "DELETE FROM service_offers WHERE service_id = ?";
 		return $db->insertOrUpdate($query, array($service_id));
+	}
+
+	public static function queryServiceTarget($service_id):array {
+		$db = new Database();
+		$query = "SELECT * FROM service_target WHERE service_id = ?";
+		return $db->query($query, array($service_id));
 	}
 }
 

@@ -137,5 +137,11 @@ class User {
         $params = array($last_name, $first_name, $gender, $telephone, $bio, $_SESSION['username']);
         return $db->insertOrUpdate($query, $params);
     }
+
+    public static function getUserType(string $username):array {
+        $db = new Database();
+        $query = "SELECT type FROM user_profiles WHERE username = ?";
+        return $db->query($query, array($username));
+    }
 }
 

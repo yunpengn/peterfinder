@@ -16,6 +16,47 @@ class OfferController extends Controller {
     	if (isset($_GET["message"])) {
     		$data["message"] = $_GET["message"];
     	}
+
+        if (isset($_SESSION["isPeter"]) && $_SESSION["isPeter"]) {
+            $my_result = Offer::queryOfferByProvider($_SESSION["username"]);
+            $my_target = array();
+            for ($i = 0; $i < count($my_result); $i++) {
+                $service_id = $my_result[$i]["service_id"];
+                $temp_target = Offer::queryServiceTarget($service_id);
+
+                if (empty($temp_target)) {
+                    continue;
+                }
+
+                $temp_str = $temp_target[0]["type"];
+                for ($j = 1; $j < count($temp_target); $j++) {
+                    $temp_str = $temp_str.", ".$temp_target[$j]["type"];
+                }
+                $my_target[$service_id] = $temp_str;
+            }
+            $data["my_result"] = $my_result;
+            $data["my_target"] = $my_target;
+        }
+
+        $all_result = Offer::queryAllOfferExceptSelf($_SESSION["username"]);
+        $all_target = array();
+        for ($i = 0; $i < count($all_result); $i++) {
+            $service_id = $all_result[$i]["service_id"];
+            $temp_target = Offer::queryServiceTarget($service_id);
+
+            if (empty($temp_target)) {
+                continue;
+            }
+
+            $temp_str = $temp_target[0]["type"];
+            for ($j = 1; $j < count($temp_target); $j++) {
+                $temp_str = $temp_str.", ".$temp_target[$j]["type"];
+            }
+            $all_target[$service_id] = $temp_str;
+        }
+        $data["all_result"] = $all_result;
+        $data["all_target"] = $all_target;
+        
         $this->show("Offer/index", $data);
     }
 
