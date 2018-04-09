@@ -16,14 +16,24 @@ class Offer {
      * @param int $expected_salary to insert
      * @return true if create offer success.
      */
-	public static function createOffer(string $username, string $start_date, string $end_date,
-		string $decision_deadline, string $expected_salary, array $type_selected): bool {
+	public static function create(string $username, string $start_date, string $end_date,
+                                  string $decision_deadline, string $expected_salary, array $type_selected): bool {
 		$db = new Database();
-        $query = "INSERT INTO service_offers(provider, start_date, end_date,".
-        	"decision_deadline, expected_salary) VALUES (?, ?, ?, ?, ?)";
+
+		// First inserts a new row into service_offers table and returns the resulting service_id.
+        $query = "INSERT INTO service_offers (provider, start_date, end_date, decision_deadline, expected_salary)"
+            . " VALUES (?, ?, ?, ?, ?) RETURNING service_id";
         $params = array($username, $start_date, $end_date, $decision_deadline, $expected_salary);
-        // TODO: Insert into table service_offers and service_target
-        return $db->insertOrUpdate($query, $params);
+        $service_id = $db->query($query, $params)["service_id"];
+
+        // Then inserts each selected type into the service_target table.
+        $queries = array();
+        $params = array();
+        foreach ($type_selected as $type) {
+            array_push($queries, "INSERT INTO service_target (service_id, type) VALUES (?, ?)");
+            array_push($params, array($service_id, $type));
+        }
+        return $db->transact($queries, $params);
 	}
 
 	public static function queryOffer(string $service_id):array {

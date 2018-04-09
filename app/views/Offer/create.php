@@ -4,8 +4,8 @@ if (!hasLogin()) {
 }
 ?>
 <div class="container">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-4 offset-md-4 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
-        <h1>Create New Offer</h1>
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+        <h1>New Service Offer</h1>
         <br>
         <form method="post" action="<?php echo APP_URL; ?>/Offer/createOffer">
             <?php if (isset($errorMessage)) { ?>
@@ -16,24 +16,29 @@ if (!hasLogin()) {
                 </button>
             </div>
             <?php } ?>
+
             <div class="form-group">
                 <label for="start_date">Start Date</label>
-                <input type="date" name="start_date" class="form-control" id="start_date" accesskey="u" tabindex="1" required autofocus value="<?php if (isset($start_date)) { echo $start_date; } ?>">
+                <input type="date" name="start_date" class="form-control" id="start_date" accesskey="s" tabindex="1" required autofocus value="<?php if (isset($start_date)) { echo $start_date; } ?>">
             </div>
+
             <div class="form-group">
                 <label for="end_date">End Date</label>
                 <input type="date" name="end_date" class="form-control" id="end_date" accesskey="e" tabindex="2" required value="<?php if (isset($end_date)) { echo $end_date; } ?>">
             </div>
+
             <div class="form-group">
                 <label for="decision_deadline">Decision Deadline</label>
                 <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo substr($decision_deadline, 0, strpos($decision_deadline, " ")); } ?>">
             </div>
+
             <div class="form-group">
                 <label for="expected_salary">Expected Salary</label>
-                <input type="text" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
+                <input type="number" min="0.00" step="any" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
             </div>
+            
             <div class="form-group">
-                <label for="type_selected">Pets Type</label>
+                <label for="type_selected">Target Pet Types</label>
                 <select name="type_selected[]" class="form-control" id="type_selected" required multiple>
                     <option <?php if (!isset($type_selected)) { echo "selected"; } ?> disabled value>Choose...</option>
                     <?php
@@ -43,10 +48,11 @@ if (!hasLogin()) {
                     ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <br>
+            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<?php echo APP_URL; ?>/Pet/index" class="btn btn-info">Cancel</a>
         </form>
-        <br>
-        <a href="<?php echo APP_URL; ?>/Offer">Cancel</a>
     </div>
 </div>
 

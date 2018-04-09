@@ -69,7 +69,7 @@ CREATE TABLE service_offers (
   start_date date,
   end_date date,
   decision_deadline timestamp,
-  expected_salary int NOT NULL DEFAULT 100,
+  expected_salary numeric NOT NULL DEFAULT 100,
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
   CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > updated_at),

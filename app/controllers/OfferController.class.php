@@ -7,58 +7,52 @@
  */
 class OfferController extends Controller {
     /**
-     * Handles the offer listing logic.
+     * Lists all opening offers.
      *
      * @param array $data is the parameters passed in.
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-    	if (!isset($_GET["message"])) {
+    	if (isset($_GET["message"])) {
     		$data["message"] = $_GET["message"];
     	}
         $this->show("Offer/index", $data);
     }
 
 	/**
-     * Handles the offer creating logic.
+     * Creates a new offer.
      *
      * @param array $data is the parameters passed in.
      * @throws NotFoundException when the page is not found.
      */
-    public function createOffer($data = array()) {
-    	if (!isset($data["pet_types"])) {
-    		$query_data = PetType::getAllTypes();
-    		$data["pet_types"] = $query_data;
-    		$data["type_selected"] = array();
-    	}
-
+    public function create($data = array()) {
     	if (empty($_POST)) {
-    		$this->show("Offer/createOffer", $data);
+            $data["pet_types"] = PetType::getAllTypes();
+    		$this->show("Offer/create", $data);
             return;
     	}
+
     	$username = $_SESSION["username"];
     	$start_date = $_POST["start_date"];
     	$end_date = $_POST["end_date"];
-    	$decision_deadline = $_POST["decision_deadline"]." 00:00:00";
+    	$decision_deadline = $_POST["decision_deadline"] . " 00:00:00";
     	$expected_salary = $_POST["expected_salary"];
     	$type_selected = $_POST["type_selected"];
 
-    	$result = Offer::createOffer($username, $start_date, $end_date, $decision_deadline, $expected_salary, $type_selected);
-    	if ($result) {
+    	if (Offer::create($username, $start_date, $end_date, $decision_deadline, $expected_salary, $type_selected)) {
     		$message = "?message=Successfully creating new offer!";
     		header("Location:" . APP_URL . "/Offer/index" . $message);
     	} else {
-    		$data["errorMessage"] = "invalid input data";
+    		$data["errorMessage"] = "Some input data is invalid. Please check again.";
     		$data["username"] = $username;
     		$data["start_date"] = $start_date;
     		$data["end_date"] = $end_date;
     		$data["decision_deadline"] = $decision_deadline;
     		$data["expected_salary"] = $expected_salary;
     		$data["type_selected"] = $type_selected;
-    		$this->show("Offer/createOffer", $data);
+    		$this->show("Offer/create", $data);
     	}
     }
-
 
     /**
      * @param array $data
