@@ -28,7 +28,7 @@ class OfferController extends Controller {
      */
     public function createOffer($data = array()) {
     	if (!isset($data["pet_types"])) {
-    		$query_data = Pet::queryType();
+    		$query_data = PetType::getAllTypes();
     		$data["pet_types"] = $query_data;
     		$data["type_selected"] = array();
     	}
@@ -61,6 +61,10 @@ class OfferController extends Controller {
     }
 
 
+    /**
+     * @param array $data
+     * @throws NotFoundException
+     */
     public function editOffer($data = array()) {
     	if (!isset($_GET["service_id"])) {
     		header("Location:" . APP_URL."/Offer/index");
@@ -96,7 +100,7 @@ class OfferController extends Controller {
     		$data["decision_deadline"] = $query_data["decision_deadline"];
     		$data["expected_salary"] = $query_data["expected_salary"];
 
-    		$query_data = Pet::queryType();
+    		$query_data = PetType::getAllTypes();
     		$data["pet_types"] = $query_data;
     		$data["type_selected"] = array();
     	}

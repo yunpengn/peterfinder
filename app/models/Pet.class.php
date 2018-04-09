@@ -19,15 +19,30 @@ class Pet {
         return $result;
     }
 
-    public static function add(): bool {
-        return true;
+    /**
+     * Checks whether the current user has a pet with this pet name.
+     *
+     * @param string $petName
+     * @return bool
+     */
+    public static function hasPet(string $petName): bool {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
+        $db = new Database();
+        $query = "SELECT * FROM pets WHERE username = ? AND pet_name = ?";
+        $result = $db->query($query, array($_SESSION['username'], $petName));
+        return !empty($result);
     }
 
-    public static function queryType(): array {
-    	$db = new Database();
-        $query = "SELECT type FROM pet_types";
-        
-        return $db->query($query, array());
+    public static function add(string $petName, string $gender, string $type, string $birthday, string $bio): bool {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
+        $db = new Database();
+        // Makes sure this pet belongs to the current user.
+        $query = "INSERT INTO pets (username, pet_name, gender, type, birthday, bio) VALUES (?, ?, ?, ?, ?, ?)";
+        return $db->insertOrUpdate($query, array($_SESSION['username'], $petName, $gender, $type, $birthday, $bio));
     }
 
     public static function getPetInfo(string $petName): array {
@@ -35,9 +50,19 @@ class Pet {
             return array();
         }
         $db = new Database();
-        $query = "SELECT * FROM pets WHERE username = ? AND petname = ?";
+        // Makes sure this pet belongs to the current user.
+        $query = "SELECT * FROM pets WHERE username = ? AND pet_name = ?";
         $result = $db->query($query, array($_SESSION['username'], $petName));
         return $result[0];
     }
-}
 
+    public static function updatePetInfo(string $petName, string $gender, string $type, string $birthday, string $bio): bool {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
+        $db = new Database();
+        // Makes sure this pet belongs to the current user.
+        $query = "UPDATE pets SET gender = ?, type = ?, birthday = ?, bio = ? WHERE username = ? AND pet_name = ?";
+        return $db->insertOrUpdate($query, array($gender, $type, $birthday, $bio, $_SESSION['username'], $petName));
+    }
+}

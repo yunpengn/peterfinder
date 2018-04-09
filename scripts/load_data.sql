@@ -59,10 +59,10 @@ INSERT INTO pet_types(type, root_type, description) VALUES ('Budgies Bird', 'Bir
 INSERT INTO pet_types(type, root_type, description) VALUES ('Neon Tetra Fish', 'Fish', 'Although small in size, these beautifully coloured, cool freshwater fish will surely satisfy you.');
 
 -- Generate some fake data for pets.
-INSERT INTO pets(username, petname, type, bio) VALUES ('test', 'John', 'Bull Terrier Dog', 'A very nice dog');
-INSERT INTO pets(username, petname, type, bio) VALUES ('test', 'Tommy', 'Cat', 'My pet really loves sleeping');
-INSERT INTO pets(username, petname, type, bio) VALUES ('user0', 'John', 'Dog', 'He is quite quite.');
-INSERT INTO pets(username, petname, type, bio) VALUES ('user2', 'Swify', 'Budgies Bird', 'Please give her enough food. Please!');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'John', 'Bull Terrier Dog', 'A very nice dog');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'Tommy', 'Cat', 'My pet really loves sleeping');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('user0', 'John', 'Dog', 'He is quite quite.');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('user2', 'Swify', 'Budgies Bird', 'Please give her enough food. Please!');
 
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('user1','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');

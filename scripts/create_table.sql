@@ -58,7 +58,7 @@ CREATE TABLE pet_types (
 
 CREATE TABLE pets (
   username varchar(255) REFERENCES users(username),
-  petname varchar(255) NOT NULL,
+  pet_name varchar(255) NOT NULL,
   gender gender_type NOT NULL DEFAULT 'unknown',
   type varchar(255) REFERENCES pet_types(type) NOT NULL,
   avatar varchar(255),
@@ -68,7 +68,7 @@ CREATE TABLE pets (
   created_at timestamp DEFAULT current_timestamp,
   updated_by varchar(255) REFERENCES users(username),
   updated_at timestamp DEFAULT current_timestamp,
-  PRIMARY KEY (username, petname)
+  PRIMARY KEY (username, pet_name)
 );
 
 CREATE TABLE service_offers (

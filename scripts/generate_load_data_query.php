@@ -59,7 +59,7 @@ $petname = array("John", "Tommy", "John", "Swify");
 $type = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird");
 $bio = array("A very nice dog", "My pet really loves sleeping", "He is quite quite.", "Please give her enough food. Please!");
 for ($i = 0; $i < 4; $i++) {
-	$query = "INSERT INTO pets(username, petname, type, bio) VALUES ('" . 
+	$query = "INSERT INTO pets(username, pet_name, type, bio) VALUES ('" . 
 			  $username[$i] . "', '" . $petname[$i] . "', '" . $type[$i] . "', '" . $bio[$i] . "');";
 	echo $query . "<br>";
 }

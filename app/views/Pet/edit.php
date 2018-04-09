@@ -7,7 +7,7 @@ if (!hasLogin()) {
     <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
         <h1>Edit My Pet</h1>
         <br>
-        <form method="post" action="<?php echo APP_URL; ?>/Pet/edit">
+        <form method="post" action="<?php echo APP_URL; ?>/Pet/edit?pet_name=<?php echo $pet_name; ?>">
             <?php if (isset($errorMessage)) { ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo $errorMessage; ?>
@@ -25,8 +25,8 @@ if (!hasLogin()) {
             </div>
             <?php } ?>
             <div class="form-group">
-                <label for="petname">Pet Name</label>
-                <input type="text" name="petname" class="form-control" id="username" value="<?php if (isset($petname)) { echo $petname; } ?>" placeholder="Type your pet's name" accesskey="n" tabindex="1" required autofocus>
+                <label for="pet_name">Pet Name</label>
+                <input type="text" name="pet_name" class="form-control" id="username" value="<?php if (isset($pet_name)) { echo $pet_name; } ?>" placeholder="Type your pet's name" accesskey="n" tabindex="1" disabled required autofocus>
             </div>
 
             <div class="form-group">
@@ -41,13 +41,16 @@ if (!hasLogin()) {
             <div class="form-group">
                 <label for="type">Type</label>
                 <select name="type" class="form-control" id="type">
-                	<option selected disabled value>Choose...</option>
+                	<option <?php if (!isset($type)) { echo "selected"; } ?> disabled value>Choose...</option>
+                    <?php foreach ($types as $myType) { ?>
+                    <option value="<?php echo $myType['type']; ?>" <?php if (isset($type) && $type == $myType["type"]) { echo "selected"; } ?>><?php echo $myType['type']; ?></option>
+                    <?php } ?>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="birthday">Birthday</label>
-                <input type="date" name="birthday" class="form-control" id="birthday" accesskey="d" tabindex="2" autofocus value="<?php if (isset($birthday)) { echo $birthday; } ?>">
+                <input type="date" name="birthday" class="form-control" id="birthday" accesskey="d" tabindex="2" autofocus required value="<?php if (isset($birthday)) { echo $birthday; } ?>">
             </div>
 
             <div class="form-group">
@@ -57,8 +60,7 @@ if (!hasLogin()) {
 
             <br>
             <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="<?php echo APP_URL; ?>" class="btn btn-info">Cancel</a>
+            <a href="<?php echo APP_URL; ?>/Pet/index" class="btn btn-info">Cancel</a>
         </form>
     </div>
 </div>
-
