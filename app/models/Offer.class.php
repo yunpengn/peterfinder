@@ -6,18 +6,27 @@
  * Time: 00:49
  */
 class Offer {
+    /**
+     * @return array of all opening offers (has not passed decision deadline yet).
+     */
+    public static function all(): array {
+        $db = new Database();
+        $query = "SELECT * FROM opening_offers";
+        return $db->query($query, array());
+    }
 
-	/**
+    /**
      * Create offer
      * @param string $username to insert
      * @param string $start_date to insert
      * @param string $end_date to insert
      * @param string $decision_deadline to insert
-     * @param int $expected_salary to insert
+     * @param string $expected_salary to insert
+     * @param array $type_selected
      * @return true if create offer success.
      */
 	public static function create(string $username, string $start_date, string $end_date,
-                                  string $decision_deadline, string $expected_salary, array $type_selected): bool {
+                                    string $decision_deadline, string $expected_salary, array $type_selected): bool {
 		$db = new Database();
 		// First inserts a new row into service_offers table and returns the resulting service_id.
         $query = "INSERT INTO service_offers (provider, start_date, end_date, decision_deadline, expected_salary)"
@@ -43,7 +52,7 @@ class Offer {
 		return $db->query($query, $params);
 	}
 
-	public static function queryOfferByProvider(string $username):array {
+	public static function queryOfferByProvider(string $username): array {
 		$db = new Database();
 		$query = "SELECT * FROM service_offers WHERE provider = ?";
 		$params = array($username);
@@ -51,14 +60,8 @@ class Offer {
 		return $db->query($query, $params);
 	}
 
-	public static function queryAllOfferExceptSelf(string $username):array {
-		$db = new Database();
-		$query = "SELECT * FROM service_offers WHERE provider <> ?";
-		return $db->query($query, array($username));
-	}
-
 	public static function editOffer(string $service_id, string $start_date, string $end_date,
-		string $decision_deadline, string $expected_salary, array $type_selected):bool {
+		string $decision_deadline, string $expected_salary, array $type_selected): bool {
 		$db = new Database();
 		$query = "UPDATE service_offers SET start_date = ?, end_date = ?, decision_deadline = ?, expected_salary = ?".
 			"WHERE service_id = ?";
@@ -67,22 +70,29 @@ class Offer {
 		return $db->insertOrUpdate($query, $params);
 	}
 
-	public static function checkOfferCreator(string $service_id, string $username):bool {
+	public static function checkOfferCreator(string $service_id, string $username): bool {
 		$db = new Database();
 		$query = "SELECT 1 FROM service_offers WHERE service_id = ? AND provider = ?";
 		return !empty($db->query($query, array($service_id, $username)));
 	}
 
-	public static function deleteOffer(string $service_id):bool {
+    /**
+     * Deletes a certain offer.
+     *
+     * @param string $service_id
+     * @return bool
+     */
+    public static function delete(string $service_id): bool {
 		$db = new Database();
-		$query = "DELETE FROM service_offers WHERE service_id = ?";
-		return $db->insertOrUpdate($query, array($service_id));
+		$query = "DELETE FROM service_offers WHERE service_id = ? AND provider = ?";
+		return $db->insertOrUpdate($query, array($service_id, $_SESSION['username']));
 	}
 
-	public static function queryServiceTarget($service_id):array {
+	public static function queryServiceTarget($service_id): array {
 		$db = new Database();
 		$query = "SELECT * FROM service_target WHERE service_id = ?";
-		return $db->query($query, array($service_id));
+		$result = $db->query($query, array($service_id));
+		return array_map(function($target) { return $target["type"]; }, $result);
 	}
 }
 

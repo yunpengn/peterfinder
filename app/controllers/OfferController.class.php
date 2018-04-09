@@ -13,47 +13,27 @@ class OfferController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-        if (isset($_SESSION["isPeter"]) && $_SESSION["isPeter"]) {
-            $my_result = Offer::queryOfferByProvider($_SESSION["username"]);
-            $my_target = array();
-            for ($i = 0; $i < count($my_result); $i++) {
-                $service_id = $my_result[$i]["service_id"];
-                $temp_target = Offer::queryServiceTarget($service_id);
-
-                if (empty($temp_target)) {
-                    continue;
-                }
-
-                $temp_str = $temp_target[0]["type"];
-                for ($j = 1; $j < count($temp_target); $j++) {
-                    $temp_str = $temp_str . ", " . $temp_target[$j]["type"];
-                }
-                $my_target[$service_id] = $temp_str;
-            }
-            $data["my_result"] = $my_result;
-            $data["my_target"] = $my_target;
+        $offers = Offer::all();
+        foreach ($offers as $key => $offer) {
+            $targets = Offer::queryServiceTarget($offer["service_id"]);
+            $offers[$key]["target"] = implode(", ", $targets);
         }
-
-        $all_result = Offer::queryAllOfferExceptSelf($_SESSION["username"]);
-        $all_target = array();
-        for ($i = 0; $i < count($all_result); $i++) {
-            $service_id = $all_result[$i]["service_id"];
-            $temp_target = Offer::queryServiceTarget($service_id);
-
-            if (empty($temp_target)) {
-                continue;
-            }
-
-            $temp_str = $temp_target[0]["type"];
-            for ($j = 1; $j < count($temp_target); $j++) {
-                $temp_str = $temp_str.", ".$temp_target[$j]["type"];
-            }
-            $all_target[$service_id] = $temp_str;
-        }
-        $data["all_result"] = $all_result;
-        $data["all_target"] = $all_target;
-        
+        $data["offers"] = $offers;
         $this->show("Offer/index", $data);
+    }
+
+    /**
+     * @param array $data
+     * @throws NotFoundException
+     */
+    public function myOffers($data = array()) {
+        $offers = Offer::queryOfferByProvider($_SESSION["username"]);
+        foreach ($offers as $key => $offer) {
+            $targets = Offer::queryServiceTarget($offer["service_id"]);
+            $offers[$key]["target"] = implode(", ", $targets);
+        }
+        $data["offers"] = $offers;
+        $this->show("Offer/myOffers", $data);
     }
 
 	/**
@@ -96,7 +76,7 @@ class OfferController extends Controller {
      * @param array $data
      * @throws NotFoundException
      */
-    public function editOffer($data = array()) {
+    public function edit($data = array()) {
     	if (!isset($_GET["service_id"])) {
     		header("Location:" . APP_URL."/Offer/index");
     		return;
@@ -159,27 +139,17 @@ class OfferController extends Controller {
     	}
     }
 
-    public function deleteOffer($data = array()) {
-    	if (!isset($_GET["service_id"])) {
+    public function delete($data = array()) {
+    	if (!isset($data["service_id"])) {
     		header("Location:" . APP_URL."/Offer/index");
     		return;
     	}
 
-    	$username = $_SESSION["username"];
-		// check whether the service is created the user
-		$check_user = Offer::checkOfferCreator($_GET["service_id"], $username);
-
-		if (!$check_user) {
-			$message = "?message=You have no right to change that offer!";
-			header("Location:" . APP_URL."/Offer/index".$message);
-		}
-
-		$result = Offer::deleteOffer($_GET["service_id"], $username);
-		if ($result) {
-    		$message = "?message=Successfully deleting the offer!";
+		if (Offer::delete($data["service_id"])) {
+    		$message = "?successMessage=Successfully deleting the offer!";
     		header("Location:" . APP_URL."/Offer/index".$message);
     	} else {
-    		$message = "?message=Error when deleting the offer!";
+    		$message = "?errorMessage=Error when deleting the offer!";
     		header("Location:" . APP_URL."/Offer/index".$message);
     	}
     }

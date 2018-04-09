@@ -44,7 +44,7 @@ CREATE TABLE user_profiles (
 
 CREATE TABLE pet_types (
   type varchar(255) PRIMARY KEY,
-  root_type varchar(255) REFERENCES pet_types(type),
+  root_type varchar(255) REFERENCES pet_types(type) ON DELETE SET NULL ON UPDATE CASCADE,
   description varchar(255),
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp
@@ -54,7 +54,7 @@ CREATE TABLE pets (
   username varchar(255) REFERENCES users(username),
   pet_name varchar(255) NOT NULL,
   gender gender_type NOT NULL DEFAULT 'unknown',
-  type varchar(255) REFERENCES pet_types(type) NOT NULL,
+  type varchar(255) REFERENCES pet_types(type) NOT NULL ON UPDATE CASCADE,
   avatar varchar(255),
   birthday date,
   bio varchar(511),
@@ -65,7 +65,7 @@ CREATE TABLE pets (
 
 CREATE TABLE service_offers (
   service_id SERIAL PRIMARY KEY,
-  provider varchar(255) REFERENCES users(username),
+  provider varchar(255) REFERENCES users(username) ON DELETE CASCADE ON UPDATE CASCADE,
   start_date date NOT NULL,
   end_date date NOT NULL,
   decision_deadline timestamp NOT NULL,
@@ -78,16 +78,16 @@ CREATE TABLE service_offers (
 );
 
 CREATE TABLE service_target (
-  service_id int REFERENCES service_offers(service_id),
-  type varchar(255) REFERENCES pet_types(type),
+  service_id int REFERENCES service_offers(service_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  type varchar(255) REFERENCES pet_types(type) ON DELETE CASCADE ON UPDATE CASCADE,
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
   PRIMARY KEY (service_id, type)
 );
 
 CREATE TABLE bidding (
-  service_id int REFERENCES service_offers(service_id),
-  bidder varchar(255) REFERENCES users(username),
+  service_id int REFERENCES service_offers(service_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  bidder varchar(255) REFERENCES users(username) ON DELETE CASCADE ON UPDATE CASCADE,
   points int DEFAULT 0,
   status bidding_status DEFAULT 'pending',
   created_at timestamp DEFAULT current_timestamp,
@@ -104,13 +104,13 @@ CREATE TABLE service_history (
   review_for_taker varchar(511),
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
-  FOREIGN KEY (service_id, owner) REFERENCES bidding(service_id, bidder),
+  FOREIGN KEY (service_id, owner) REFERENCES bidding(service_id, bidder) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT "Rating for pet owner is not valid." CHECK (rating_for_owner > 0 AND rating_for_owner <= 5),
   CONSTRAINT "Rating for care taker is not valid." CHECK (rating_for_taker > 0 AND rating_for_taker <= 5)
 );
 
 CREATE TABLE notification (
-  username varchar(255) REFERENCES users(username),
+  username varchar(255) REFERENCES users(username) ON DELETE SET NULL ON UPDATE CASCADE,
   message varchar(511),
   status notification_status DEFAULT 'unread',
   created_at timestamp DEFAULT current_timestamp,

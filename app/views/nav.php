@@ -1,6 +1,10 @@
 <?php
-function hasLogin() {
+function hasLogin(): bool {
     return isset($_SESSION['authorized']) && $_SESSION['authorized'] == true;
+}
+
+function formatDate(string $date): string {
+    return date_format(date_create($date), DATE_FORMAT);
 }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">

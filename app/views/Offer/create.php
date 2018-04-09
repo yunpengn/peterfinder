@@ -1,5 +1,5 @@
 <?php
-if (!hasLogin()) {
+if (!hasLogin() || !(isset($_SESSION["isPeter"]) && $_SESSION["isPeter"])) {
     header("Location:" . APP_URL);
 }
 ?>
@@ -54,3 +54,13 @@ if (!hasLogin()) {
     </div>
 </div>
 
+<script type="text/javascript">
+    $("#start_date").change(function() {
+        var startDate = $("#start_date").val();
+        var endDate = $("#end_date").val();
+
+        if (endDate == "") {
+            $("#end_date").val(startDate);
+        }
+    });
+</script>
