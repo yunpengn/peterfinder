@@ -54,7 +54,7 @@ CREATE TABLE pets (
   username varchar(255) REFERENCES users(username),
   pet_name varchar(255) NOT NULL,
   gender gender_type NOT NULL DEFAULT 'unknown',
-  type varchar(255) REFERENCES pet_types(type) NOT NULL ON UPDATE CASCADE,
+  type varchar(255) REFERENCES pet_types(type) ON UPDATE CASCADE NOT NULL,
   avatar varchar(255),
   birthday date,
   bio varchar(511),
