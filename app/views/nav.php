@@ -19,7 +19,7 @@ function hasLogin() {
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Offer/index">Service Offers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">Service Biddings</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/Bidding/index">Service Biddings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>">Service History</a>
