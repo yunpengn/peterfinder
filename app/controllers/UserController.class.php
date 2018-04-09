@@ -37,6 +37,19 @@ class UserController extends Controller {
             $authorized = true;
         }
 
+        if ($authorized) {
+            $_SESSION["isOwner"] = $_SESSION["isPeter"] = false;
+            $user_result = User::getUserType($_SESSION['username']);
+
+            for ($i = 0; $i < count($user_result); $i++) {
+                if ($user_result[$i]["type"] == "owner") {
+                    $_SESSION["isOwner"] = true;
+                } else if ($user_result[$i]["type"] == "peter") {
+                    $_SESSION["isPeter"] = true;
+                }
+            }
+        }
+
         if (!$authorized) {
             $data["errorMessage"] = "You have entered an invalid username/email address or password";
             $data["username"] = $usernameOrEmail;
