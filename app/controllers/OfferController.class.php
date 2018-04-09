@@ -13,12 +13,7 @@ class OfferController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-        $offers = Offer::all();
-        foreach ($offers as $key => $offer) {
-            $targets = Offer::queryServiceTarget($offer["service_id"]);
-            $offers[$key]["target"] = implode(", ", $targets);
-        }
-        $data["offers"] = $offers;
+        $data["offers"] = Offer::all();
         $this->show("Offer/index", $data);
     }
 

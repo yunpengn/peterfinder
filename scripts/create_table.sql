@@ -25,12 +25,14 @@ CREATE TABLE users (
   last_name varchar(255),
   first_name varchar(255),
   gender gender_type NOT NULL DEFAULT 'unknown',
+  birthday date,
   telephone varchar(15),
   bio varchar(511),
   is_admin boolean NOT NULL DEFAULT false,
   is_active boolean NOT NULL DEFAULT true,
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp
+  updated_at timestamp DEFAULT current_timestamp,
+  CONSTRAINT "Birthday must not be in the future." CHECK (birthday <= NOW())
 );
 
 CREATE TABLE user_profiles (
@@ -60,7 +62,8 @@ CREATE TABLE pets (
   bio varchar(511),
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
-  PRIMARY KEY (username, pet_name)
+  PRIMARY KEY (username, pet_name),
+  CONSTRAINT "Birthday must not be in the future." CHECK (birthday <= NOW())
 );
 
 CREATE TABLE service_offers (
@@ -88,25 +91,28 @@ CREATE TABLE service_target (
 
 CREATE TABLE bidding (
   service_id int REFERENCES service_offers(service_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  bidder varchar(255) REFERENCES users(username) ON DELETE CASCADE ON UPDATE CASCADE,
+  bidder varchar(255),
+  pet_name varchar(255),
   points int DEFAULT 0,
   status bidding_status DEFAULT 'pending',
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
-  PRIMARY KEY (bidder, service_id),
+  PRIMARY KEY (service_id, bidder, pet_name),
+  FOREIGN KEY (bidder, pet_name) REFERENCES pets(username, pet_name) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT "Bidding points must be positive." CHECK (points > 0)
 );
 
 CREATE TABLE service_history (
   service_id int PRIMARY KEY,
   owner varchar(255) NOT NULL,
+  pet_name varchar(255) NOT NULL,
   rating_for_owner integer,
   review_for_owner varchar(511),
   rating_for_taker integer,
   review_for_taker varchar(511),
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,
-  FOREIGN KEY (service_id, owner) REFERENCES bidding(service_id, bidder) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (service_id, owner, pet_name) REFERENCES bidding(service_id, bidder, pet_name) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT "Rating for pet owner is not valid." CHECK (rating_for_owner > 0 AND rating_for_owner <= 5),
   CONSTRAINT "Rating for care taker is not valid." CHECK (rating_for_taker > 0 AND rating_for_taker <= 5)
 );

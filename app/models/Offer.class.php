@@ -11,7 +11,9 @@ class Offer {
      */
     public static function all(): array {
         $db = new Database();
-        $query = "SELECT * FROM opening_offers";
+        $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, "
+            . "(SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
+            . "AS target FROM opening_offers o;";
         return $db->query($query, array());
     }
 
