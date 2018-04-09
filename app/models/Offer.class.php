@@ -17,6 +17,14 @@ class Offer {
         return $db->query($query, array());
     }
 
+    public static function queryOfferByProvider(string $username): array {
+        $db = new Database();
+        $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, "
+            . "(SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
+            . "AS target FROM opening_offers o WHERE o.provider = ?;";
+        return $db->query($query, array($username));
+    }
+
     /**
      * Create offer
      * @param string $username to insert
@@ -50,14 +58,6 @@ class Offer {
 		$db = new Database();
 		$query = "SELECT * FROM service_offers WHERE service_id = ?";
 		$params = array($service_id);
-
-		return $db->query($query, $params);
-	}
-
-	public static function queryOfferByProvider(string $username): array {
-		$db = new Database();
-		$query = "SELECT * FROM service_offers WHERE provider = ?";
-		$params = array($username);
 
 		return $db->query($query, $params);
 	}

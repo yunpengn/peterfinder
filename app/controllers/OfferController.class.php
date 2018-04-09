@@ -22,12 +22,7 @@ class OfferController extends Controller {
      * @throws NotFoundException
      */
     public function myOffers($data = array()) {
-        $offers = Offer::queryOfferByProvider($_SESSION["username"]);
-        foreach ($offers as $key => $offer) {
-            $targets = Offer::queryServiceTarget($offer["service_id"]);
-            $offers[$key]["target"] = implode(", ", $targets);
-        }
-        $data["offers"] = $offers;
+        $data["offers"] = Offer::queryOfferByProvider($_SESSION["username"]);
         $this->show("Offer/myOffers", $data);
     }
 
