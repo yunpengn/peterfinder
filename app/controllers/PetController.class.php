@@ -77,5 +77,23 @@ class PetController extends Controller {
         $data["types"] = PetType::getAllTypes();
         $this->show("Pet/edit", $data);
     }
+
+    /**
+     * @param array $data
+     * @throws NotFoundException
+     */
+    public function delete($data = array()) {
+        if (!isset($data["pet_name"])) {
+            $this->index($data);
+            return;
+        }
+        $petName = $data["pet_name"];
+        if (Pet::delete($petName)) {
+            $data["successMessage"] = "Your pet " . $petName . " has been removed.";
+        } else {
+            $data["errorMessage"] = "Something went wrong. Your pet cannot be removed.";
+        }
+        $this->index($data);
+    }
 }
 

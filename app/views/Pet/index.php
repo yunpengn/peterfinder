@@ -4,7 +4,7 @@ if (!hasLogin()) {
 }
 ?>
 <div class="container">
-    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+    <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
     	<div class="row">
     		<div class="col">
     			<h1>My Pets</h1>
@@ -30,7 +30,7 @@ if (!hasLogin()) {
 		            <th>Type</th>
 		            <th>Birthday</th>
 		            <th>Bio</th>
-		            <th class="nosort">Edit</th>
+		            <th>Action</th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -41,9 +41,10 @@ if (!hasLogin()) {
 		            <td><?php echo isset($pet["type"]) ? ucfirst($pet["type"]) : ""; ?></td>
 		            <td><?php echo isset($pet["birthday"]) ? date_format(date_create($pet["birthday"]), DATE_FORMAT) : ""; ?></td>
 		            <td><?php echo isset($pet["bio"]) ? $pet["bio"] : ""; ?></td>
-		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Pet/edit?pet_name=<?php echo $pet['pet_name']; ?>">
-		            	<i class="far fa-edit"></i>
-		            </a></td>
+		            <td><div class="row">
+		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Pet/edit?pet_name=<?php echo $pet['pet_name']; ?>"><i class="far fa-edit"></i></a>&nbsp;
+		            	<a role="button" class="btn btn-danger btn-delete-pet" href="<?php echo APP_URL; ?>/Pet/delete?pet_name=<?php echo $pet['pet_name']; ?>"><i class="fas fa-trash"></i></a>
+		        	</div></td>
 		        </tr>
 		    	<?php } ?>
 		    </tbody>
@@ -51,6 +52,12 @@ if (!hasLogin()) {
 		<script type="text/javascript">
 			$(document).ready(function () {
     			$('#myPets').DataTable();
+			});
+
+			$('.btn-delete-pet').click(function(event) {
+				if (!confirm("Are you sure to delete this pet? This cannot be undone.")) {
+					event.preventDefault();
+				}
 			});
 		</script>
     </div>

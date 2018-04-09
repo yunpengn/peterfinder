@@ -65,4 +65,20 @@ class Pet {
         $query = "UPDATE pets SET gender = ?, type = ?, birthday = ?, bio = ? WHERE username = ? AND pet_name = ?";
         return $db->insertOrUpdate($query, array($gender, $type, $birthday, $bio, $_SESSION['username'], $petName));
     }
+
+    /**
+     * Delete a pets of the current user.
+     *
+     * @param string $petName
+     * @return bool
+     */
+    public static function delete(string $petName) {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
+        $db = new Database();
+        // Makes sure this pet belongs to the current user.
+        $query = "DELETE FROM pets WHERE username = ? AND pet_name = ?";
+        return $db->insertOrUpdate($query, array($_SESSION['username'], $petName));
+    }
 }
