@@ -42,8 +42,8 @@ if (!hasLogin() || !(isset($_SESSION["isPeter"]) && $_SESSION["isPeter"])) {
 		    	<?php foreach ($offers as $offer) { ?>
 		    	<tr>
 		            <td><?php echo isset($offer["provider"]) ? $offer["provider"] : ""; ?></td>
-		            <td><?php echo isset($offer["start_date"]) ? $offer["start_date"] : ""; ?></td>
-		            <td><?php echo isset($offer["end_date"]) ? $offer["end_date"] : ""; ?></td>
+		            <td><?php echo isset($offer["start_date"]) ? formatDate($offer["start_date"]) : ""; ?></td>
+		            <td><?php echo isset($offer["end_date"]) ? formatDate($offer["end_date"]) : ""; ?></td>
 		            <td><?php echo isset($offer["decision_deadline"]) ? $offer["decision_deadline"] : ""; ?></td>
 		            <td><?php echo isset($offer["expected_salary"]) ? $offer["expected_salary"] : ""; ?></td>
 		            <td><?php echo isset($offer["target"]) ? $offer["target"] : ""; ?></td>

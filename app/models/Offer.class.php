@@ -72,8 +72,9 @@ class Offer {
 
 	public static function checkOfferCreator(string $service_id, string $username): bool {
 		$db = new Database();
-		$query = "SELECT 1 FROM service_offers WHERE service_id = ? AND provider = ?";
-		return !empty($db->query($query, array($service_id, $username)));
+		$query = "SELECT provider FROM service_offers WHERE service_id = ?";
+		$result = $db->query($query, array($service_id));
+		return !empty($result) && $result[0]["provider"] == $username;
 	}
 
     /**
