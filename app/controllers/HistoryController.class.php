@@ -17,6 +17,7 @@ class HistoryController extends Controller {
             header("Location:" . APP_URL);
             return;
         }
-        $this->show("Offer/index", $data);
+        $data["history"] = $this->isPetOwner() ? History::getOwnerHistory() : History::getTakerHistory();
+        $this->show("History/index", $data);
     }
 }
