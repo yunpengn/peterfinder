@@ -1,5 +1,5 @@
 <?php
-if (!hasLogin()) {
+if (!hasLogin() || !(isset($_SESSION["isOwner"]) && $_SESSION["isOwner"])) {
     header("Location:" . APP_URL);
 }
 ?>

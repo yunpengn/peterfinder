@@ -1,5 +1,5 @@
 <?php
-if (!hasLogin()) {
+if (!hasLogin() || !(isset($_SESSION["isOwner"]) && $_SESSION["isOwner"])) {
     header("Location:" . APP_URL);
 }
 ?>
@@ -39,7 +39,7 @@ if (!hasLogin()) {
 		            <td><?php echo isset($pet["pet_name"]) ? $pet["pet_name"] : ""; ?></td>
 		            <td><?php echo isset($pet["gender"]) ? ucfirst($pet["gender"]) : ""; ?></td>
 		            <td><?php echo isset($pet["type"]) ? ucfirst($pet["type"]) : ""; ?></td>
-		            <td><?php echo isset($pet["birthday"]) ? date_format(date_create($pet["birthday"]), DATE_FORMAT) : ""; ?></td>
+		            <td><?php echo isset($pet["birthday"]) ? formatDate($pet["birthday"]) : ""; ?></td>
 		            <td><?php echo isset($pet["bio"]) ? $pet["bio"] : ""; ?></td>
 		            <td><div class="row">
 		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Pet/edit?pet_name=<?php echo $pet['pet_name']; ?>"><i class="far fa-edit"></i></a>&nbsp;
