@@ -77,7 +77,7 @@ DECLARE
 	takerName varchar(255);
 BEGIN
 	-- First get the care taker's username.
-	SELECT FIRST(provider) INTO takerName FROM service_offers WHERE service_id = NEW.service_id;
+	SELECT MIN(provider) INTO takerName FROM service_offers WHERE service_id = NEW.service_id;
 
 	-- Updates the care taker's overall score.
 	With TakerHistory AS
@@ -85,13 +85,13 @@ BEGIN
 		 WHERE h.service_id IN (
 			SELECT o.service_id FROM service_offers o WHERE o.provider = takerName
 		))
-	UPDATE user_profiles p SET p.score = (SELECT AVG(rating_for_taker) FROM TakerHistory) 
+	UPDATE user_profiles p SET score = (SELECT AVG(rating_for_taker) FROM TakerHistory) 
 	WHERE p.username = takerName AND p.type = 'peter';
-	
+
 	-- Updates the pet owner's overall score.
 	With OwnerHistory AS
 		(SELECT * FROM service_history h WHERE h.owner = NEW.owner)
-	UPDATE user_profiles p SET p.score = (SELECT AVG(rating_for_owner) FROM OwnerHistory) 
+	UPDATE user_profiles p SET score = (SELECT AVG(rating_for_owner) FROM OwnerHistory) 
 	WHERE p.username = takerName AND p.type = 'owner';
 
 	RETURN NEW;
@@ -100,7 +100,7 @@ LANGUAGE PLPGSQL;
 
 -- Updates the user profile's overall score when the rating for a single row in "service_history" table changes.
 CREATE TRIGGER service_history_update_user_profile_overall_score
-BEFORE INSERT OR UPDATE
+AFTER INSERT OR UPDATE
 ON service_history
 FOR EACH ROW
 EXECUTE PROCEDURE update_user_profile_score();
