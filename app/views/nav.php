@@ -34,7 +34,7 @@ function formatMoney(string $number): string {
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Bidding/index">Service Biddings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">Service History</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/History/index">Service History</a>
             </li>
         <?php } ?>
         </ul>
