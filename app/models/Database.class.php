@@ -80,6 +80,7 @@ class Database {
             return true;
         } catch (PDOException $e) {
             $this->db->rollBack();
+            echo $e->getMessage();
             return false;
         }
     }

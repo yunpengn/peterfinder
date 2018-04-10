@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="decision_deadline">Decision Deadline</label>
-                <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo substr($decision_deadline, 0, strpos($decision_deadline, " ")); } ?>">
+                <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo substr($decision_deadline, 0, 10); } ?>">
             </div>
 
             <div class="form-group">
