@@ -1,6 +1,11 @@
 <?php
 
 class Bidding {
+    public static function create(string $serviceId, string $petName, string $points): bool {
+        $db = new Database();
+        $query = "INSERT INTO bidding (service_id, bidder, pet_name, points) VALUES (?, ?, ?, ?)";
+        return $db->insertOrUpdate($query, array($serviceId, $_SESSION['username'], $petName, $points));
+    }
 
     /**
      * @return array 2D-array representing all biddings belonging to the current user.
@@ -36,6 +41,35 @@ class Bidding {
         $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.pet_name as pet_name, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE B.service_id = ? AND bidder = ? AND pet_name = ?";
         $result = $db->query($query, array($serviceId, $_SESSION['username'], $petName));
         return $result[0];
+    }
+
+
+    /**
+     * Checks whether one pet owner has bidder for a certain service offer before.
+     *
+     * @param string $serviceId
+     * @param string $owner
+     * @return bool
+     */
+    public static function hasBidding(string $serviceId, string $owner): bool {
+        $db = new Database();
+        $query = "SELECT 1 FROM bidding WHERE service_id = ? AND bidder = ?";
+        return !empty($db->query($query, array($serviceId, $owner)));
+    }
+
+    /**
+     * Gets the pet names of which a certain pet owner can use when bidding for a certain pet offer. In
+     * other words, the pet's type must be within the service targets.
+     *
+     * @param string $serviceId
+     * @param string $owner
+     * @return array
+     */
+    public static function getValidPets(string $serviceId, string $owner): array {
+        $db = new Database();
+        $query = "SELECT pet_name FROM pets WHERE username = ? "
+            ."AND type IN (SELECT type FROM service_target WHERE service_id = ?)";
+        return $db->query($query, array($owner, $serviceId));
     }
 
     public static function getBiddersInfo(int $serviceId): array {

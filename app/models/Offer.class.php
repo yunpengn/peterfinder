@@ -59,7 +59,7 @@ class Offer {
 		$query = "SELECT * FROM service_offers WHERE service_id = ?";
 		$params = array($service_id);
 
-		return $db->query($query, $params);
+		return $db->query($query, $params)[0];
 	}
 
 	public static function editOffer(string $service_id, string $start_date, string $end_date,

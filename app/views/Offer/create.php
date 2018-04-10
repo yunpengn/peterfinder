@@ -29,7 +29,12 @@
 
             <div class="form-group">
                 <label for="expected_salary">Expected Salary</label>
-                <input type="number" min="0.00" step="any" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                          <div class="input-group-text">$</div>
+                    </div>
+                    <input type="number" min="0.00" step="any" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
+                </div>
             </div>
 
             <div class="form-group">

@@ -55,7 +55,7 @@
 		            <td><?php echo isset($offer["expected_salary"]) ? formatMoney($offer["expected_salary"]) : ""; ?></td>
 		            <td><?php echo isset($offer["target"]) ? $offer["target"] : ""; ?></td>
 		            <?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
-		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/add?service_id=<?php echo $offer['service_id']; ?>"><i class="fas fa-shopping-cart"></i></a></td>
+		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/create?service_id=<?php echo $offer['service_id']; ?>"><i class="fas fa-shopping-cart"></i></a></td>
 		        	<?php } ?>
 		        </tr>
 		    	<?php } ?>

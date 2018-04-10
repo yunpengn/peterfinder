@@ -34,4 +34,3 @@ if (!hasLogin()) {
         </form>
     </div>
 </div>
-

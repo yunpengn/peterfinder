@@ -90,7 +90,7 @@ class OfferController extends Controller {
 
         $data["pet_types"] = PetType::getAllTypes();
     	if (empty($_POST)) {
-            $data = array_merge($data, Offer::queryOffer($data["service_id"])[0]);
+            $data = array_merge($data, Offer::queryOffer($data["service_id"]));
             $data["type_selected"] = Offer::queryServiceTarget($data["service_id"]);
             $this->show("Offer/edit", $data);
     		return;
