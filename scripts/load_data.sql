@@ -27,16 +27,23 @@ INSERT INTO user_profiles(username, type) VALUES ('test', 'owner');
 INSERT INTO user_profiles(username, type) VALUES ('test', 'peter');
 -- Sample uses take turns to be owner or taker.
 INSERT INTO user_profiles(username, type) VALUES ('user0', 'owner');
+INSERT INTO user_profiles(username, type) VALUES ('user1', 'owner');
 INSERT INTO user_profiles(username, type) VALUES ('user1', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user2', 'owner');
+INSERT INTO user_profiles(username, type) VALUES ('user2', 'peter');
+INSERT INTO user_profiles(username, type) VALUES ('user3', 'owner');
 INSERT INTO user_profiles(username, type) VALUES ('user3', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user4', 'owner');
+INSERT INTO user_profiles(username, type) VALUES ('user4', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user5', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user6', 'owner');
+INSERT INTO user_profiles(username, type) VALUES ('user6', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user7', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user8', 'owner');
+INSERT INTO user_profiles(username, type) VALUES ('user8', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user9', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user10', 'owner');
+INSERT INTO user_profiles(username, type) VALUES ('user10', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user11', 'peter');
 INSERT INTO user_profiles(username, type) VALUES ('user12', 'owner');
 INSERT INTO user_profiles(username, type) VALUES ('user13', 'peter');
@@ -61,55 +68,56 @@ INSERT INTO pet_types(type, root_type, description) VALUES ('Neon Tetra Fish', '
 -- Generate some fake data for pets.
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'John', 'Bull Terrier Dog', 'A very nice dog');
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'Tommy', 'Cat', 'My pet really loves sleeping');
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('user0', 'John', 'Dog', 'He is quite quite.');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('user1', 'John', 'Dog', 'He is quite quiet.');
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('user2', 'Swify', 'Budgies Bird', 'Please give her enough food. Please!');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('user3', 'Molly', 'Cat', 'She needs to sleep at least 8 hours a day.');
 
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user1','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user1','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user2','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user2','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user3','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user3','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user4','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user4','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user5','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user5','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user6','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user6','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user7','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user7','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user8','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user8','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user9','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user9','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
-VALUES('user10','2018-03-21 08:05:00','2018-03-25 20:55:00','2018-03-20 23:59:59');
+VALUES('user10','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('test','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('test','2018-04-26 08:05:00','2018-04-30 20:55:00','2018-04-21 23:59:59');
 
-INSERT INTO bidding(bidder, service_id, points)
-SELECT 'test', service_id, 10
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'test', 'John', service_id, 10
 FROM service_offers
 WHERE provider = 'user1';
-INSERT INTO bidding(bidder, service_id, points)
-SELECT 'test', service_id, 30
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'test', 'John', service_id, 30
 FROM service_offers
 WHERE provider = 'user2';
-INSERT INTO bidding(bidder, service_id, points)
-SELECT 'test', service_id, 50
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'test', 'Tommy', service_id, 50
 FROM service_offers
 WHERE provider = 'user3';
-INSERT INTO bidding(bidder, service_id, points)
-SELECT 'user1', service_id, 30
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'user1', 'John', service_id, 30
 FROM service_offers
 WHERE provider = 'test' AND decision_deadline = '2018-04-20 23:59:59';
-INSERT INTO bidding(bidder, service_id, points)
-SELECT 'user2', service_id, 50
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'user2', 'Swify', service_id, 50
 FROM service_offers
 WHERE provider = 'test' AND decision_deadline = '2018-04-20 23:59:59';
-INSERT INTO bidding(bidder, service_id, points)
-SELECT 'user3', service_id, 40
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'user3', 'Molly', service_id, 40
 FROM service_offers
 WHERE provider = 'test' AND decision_deadline = '2018-04-21 23:59:59';
