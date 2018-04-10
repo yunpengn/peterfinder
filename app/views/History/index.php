@@ -10,6 +10,7 @@
         <?php } ?>
 
     	<h1>Service History</h1>
+    	<br>
         <table id="history" class="table table-responsive table-striped display">
 		    <thead>
 		        <tr>
