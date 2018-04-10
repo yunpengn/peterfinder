@@ -41,6 +41,8 @@ for ($i = 0; $i < 4; $i++) {
 	$query = "INSERT INTO pet_types(type, description) VALUES ('" . $name[$i] . "', '" . $desp[$i] . "');";
 	echo $query . "<br>";
 }
+echo "<br>";
+
 echo "-- Then declare some derived types.<br>";
 $name2 = array("Siamese Cat", "Bull Terrier Dog", "Budgies Bird", "Neon Tetra Fish");
 $desp = array("With stunning blue eyes, it is ranked as the most popular pedigreed cat breed in 2011.",
@@ -54,12 +56,11 @@ for ($i = 0; $i < 4; $i++) {
 echo "<br>";
 
 echo "-- Generate some fake data for pets.<br>";
-$deadline = strtotime("+2 weeks");
-$username = array("test", "test", "user0", "user2");
-$petname = array("John", "Tommy", "John", "Swify");
-$type = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird");
-$bio = array("A very nice dog", "My pet really loves sleeping", "He is quite quite.", "Please give her enough food. Please!");
-for ($i = 0; $i < 4; $i++) {
+$username = array("test", "test", "user0", "user2", "user4", "user6");
+$petname = array("John", "Tommy", "John", "Swify", "Molly", "Oscar");
+$type = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird", "Cat", "Siamese Cat");
+$bio = array("A very nice dog", "My pet really loves sleeping", "He is quite quite.", "Please give her enough food. Please!", "She needs to sleep at least 8 hours a day.", "He is a very active cat.");
+for ($i = 0; $i < 6; $i++) {
 	$query = "INSERT INTO pets(username, pet_name, type, bio) VALUES ('" . 
 			  $username[$i] . "', '" . $petname[$i] . "', '" . $type[$i] . "', '" . $bio[$i] . "');";
 	echo $query . "<br>";
@@ -67,4 +68,29 @@ for ($i = 0; $i < 4; $i++) {
 echo "<br>";
 
 echo "-- Generate some fake data for service offers.<br>";
+$provider = array("test", "test", "user1", "user3", "user5", "user7", "user9", "user1", "user3", "user5", "user7", "user9");
+$deadline = date("Y-m-d", strtotime("+4 weeks"));
+$start = date("Y-m-d", strtotime("+2 months"));
+$end = date("Y-m-d", strtotime("+3 months"));
+for ($i = 0; $i < 12; $i++) {
+	$query = "INSERT INTO service_offers(provider, start_date, end_date, decision_deadline) VALUES ('" . 
+			  $provider[$i] . "', '" . $start . "', '" . $end . "', '" . $deadline . "');";
+	echo $query . "<br>";
+}
+echo "<br>";
+
+echo "-- Generate some fake data for service targets.<br>";
+$types = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird", "Cat", "Siamese Cat");
+for ($i = 0; $i < 12; $i++) {
+	for ($j = 0; $j < 2; $j++) {
+		// Gets a random type.
+		$type = $types[array_rand($types)];
+		$query = "INSERT INTO service_target(service_id, type) VALUES (" . ($i + 1) . ", '" . $type. "');";
+		echo $query . "<br>";
+	}
+}
+echo "<br>";
+
+echo "-- Generate some fake data for biddings.<br>";
+
 echo "<br>";

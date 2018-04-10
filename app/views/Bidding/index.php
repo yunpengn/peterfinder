@@ -1,8 +1,3 @@
-<?php
-if (!hasLogin()) {
-    header("Location:" . APP_URL);
-}
-?>
 <div class="container">
     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
         <?php if (isset($successMessage)) { ?>
