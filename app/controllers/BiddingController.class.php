@@ -21,6 +21,24 @@ class BiddingController extends Controller {
     }
 
     /**
+     * Lists bidding details of a specific bidding.
+     *
+     * @param array $data
+     * @throws NotFoundException
+     */
+    public function listDetails($data = array()) {
+        if (!isset($data["service_id"])) {
+            $this->index($data);
+            return;
+        }
+        $serviceId = $data["service_id"];
+        $petName = $data["pet_name"];
+        $data = array_merge($data, Bidding::getBiddingRecord($serviceId, $petName));
+        $data["bidders_info"] = Bidding::getBiddersInfo($serviceId);
+        $this->show("Bidding/listBiddingDetails", $data);
+    }
+
+    /**
      * Edits the bidding point of a specific bidding.
      *
      * @param array $data

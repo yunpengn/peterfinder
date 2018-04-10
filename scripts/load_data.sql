@@ -71,6 +71,7 @@ INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'Tommy', 'Cat', 
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('user1', 'John', 'Dog', 'He is quite quiet.');
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('user2', 'Swify', 'Budgies Bird', 'Please give her enough food. Please!');
 INSERT INTO pets(username, pet_name, type, bio) VALUES ('user3', 'Molly', 'Cat', 'She needs to sleep at least 8 hours a day.');
+INSERT INTO pets(username, pet_name, type, bio) VALUES ('user4', 'Oscar', 'Siamese Cat', 'He is a very active cat.');
 
 INSERT INTO service_offers(provider,start_date,end_date,decision_deadline)
 VALUES('user1','2018-04-21 08:05:00','2018-04-25 20:55:00','2018-04-20 23:59:59');
@@ -121,3 +122,7 @@ INSERT INTO bidding(bidder, pet_name, service_id, points)
 SELECT 'user3', 'Molly', service_id, 40
 FROM service_offers
 WHERE provider = 'test' AND decision_deadline = '2018-04-21 23:59:59';
+INSERT INTO bidding(bidder, pet_name, service_id, points)
+SELECT 'user4', 'Oscar', service_id, 30
+FROM service_offers
+WHERE provider = 'user1' AND decision_deadline = '2018-04-20 23:59:59';

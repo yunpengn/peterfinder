@@ -28,6 +28,26 @@ class Bidding {
         return $result;
     }
 
+    public static function getBiddingRecord(int $serviceId, string $petName): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
+        $db = new Database();
+        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.pet_name as pet_name, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE B.service_id = ? AND bidder = ? AND pet_name = ?";
+        $result = $db->query($query, array($serviceId, $_SESSION['username'], $petName));
+        return $result[0];
+    }
+
+    public static function getBiddersInfo(int $serviceId): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
+        $db = new Database();
+        $query = "SELECT count(*) as number, min(points) as minimum, max(points) as maximum FROM bidding WHERE service_id = ?";
+        $result = $db->query($query, array($serviceId));
+        return $result[0];
+    }
+
     public static function getBidPoint(int $serviceId, string $petName): array {
         if (!isset($_SESSION['username'])) {
             return array();
