@@ -21,33 +21,29 @@ class BiddingController extends Controller {
     }
 
     /**
-     * Edits the information about an existing pet.
+     * Edits the bidding point of a specific bidding.
      *
      * @param array $data
      * @throws NotFoundException
      */
     public function edit($data = array()) {
-        if (!isset($data["provider"])) {
+        if (!isset($data["service_id"])) {
             $this->index($data);
             return;
         }
-        $petName = $data["pet_name"];
+        $serviceId = $data["service_id"];
         if (!empty($_POST)) {
-            $gender = isset($_POST["gender"]) ? $_POST["gender"] : "unknown";
-            $type = isset($_POST["type"]) ? $_POST["type"] : "";
-            $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "NULL";
-            $bio = isset($_POST["bio"]) ? $_POST["bio"] : "";
-            if (Pet::updatePetInfo($petName, $gender, $type, $birthday, $bio)) {
-                $data["successMessage"] = "Your pet " . $petName . " 's information has been updated.";
+            $bidPoint = isset($_POST["bid_point"]) ? $_POST["bid_point"] : 0;
+            if (Bidding::updateBidPoint($bidPoint, $serviceId)) {
+                $data["successMessage"] = "Your bidding point has been updated.";
                 $this->index($data);
                 return;
             } else {
-                $data["errorMessage"] = "Something went wrong. Your pet's information cannot be updated.";
+                $data["errorMessage"] = "Something went wrong. Your bidding point cannot be updated.";
             }
         }
-        $data = array_merge($data, Pet::getPetInfo($petName));
-        $data["types"] = PetType::getAllTypes();
-        $this->show("Pet/edit", $data);
+        $data = array_merge($data, Bidding::getBidPoint($serviceId));
+        $this->show("Bidding/editBidding", $data);
     }
 
     /**
@@ -55,15 +51,15 @@ class BiddingController extends Controller {
      * @throws NotFoundException
      */
     public function delete($data = array()) {
-        if (!isset($data["pet_name"])) {
+        if (!isset($data["service_id"])) {
             $this->index($data);
             return;
         }
-        $petName = $data["pet_name"];
-        if (Pet::delete($petName)) {
-            $data["successMessage"] = "Your pet " . $petName . " has been removed.";
+        $serviceId = $data["service_id"];
+        if (Bidding::delete($serviceId)) {
+            $data["successMessage"] = "Your bidding has been removed.";
         } else {
-            $data["errorMessage"] = "Something went wrong. Your pet cannot be removed.";
+            $data["errorMessage"] = "Something went wrong. Your bidding cannot be removed.";
         }
         $this->index($data);
     }

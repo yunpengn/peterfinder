@@ -96,8 +96,8 @@ if (!hasLogin()) {
                             <td><?php echo isset($bid["decision_deadline"]) ? $bid["decision_deadline"] : ""; ?></td>
 		            <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><div class="row">
-		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/editBidding?pet_name=<?php echo $pet['pet_name']; ?>"><i class="far fa-edit"></i></a>&nbsp;
-		            	<a role="button" class="btn btn-danger btn-delete-pet" href="<?php echo APP_URL; ?>/Pet/delete?pet_name=<?php echo $pet['pet_name']; ?>"><i class="fas fa-trash"></i></a>
+		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $bid["service_id"]; ?>"><i class="far fa-edit"></i></a>&nbsp;
+		            	<a role="button" class="btn btn-danger btn-delete-bidding" href="<?php echo APP_URL; ?>/Bidding/delete?service_id=<?php echo $bid["service_id"]; ?>"><i class="fas fa-trash"></i></a>
 		        	</div></td>
 		        </tr>
 		    	<?php } ?>
@@ -108,8 +108,8 @@ if (!hasLogin()) {
     			$('#myBiddings').DataTable();
 			});
 
-			$('.btn-delete-pet').click(function(event) {
-				if (!confirm("Are you sure to delete this pet? This cannot be undone.")) {
+			$('.btn-delete-bidding').click(function(event) {
+				if (!confirm("Are you sure to delete this bidding? This cannot be undone.")) {
 					event.preventDefault();
 				}
 			});
