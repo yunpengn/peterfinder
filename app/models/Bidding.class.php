@@ -28,23 +28,23 @@ class Bidding {
         return $result;
     }
 
-    public static function getBidPoint(int $serviceId): array {
+    public static function getBidPoint(int $serviceId, string $petName): array {
         if (!isset($_SESSION['username'])) {
             return array();
         }
         $db = new Database();
-        $query = "SELECT * FROM bidding WHERE service_id = ?";
-        $result = $db->query($query, array($serviceId));
+        $query = "SELECT * FROM bidding WHERE service_id = ? AND bidder = ? AND pet_name = ?";
+        $result = $db->query($query, array($serviceId, $_SESSION['username'], $petName));
         return $result[0];
     }
 
-    public static function updateBidPoint(int $bidPoint, int $serviceId): bool {
+    public static function updateBidPoint(int $bidPoint, int $serviceId, string $petName): bool {
         if (!isset($_SESSION['username'])) {
             return false;
         }
         $db = new Database();
-        $query = "UPDATE bidding SET points = ? WHERE service_id = ?";
-        return $db->insertOrUpdate($query, array($bidPoint, $serviceId));
+        $query = "UPDATE bidding SET points = ? WHERE service_id = ? AND bidder = ? AND pet_name = ?";
+        return $db->insertOrUpdate($query, array($bidPoint, $serviceId, $_SESSION['username'], $petName));
     }
 
     public static function getBidStatus(int $serviceId, string $bidder, string $petName): array {

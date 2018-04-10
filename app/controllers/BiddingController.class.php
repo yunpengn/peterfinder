@@ -32,9 +32,10 @@ class BiddingController extends Controller {
             return;
         }
         $serviceId = $data["service_id"];
+        $petName = $data["pet_name"];
         if (!empty($_POST)) {
             $bidPoint = isset($_POST["bid_point"]) ? $_POST["bid_point"] : 0;
-            if (Bidding::updateBidPoint($bidPoint, $serviceId)) {
+            if (Bidding::updateBidPoint($bidPoint, $serviceId, $petName)) {
                 $data["successMessage"] = "Your bidding point has been updated.";
                 $this->index($data);
                 return;
@@ -42,7 +43,7 @@ class BiddingController extends Controller {
                 $data["errorMessage"] = "Something went wrong. Your bidding point cannot be updated.";
             }
         }
-        $data = array_merge($data, Bidding::getBidPoint($serviceId));
+        $data = array_merge($data, Bidding::getBidPoint($serviceId, $petName));
         $this->show("Bidding/editBidding", $data);
     }
 

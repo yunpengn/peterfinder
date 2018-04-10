@@ -7,7 +7,7 @@ if (!hasLogin()) {
     <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
         <h1>Edit My Bidding</h1>
         <br>
-        <form method="post" action="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $service_id; ?>">
+        <form method="post" action="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $service_id; ?>&pet_name=<?php echo $pet_name; ?>">
             <?php if (isset($errorMessage)) { ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?php echo $errorMessage; ?>

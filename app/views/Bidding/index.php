@@ -87,7 +87,7 @@ if (!hasLogin()) {
                             <td><?php echo isset($bid["decision_deadline"]) ? $bid["decision_deadline"] : ""; ?></td>
 		            <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><div class="row">
-		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $bid["service_id"]; ?>"><i class="far fa-edit"></i></a>&nbsp;
+		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $bid["service_id"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="far fa-edit"></i></a>&nbsp;
 		            	<a role="button" class="btn btn-danger btn-delete-bidding" href="<?php echo APP_URL; ?>/Bidding/delete?service_id=<?php echo $bid["service_id"]; ?>"><i class="fas fa-trash"></i></a>
 		        	</div></td>
 		        </tr>
