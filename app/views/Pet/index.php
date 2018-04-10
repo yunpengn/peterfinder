@@ -1,8 +1,3 @@
-<?php
-if (!hasLogin() || !(isset($_SESSION["isOwner"]) && $_SESSION["isOwner"])) {
-    header("Location:" . APP_URL);
-}
-?>
 <div class="container">
     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
     	<div class="row">
@@ -13,6 +8,7 @@ if (!hasLogin() || !(isset($_SESSION["isOwner"]) && $_SESSION["isOwner"])) {
 				<a role="button" class="btn btn-primary" href="<?php echo APP_URL; ?>/Pet/new">Add New Pet</a>
 		    </div></div>
     	</div>
+
         <?php if (isset($successMessage)) { ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?php echo $successMessage; ?>
@@ -22,6 +18,7 @@ if (!hasLogin() || !(isset($_SESSION["isOwner"]) && $_SESSION["isOwner"])) {
         </div>
         <?php } ?>
         <br>
+        
         <table id="myPets" class="table table-responsive table-striped table-bordered display">
 		    <thead>
 		        <tr>

@@ -42,10 +42,21 @@ class Controller {
         }
     }
 
+    public function hasLogin(): bool {
+        return isset($_SESSION['authorized']) && $_SESSION['authorized'] == true;
+    }
+
     public static function logger($msg) {
         $logFile = date('Y-m-d').'.txt';
         $msg = date('Y-m-d H:i:s').' >>> '.$msg."\r\n";
         file_put_contents($logFile, $msg, FILE_APPEND);
     }
-}
 
+    public function isPetOwner(): bool {
+        return isset($_SESSION["isOwner"]) && $_SESSION["isOwner"];
+    }
+
+    public function isCareTaker(): bool {
+        return isset($_SESSION["isPeter"]) && $_SESSION["isPeter"];
+    }
+}

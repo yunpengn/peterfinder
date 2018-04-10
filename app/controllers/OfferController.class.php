@@ -13,6 +13,10 @@ class OfferController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
+        if (!$this->hasLogin()) {
+            header("Location:" . APP_URL);
+            return;
+        }
         $data["offers"] = Offer::all();
         $this->show("Offer/index", $data);
     }
@@ -22,6 +26,10 @@ class OfferController extends Controller {
      * @throws NotFoundException
      */
     public function myOffers($data = array()) {
+        if (!$this->hasLogin() || !$this->isCareTaker()) {
+            header("Location:" . APP_URL . "/Offer/index");
+            return;
+        }
         $data["offers"] = Offer::queryOfferByProvider($_SESSION["username"]);
         $this->show("Offer/myOffers", $data);
     }
@@ -33,6 +41,10 @@ class OfferController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function create($data = array()) {
+        if (!$this->hasLogin() || !$this->isCareTaker()) {
+            header("Location:" . APP_URL . "/Offer/index");
+            return;
+        }
     	if (empty($_POST)) {
             $data["pet_types"] = PetType::getAllTypes();
     		$this->show("Offer/create", $data);
@@ -67,6 +79,10 @@ class OfferController extends Controller {
      * @throws NotFoundException
      */
     public function edit($data = array()) {
+        if (!$this->hasLogin() || !$this->isCareTaker()) {
+            header("Location:" . APP_URL . "/Offer/index");
+            return;
+        }
     	if (!isset($_GET["service_id"]) ||  !Offer::checkOfferCreator($data["service_id"], $_SESSION["username"])) {
     		header("Location:" . APP_URL."/Offer/myOffers");
     		return;
@@ -92,6 +108,10 @@ class OfferController extends Controller {
     }
 
     public function delete($data = array()) {
+        if (!$this->hasLogin() || !$this->isCareTaker()) {
+            header("Location:" . APP_URL . "/Offer/index");
+            return;
+        }
     	if (!isset($data["service_id"])) {
     		header("Location:" . APP_URL."/Offer/index");
     		return;
