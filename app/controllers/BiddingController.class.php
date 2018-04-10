@@ -47,6 +47,34 @@ class BiddingController extends Controller {
     }
 
     /**
+     * Edits the bidding status of a specific bidding.
+     *
+     * @param array $data
+     * @throws NotFoundException
+     */
+    public function updateStatus($data = array()) {
+        if (!isset($data["service_id"])) {
+            $this->index($data);
+            return;
+        }
+        $serviceId = $data["service_id"];
+        $bidder = $data["bidder"];
+        $petName = $data["pet_name"];
+        if (!empty($_POST)) {
+            $bidStatus = isset($_POST["bid_status"]) ? $_POST["bid_status"] : "pending";
+            if (Bidding::updateBidStatus($bidStatus, $serviceId, $bidder, $petName)) {
+                $data["successMessage"] = "Bidding status has been updated.";
+                $this->index($data);
+                return;
+            } else {
+                $data["errorMessage"] = "Something went wrong. Bidding status cannot be updated.";
+            }
+        }
+        $data = array_merge($data, Bidding::getBidStatus($serviceId, $bidder, $petName));
+        $this->show("Bidding/updateBiddingStatus", $data);
+    }
+
+    /**
      * @param array $data
      * @throws NotFoundException
      */

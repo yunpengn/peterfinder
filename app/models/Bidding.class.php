@@ -10,7 +10,7 @@ class Bidding {
             return array();
         }
         $db = new Database();
-        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE bidder = ?";
+        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.pet_name as pet_name, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE bidder = ?";
         $result = $db->query($query, array($_SESSION['username']));
         return $result;
     }
@@ -23,7 +23,7 @@ class Bidding {
             return array();
         }
         $db = new Database();
-        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE provider = ?";
+        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.pet_name as pet_name, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE provider = ?";
         $result = $db->query($query, array($_SESSION['username']));
         return $result;
     }
@@ -45,6 +45,25 @@ class Bidding {
         $db = new Database();
         $query = "UPDATE bidding SET points = ? WHERE service_id = ?";
         return $db->insertOrUpdate($query, array($bidPoint, $serviceId));
+    }
+
+    public static function getBidStatus(int $serviceId, string $bidder, string $petName): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
+        $db = new Database();
+        $query = "SELECT * FROM bidding WHERE service_id = ? AND bidder = ? AND pet_name = ?";
+        $result = $db->query($query, array($serviceId, $bidder, $petName));
+        return $result[0];
+    }
+
+    public static function updateBidStatus(string $bidStatus, int $serviceId, string $bidder, string $petName): bool {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
+        $db = new Database();
+        $query = "UPDATE bidding SET status = ? WHERE service_id = ? AND bidder = ? AND pet_name = ?";
+        return $db->insertOrUpdate($query, array($bidStatus, $serviceId, $bidder, $petName));
     }
 
     /**
