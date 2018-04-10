@@ -14,8 +14,7 @@ CREATE TYPE notification_status AS ENUM (
 CREATE TYPE bidding_status AS ENUM (
   'pending',
   'succeed',
-  'fail',
-  'cancel');
+  'fail');
 
 CREATE TABLE users (
   username varchar(255) PRIMARY KEY,
@@ -93,7 +92,7 @@ CREATE TABLE bidding (
   service_id int REFERENCES service_offers(service_id) ON DELETE CASCADE ON UPDATE CASCADE,
   bidder varchar(255),
   pet_name varchar(255),
-  points int DEFAULT 0,
+  points numeric DEFAULT 0,
   status bidding_status DEFAULT 'pending',
   created_at timestamp DEFAULT current_timestamp,
   updated_at timestamp DEFAULT current_timestamp,

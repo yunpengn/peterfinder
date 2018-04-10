@@ -1,8 +1,3 @@
-<?php
-if (!hasLogin()) {
-    header("Location:" . APP_URL);
-}
-?>
 <div class="container">
     <div class="col-12 col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1 col-xl-10 offset-xl-1">
         <div class="row">
@@ -57,10 +52,10 @@ if (!hasLogin()) {
 		            <td><?php echo isset($offer["start_date"]) ? formatDate($offer["start_date"]) : ""; ?></td>
 		            <td><?php echo isset($offer["end_date"]) ? formatDate($offer["end_date"]) : ""; ?></td>
 		            <td><?php echo isset($offer["decision_deadline"]) ? $offer["decision_deadline"] : ""; ?></td>
-		            <td><?php echo isset($offer["expected_salary"]) ? formatNumber($offer["expected_salary"]) : ""; ?></td>
+		            <td><?php echo isset($offer["expected_salary"]) ? formatMoney($offer["expected_salary"]) : ""; ?></td>
 		            <td><?php echo isset($offer["target"]) ? $offer["target"] : ""; ?></td>
 		            <?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
-		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/add?service_id=<?php echo $offer['service_id']; ?>"><i class="fas fa-shopping-cart"></i></a></td>
+		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/create?service_id=<?php echo $offer['service_id']; ?>"><i class="fas fa-shopping-cart"></i></a></td>
 		        	<?php } ?>
 		        </tr>
 		    	<?php } ?>

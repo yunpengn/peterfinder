@@ -56,12 +56,12 @@ class UserController extends Controller {
             $data["password"] = $password;
             $this->show("User/login", $data);
         } else {
-            $this->show("index", $data);
+            header("Location:" . APP_URL);
         }
     }
 
     /**
-     * Handles the user signup logic.
+     * Handles the user sign-up logic.
      *
      * @param array $data is the parameters passed in.
      * @throws NotFoundException when the page is not found.
@@ -134,7 +134,7 @@ class UserController extends Controller {
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_destroy();
         }
-        $this->show("index", $data);
+        header("Location:" . APP_URL);
     }
 
     /**

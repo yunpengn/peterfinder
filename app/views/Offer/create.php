@@ -1,8 +1,3 @@
-<?php
-if (!hasLogin() || !(isset($_SESSION["isPeter"]) && $_SESSION["isPeter"])) {
-    header("Location:" . APP_URL);
-}
-?>
 <div class="container">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
         <h1>New Service Offer</h1>
@@ -34,7 +29,12 @@ if (!hasLogin() || !(isset($_SESSION["isPeter"]) && $_SESSION["isPeter"])) {
 
             <div class="form-group">
                 <label for="expected_salary">Expected Salary</label>
-                <input type="number" min="0.00" step="any" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                          <div class="input-group-text">$</div>
+                    </div>
+                    <input type="number" min="0.00" step="any" name="expected_salary" class="form-control" id="expected_salary" accesskey="e" tabindex="2" required value="<?php if (isset($expected_salary)) { echo $expected_salary; } ?>">
+                </div>
             </div>
 
             <div class="form-group">

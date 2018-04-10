@@ -11,16 +11,16 @@ class Offer {
      */
     public static function all(): array {
         $db = new Database();
-        $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, "
-            . "(SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
+        $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, o.expected_salary, "
+            . " (SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
             . "AS target FROM opening_offers o;";
         return $db->query($query, array());
     }
 
     public static function queryOfferByProvider(string $username): array {
         $db = new Database();
-        $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, "
-            . "(SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
+        $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, o.expected_salary, "
+            . " (SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
             . "AS target FROM opening_offers o WHERE o.provider = ?;";
         return $db->query($query, array($username));
     }
@@ -59,17 +59,26 @@ class Offer {
 		$query = "SELECT * FROM service_offers WHERE service_id = ?";
 		$params = array($service_id);
 
-		return $db->query($query, $params);
+		return $db->query($query, $params)[0];
 	}
 
 	public static function editOffer(string $service_id, string $start_date, string $end_date,
 		string $decision_deadline, string $expected_salary, array $type_selected): bool {
 		$db = new Database();
-		$query = "UPDATE service_offers SET start_date = ?, end_date = ?, decision_deadline = ?, expected_salary = ?".
-			"WHERE service_id = ?";
-		$params = array($start_date, $end_date, $decision_deadline, $expected_salary, $service_id);
-		// TODO: Update table service_offers and service_target
-		return $db->insertOrUpdate($query, $params);
+
+        // First updates the row in the service_offers table.
+		$queries = array("UPDATE service_offers SET start_date = ?, end_date = ?, decision_deadline = ?, ".
+			"expected_salary = ? WHERE service_id = ?");
+		$params = array(array($start_date, $end_date, $decision_deadline, $expected_salary, $service_id));
+
+        // Then updates the related rows in the service_target table.
+        array_push($queries, "DELETE FROM service_target WHERE service_id = ?");
+        array_push($params, array($service_id));
+        foreach ($type_selected as $type) {
+            array_push($queries, "INSERT INTO service_target (service_id, type) VALUES (?, ?)");
+            array_push($params, array($service_id, $type));
+        }
+        return $db->transact($queries, $params);
 	}
 
 	public static function checkOfferCreator(string $service_id, string $username): bool {

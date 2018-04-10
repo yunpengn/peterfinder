@@ -8,16 +8,46 @@ class BiddingController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
+        if (!$this->hasLogin() || !$this->isPetOwner()) {
+            header("Location:" . APP_URL);
+            return;
+        }
         $data["my_bidding"] = Bidding::myBiddings();
         $data["others_bidding"] = Bidding::othersBiddings();
         $this->show("Bidding/index", $data);
     }
 
     /**
+     * Creates a new bidding for a certain service offer.
+     *
      * @param array $data
      * @throws NotFoundException
      */
     public function create($data = array()) {
+        if (!$this->hasLogin() || !$this->isPetOwner() || !isset($_GET["service_id"])) {
+            header("Location:" . APP_URL . "/Bidding/index");
+            return;
+        }
+        if (Bidding::hasBidding($_GET["service_id"], $_SESSION['username'])) {
+            header("Location:" . APP_URL . "/Bidding/edit?service_id=" . $_GET["service_id"]);
+            return;
+        }
+        if(empty($_POST)) {
+            $data = array_merge($data, Offer::queryOffer($_GET["service_id"]));
+            $data["valid_pets"] = Bidding::getValidPets($_GET["service_id"], $_SESSION['username']);
+            $data["info"] = Bidding::getBiddersInfo($_GET["service_id"]);
+            $this->show("Bidding/create", $data);
+            return;
+        }
+        if (Bidding::create($_GET["service_id"], $data['pet_name'], $data["points"])) {
+            $message = "You have successfully submitted the bidding for your pet.";
+            header("Location:" . APP_URL . "/Bidding/index?successMessage=" . $message);
+        } else {
+            $data = array_merge($data, Offer::queryOffer($_GET["service_id"]));
+            $data["valid_pets"] = Bidding::getValidPets($_GET["service_id"], $_SESSION['username']);
+            $data["info"] = Bidding::getBiddersInfo($_GET["service_id"]);
+            $this->show("Bidding/create", $data);
+        }
     }
 
     /**

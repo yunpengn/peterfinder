@@ -7,8 +7,8 @@ function formatDate(string $date): string {
     return date_format(date_create($date), DATE_FORMAT);
 }
 
-function formatNumber(string $number): string {
-    return number_format((float) $number, 2, '.', ' ');
+function formatMoney(string $number): string {
+    return "$" . number_format((float) $number, 2, '.', ' ');
 }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -20,12 +20,16 @@ function formatNumber(string $number): string {
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mr-auto">
         <?php if (hasLogin()) { ?>
+            <?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Pet/index">My Pets</a>
             </li>
+            <?php } ?>
+            <?php if (isset($_SESSION["isPeter"]) && $_SESSION["isPeter"]) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Offer/index">Service Offers</a>
             </li>
+            <?php } ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Bidding/index">Service Biddings</a>
             </li>

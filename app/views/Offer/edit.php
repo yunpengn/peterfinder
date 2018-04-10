@@ -1,8 +1,3 @@
-<?php
-if (!hasLogin()) {
-    header("Location:" . APP_URL);
-}
-?>
 <div class="container">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
         <h1>Edit Service Offer</h1>
@@ -29,7 +24,7 @@ if (!hasLogin()) {
 
             <div class="form-group">
                 <label for="decision_deadline">Decision Deadline</label>
-                <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo substr($decision_deadline, 0, strpos($decision_deadline, " ")); } ?>">
+                <input type="date" name="decision_deadline" class="form-control" id="decision_deadline" accesskey="e" tabindex="2" required value="<?php if (isset($decision_deadline)) { echo substr($decision_deadline, 0, 10); } ?>">
             </div>
 
             <div class="form-group">
