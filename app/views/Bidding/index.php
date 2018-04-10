@@ -8,11 +8,20 @@
             </button>
         </div>
         <?php } ?>
+        <?php if (isset($errorMessage)) { ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php echo $errorMessage; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php } ?>
 
     	<h1>Opening Biddings</h1>
         <table id="othersBiddings" class="table table-responsive table-striped display">
 		    <thead>
 		        <tr>
+		        	<th>Service ID</th>
 		            <th>Bidder</th>
 		            <th>Start Date</th>
 		            <th>End Date</th>
@@ -24,13 +33,18 @@
 		    <tbody>
 		    	<?php foreach ($others_bidding as $bid) { ?>
 		    	<tr>
+		    		<td><?php echo isset($bid["service_id"]) ? $bid["service_id"] : ""; ?></td>
 		            <td><?php echo isset($bid["bidder"]) ? $bid["bidder"] : ""; ?></td>
-                            <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
-                            <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
-                            <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
+                    <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
+                    <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
+                    <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><?php echo isset($bid["status"]) ? $bid["status"] : ""; ?></td>
 		            <td><div class="row">
-		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/updateStatus?service_id=<?php echo $bid["service_id"]; ?>&bidder=<?php echo $bid["bidder"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="far fa-edit"></i></a>&nbsp;
+		            	<?php if (isset($bid["status"]) && $bid["status"] == "pending") { ?>
+		            	<a role="button" class="btn btn-success btn-accept-bidding" href="<?php echo APP_URL; ?>/Bidding/index?service_id=<?php echo $bid["service_id"]; ?>&bidder=<?php echo $bid["bidder"]; ?>">Accept</a>&nbsp;
+		            	<?php } else { ?>
+		            	Accepted&nbsp;
+		            	<?php } ?>
 		        	</div></td>
 		        </tr>
 		    	<?php } ?>
@@ -54,6 +68,7 @@
 		            <th>End Date</th>
 		            <th>Decision Deadline</th>
 		            <th>Bid Point</th>
+		            <th>Status</th>
                     <th>Action</th>
 		        </tr>
 		    </thead>
@@ -61,10 +76,11 @@
 		    	<?php foreach ($my_bidding as $bid) { ?>
 		    	<tr>
 		            <td><?php echo isset($bid["provider"]) ? $bid["provider"] : ""; ?></td>
-                            <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
-                            <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
-                            <td><?php echo isset($bid["decision_deadline"]) ? $bid["decision_deadline"] : ""; ?></td>
+                    <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
+                    <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
+                    <td><?php echo isset($bid["decision_deadline"]) ? $bid["decision_deadline"] : ""; ?></td>
 		            <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
+		            <td><?php echo isset($bid["status"]) ? $bid["status"] : ""; ?></td>
 		            <td><div class="row">
                         <a role="button" class="btn btn-primary" href="<?php echo APP_URL; ?>/Bidding/listDetails?service_id=<?php echo $bid["service_id"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="fa fa-file"></i></a>&nbsp;
 		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $bid["service_id"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="far fa-edit"></i></a>&nbsp;
@@ -82,6 +98,12 @@
 
 			$('.btn-delete-bidding').click(function(event) {
 				if (!confirm("Are you sure to delete this bidding? This cannot be undone.")) {
+					event.preventDefault();
+				}
+			});
+
+			$('.btn-accept-bidding').click(function(event) {
+				if (!confirm("Are you sure to accept this bidding? This cannot be undone.")) {
 					event.preventDefault();
 				}
 			});

@@ -12,6 +12,22 @@ class BiddingController extends Controller {
             header("Location:" . APP_URL);
             return;
         }
+
+        if (isset($_GET["service_id"]) && isset($_GET["bidder"])) {
+            $service_id = $_GET["service_id"];
+            $bidder = $_GET["bidder"];
+            $offerProvider = $_SESSION["username"];
+
+            if (Offer::checkOfferCreator($service_id, $offerProvider)) {
+                $result = Bidding::assignSucceedForBidding($service_id, $bidder);
+                if ($result) {
+                    $data["successMessage"] = "Bidding status has been updated.";
+                } else {
+                    $data["errorMessage"] = "Something went wrong. Bidding status cannot be updated.";
+                }
+            }
+        }
+
         $data["my_bidding"] = Bidding::myBiddings();
         $data["others_bidding"] = Bidding::othersBiddings();
         $this->show("Bidding/index", $data);

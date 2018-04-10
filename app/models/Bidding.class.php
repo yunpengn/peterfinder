@@ -121,6 +121,20 @@ class Bidding {
     }
 
     /**
+     * Assign succeed for the given bidder.
+     * Assign fail to other bidders who bid for the same offer
+     *
+     * @return bool
+     */
+    public static function assignSucceedForBidding(string $service_id, string $bidder): bool {
+        $db = new Database();
+        $query = "UPDATE bidding SET status = "
+            ."(CASE WHEN bidder = ? THEN 'succeed'::bidding_status ELSE 'fail'::bidding_status END)"
+            ." WHERE service_id = ? AND status = 'pending'::bidding_status";
+        return $db->insertOrUpdate($query, array($bidder, $service_id));
+    }
+
+    /**
      * Delete a bidding of the current user.
      *
      * @param int $service_id
