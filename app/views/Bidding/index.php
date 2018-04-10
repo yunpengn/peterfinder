@@ -25,8 +25,8 @@
 		    	<?php foreach ($others_bidding as $bid) { ?>
 		    	<tr>
 		            <td><?php echo isset($bid["bidder"]) ? $bid["bidder"] : ""; ?></td>
-                            <td><?php echo isset($bid["start_date"]) ? $bid["start_date"] : ""; ?></td>
-                            <td><?php echo isset($bid["end_date"]) ? $bid["end_date"] : ""; ?></td>
+                            <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
+                            <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
                             <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><?php echo isset($bid["status"]) ? $bid["status"] : ""; ?></td>
 		            <td><div class="row">
@@ -61,8 +61,8 @@
 		    	<?php foreach ($my_bidding as $bid) { ?>
 		    	<tr>
 		            <td><?php echo isset($bid["provider"]) ? $bid["provider"] : ""; ?></td>
-                            <td><?php echo isset($bid["start_date"]) ? $bid["start_date"] : ""; ?></td>
-                            <td><?php echo isset($bid["end_date"]) ? $bid["end_date"] : ""; ?></td>
+                            <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
+                            <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
                             <td><?php echo isset($bid["decision_deadline"]) ? $bid["decision_deadline"] : ""; ?></td>
 		            <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><div class="row">
