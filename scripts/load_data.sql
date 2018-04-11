@@ -108,8 +108,8 @@ INSERT INTO service_target(service_id, type) VALUES (12, 'Cat');
 INSERT INTO service_target(service_id, type) VALUES (12, 'Budgies Bird');
 
 -- Generate some fake data for biddings.
-INSERT INTO bidding(service_id, bidder, pet_name, points) VALUES(1, 'test', 'Tommy', 189.6);
 INSERT INTO bidding(service_id, bidder, pet_name, points) VALUES(1, 'user6', 'Oscar', 598.7);
 INSERT INTO bidding(service_id, bidder, pet_name, points) VALUES(1, 'user0', 'John', 1587.55);
+INSERT INTO bidding(service_id, bidder, pet_name, points) VALUES(1, 'user2', 'Swify', 825.4);
 INSERT INTO bidding(service_id, bidder, pet_name, points) VALUES(4, 'test', 'John', 189.6);
 INSERT INTO bidding(service_id, bidder, pet_name, points) VALUES(8, 'test', 'Tommy', 189.6);
