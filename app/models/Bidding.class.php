@@ -121,17 +121,24 @@ class Bidding {
     }
 
     /**
-     * Assign succeed for the given bidder.
-     * Assign fail to other bidders who bid for the same offer
+     * Assign succeed for the given bidder, while assign fail to other bidders who bid for the same offer.
      *
      * @return bool
      */
     public static function assignSucceedForBidding(string $service_id, string $bidder): bool {
         $db = new Database();
-        $query = "UPDATE bidding SET status = "
-            ."(CASE WHEN bidder = ? THEN 'succeed'::bidding_status ELSE 'fail'::bidding_status END)"
-            ." WHERE service_id = ? AND status = 'pending'::bidding_status";
-        return $db->insertOrUpdate($query, array($bidder, $service_id));
+
+        // First update one bidding to 'succeed' and else to 'fail'.
+        $queries = array("UPDATE bidding SET status = "
+                         . "(CASE WHEN bidder = ? THEN 'succeed'::bidding_status ELSE 'fail'::bidding_status END)"
+                         . " WHERE service_id = ?");
+        $params = array(array($bidder, $service_id));
+
+        // Then create the service history for this service offer.
+        array_push($queries, "INSERT INTO service_history (service_id, owner, pet_name) VALUES ()");
+        array_push($params, array());
+
+        return $db->insertOrUpdate($queries, $params);
     }
 
     /**

@@ -8,7 +8,7 @@ class BiddingController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
-        if (!$this->hasLogin() || !$this->isPetOwner()) {
+        if (!$this->hasLogin()) {
             header("Location:" . APP_URL);
             return;
         }
@@ -28,8 +28,8 @@ class BiddingController extends Controller {
             }
         }
 
-        $data["my_bidding"] = Bidding::myBiddings();
-        $data["others_bidding"] = Bidding::othersBiddings();
+        $data["my_bidding"] = $this->isPetOwner() ? Bidding::myBiddings() : array();
+        $data["others_bidding"] = $this->isCareTaker() ? Bidding::othersBiddings() : array();
         $this->show("Bidding/index", $data);
     }
 
@@ -97,18 +97,21 @@ class BiddingController extends Controller {
         }
         $serviceId = $data["service_id"];
         $petName = $data["pet_name"];
+
         if (!empty($_POST)) {
             $bidPoint = isset($_POST["bid_point"]) ? $_POST["bid_point"] : 0;
             if (Bidding::updateBidPoint($bidPoint, $serviceId, $petName)) {
-                $data["successMessage"] = "Your bidding point has been updated.";
-                $this->index($data);
+                $message = "Your bidding has been updated.";
+                header("Location:" . APP_URL . "/Bidding/index?successMessage=" . $message);
                 return;
             } else {
                 $data["errorMessage"] = "Something went wrong. Your bidding point cannot be updated.";
+                $this->show("Bidding/edit", $data);
+                return;
             }
         }
-        $data = array_merge($data, Bidding::getBidPoint($serviceId, $petName));
-        $this->show("Bidding/editBidding", $data);
+        $data["bid_point"] = Bidding::getBidPoint($serviceId, $petName)["points"];
+        $this->show("Bidding/edit", $data);
     }
 
     /**
