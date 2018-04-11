@@ -26,7 +26,7 @@ if (!hasLogin()) {
             <?php } ?>
             <div class="form-group">
                 <label for="bid_point">Bid Point</label>
-                <input type="number" name="bid_point" class="form-control" id="bid_point" value="<?php if (isset($bid_point)) { echo $bid_point; } ?>" placeholder="Enter your bidding point" accesskey="p" tabindex="1" required autofocus>
+                <input type="number" name="bid_point" min="0.00" step="any" class="form-control" id="bid_point" value="<?php if (isset($bid_point)) { echo $bid_point; } ?>" placeholder="Enter your bidding point" accesskey="p" tabindex="1" required autofocus>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;

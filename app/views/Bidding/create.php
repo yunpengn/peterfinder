@@ -53,14 +53,14 @@
         <h3>Bidding Statistics</h3>
         <table class="table table-responsive table-striped">
             <thead><tr>
-                <td>Number of Bidders</td>
-                <td>Min. Bidding Points</td>
-                <td>Max. Bidding Points</td>
+                <td style="text-align: center;">Number of Bidders</td>
+                <td style="text-align: center;">Min. Bidding Points</td>
+                <td style="text-align: center;">Max. Bidding Points</td>
             </tr></thead>
             <tbody><tr>
-                <td><?php echo isset($info["number"]) ? $info["number"] : "Unknown"; ?></td>
-                <td><?php echo isset($info["minimum"]) ? $info["minimum"] : "Unknown"; ?></td>
-                <td><?php echo isset($info["maximum"]) ? $info["maximum"] : "Unknown"; ?></td>
+                <td style="text-align: center;"><?php echo isset($info["number"]) ? $info["number"] : "Unknown"; ?></td>
+                <td style="text-align: center;"><?php echo isset($info["minimum"]) ? $info["minimum"] : "Unknown"; ?></td>
+                <td style="text-align: center;"><?php echo isset($info["maximum"]) ? $info["maximum"] : "Unknown"; ?></td>
             </tr></tbody>
         </table>
         <br>

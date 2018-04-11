@@ -59,10 +59,11 @@ echo "-- Generate some fake data for pets.<br>";
 $username = array("test", "test", "user0", "user2", "user4", "user6");
 $petname = array("John", "Tommy", "John", "Swify", "Molly", "Oscar");
 $type = array("Bull Terrier Dog", "Cat", "Dog", "Budgies Bird", "Cat", "Siamese Cat");
+$birthday = array(date("Y-m-d", strtotime("-4 months")), date("Y-m-d", strtotime("-20 weeks")));
 $bio = array("A very nice dog", "My pet really loves sleeping", "He is quite quite.", "Please give her enough food. Please!", "She needs to sleep at least 8 hours a day.", "He is a very active cat.");
 for ($i = 0; $i < 6; $i++) {
-	$query = "INSERT INTO pets(username, pet_name, type, bio) VALUES ('" . 
-			  $username[$i] . "', '" . $petname[$i] . "', '" . $type[$i] . "', '" . $bio[$i] . "');";
+	$query = "INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('" . $username[$i] 
+			 . "', '" . $petname[$i] . "', '" . $type[$i] . "', '" . $birthday[$i % 2] . "', '" . $bio[$i] . "');";
 	echo $query . "<br>";
 }
 echo "<br>";

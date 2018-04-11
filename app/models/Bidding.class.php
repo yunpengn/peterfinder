@@ -28,7 +28,7 @@ class Bidding {
             return array();
         }
         $db = new Database();
-        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.pet_name as pet_name, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE provider = ?";
+        $query = "SELECT B.service_id as service_id, B.bidder as bidder, B.pet_name as pet_name, B.points as points, B.status as status, S.provider as provider, S.start_date as start_date, S.end_date as end_date, S.decision_deadline as decision_deadline, S.expected_salary as expected_salary FROM bidding B inner join service_offers S on B.service_id = S.service_id WHERE S.provider = ? AND B.status = 'pending'";
         $result = $db->query($query, array($_SESSION['username']));
         return $result;
     }
@@ -102,8 +102,7 @@ class Bidding {
     }
 
     /**
-     * Assign succeed for the given bidder.
-     * Assign fail to other bidders who bid for the same offer
+     * Assign succeed for the given bidder, while assign fail to other bidders who bid for the same offer.
      *
      * @return bool
      */
@@ -112,10 +111,18 @@ class Bidding {
             return false;
         }
         $db = new Database();
-        $query = "UPDATE bidding SET status = "
-            ."(CASE WHEN bidder = ? AND pet_name = ? THEN 'succeed'::bidding_status ELSE 'fail'::bidding_status END)"
-            ." WHERE service_id = ? AND status = 'pending'::bidding_status";
-        return $db->insertOrUpdate($query, array($bidder, $pet_name, $service_id));
+
+        // First update one bidding to 'succeed' and else to 'fail'.
+        $queries = array("UPDATE bidding SET status = "
+                         . "(CASE WHEN bidder = ? THEN 'succeed'::bidding_status ELSE 'fail'::bidding_status END)"
+                         . " WHERE service_id = ?");
+        $params = array(array($bidder, $service_id));
+
+        // Then create the service history for this service offer.
+        array_push($queries, "INSERT INTO service_history (service_id, owner, pet_name) VALUES (?, ?, ?)");
+        array_push($params, array($service_id, $bidder, $pet_name));
+
+        return $db->transact($queries, $params);
     }
 
     /**
