@@ -149,7 +149,8 @@ class BiddingController extends Controller {
             return;
         }
         $serviceId = $data["service_id"];
-        if (Bidding::delete($serviceId)) {
+        $petName = $data["pet_name"];
+        if (Bidding::delete($serviceId, $petName)) {
             $data["successMessage"] = "Your bidding has been removed.";
         } else {
             $data["errorMessage"] = "Something went wrong. Your bidding cannot be removed.";

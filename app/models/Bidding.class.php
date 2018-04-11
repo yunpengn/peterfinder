@@ -140,14 +140,14 @@ class Bidding {
      * @param int $service_id
      * @return bool
      */
-    public static function delete(int $service_id) {
+    public static function delete(int $service_id, string $pet_name) {
         if (!isset($_SESSION['username'])) {
             return false;
         }
         $db = new Database();
         // Makes sure this pet belongs to the current user.
-        $query = "DELETE FROM bidding WHERE service_id = ?";
-        return $db->insertOrUpdate($query, array($service_id));
+        $query = "DELETE FROM bidding WHERE service_id = ? AND bidder = ? AND pet_name = ?";
+        return $db->insertOrUpdate($query, array($service_id, $_SESSION['username'], $pet_name));
     }
 }
 

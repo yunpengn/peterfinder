@@ -84,7 +84,7 @@
 		            <td><div class="row">
                         <a role="button" class="btn btn-primary" href="<?php echo APP_URL; ?>/Bidding/listDetails?service_id=<?php echo $bid["service_id"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="fa fa-file"></i></a>&nbsp;
 		            	<a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/Bidding/edit?service_id=<?php echo $bid["service_id"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="far fa-edit"></i></a>&nbsp;
-		            	<a role="button" class="btn btn-danger btn-delete-bidding" href="<?php echo APP_URL; ?>/Bidding/delete?service_id=<?php echo $bid["service_id"]; ?>"><i class="fas fa-trash"></i></a>
+		            	<a role="button" class="btn btn-danger btn-delete-bidding" href="<?php echo APP_URL; ?>/Bidding/delete?service_id=<?php echo $bid["service_id"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>"><i class="fas fa-trash"></i></a>
 		        	</div></td>
 		        </tr>
 		    	<?php } ?>
