@@ -60,12 +60,12 @@ INSERT INTO pet_types(type, root_type, description) VALUES ('Budgies Bird', 'Bir
 INSERT INTO pet_types(type, root_type, description) VALUES ('Neon Tetra Fish', 'Fish', 'Although small in size, these beautifully coloured, cool freshwater fish will surely satisfy you.');
 
 -- Generate some fake data for pets.
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'John', 'Bull Terrier Dog', 'A very nice dog');
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('test', 'Tommy', 'Cat', 'My pet really loves sleeping');
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('user0', 'John', 'Dog', 'He is quite quite.');
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('user2', 'Swify', 'Budgies Bird', 'Please give her enough food. Please!');
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('user4', 'Molly', 'Cat', 'She needs to sleep at least 8 hours a day.');
-INSERT INTO pets(username, pet_name, type, bio) VALUES ('user6', 'Oscar', 'Siamese Cat', 'He is a very active cat.');
+INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('test', 'John', 'Bull Terrier Dog', '2017-12-11', 'A very nice dog');
+INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('test', 'Tommy', 'Cat', '2017-11-22', 'My pet really loves sleeping');
+INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('user0', 'John', 'Dog', '2017-12-11', 'He is quite quite.');
+INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('user2', 'Swify', 'Budgies Bird', '2017-11-22', 'Please give her enough food. Please!');
+INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('user4', 'Molly', 'Cat', '2017-12-11', 'She needs to sleep at least 8 hours a day.');
+INSERT INTO pets(username, pet_name, type, birthday, bio) VALUES ('user6', 'Oscar', 'Siamese Cat', '2017-11-22', 'He is a very active cat.');
 
 -- Generate some fake data for service offers.
 INSERT INTO service_offers(provider, start_date, end_date, decision_deadline) VALUES ('test', '2018-06-10', '2018-07-10', '2018-05-08');
