@@ -41,7 +41,7 @@
 		            <td><?php echo isset($bid["status"]) ? $bid["status"] : ""; ?></td>
 		            <td><div class="row">
 		            	<?php if (isset($bid["status"]) && $bid["status"] == "pending") { ?>
-		            	<a role="button" class="btn btn-success btn-accept-bidding" href="<?php echo APP_URL; ?>/Bidding/index?service_id=<?php echo $bid["service_id"]; ?>&bidder=<?php echo $bid["bidder"]; ?>">Accept</a>&nbsp;
+		            	<a role="button" class="btn btn-success btn-accept-bidding" href="<?php echo APP_URL; ?>/Bidding/index?service_id=<?php echo $bid["service_id"]; ?>&bidder=<?php echo $bid["bidder"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>">Accept</a>&nbsp;
 		            	<?php } else { ?>
 		            	Accepted&nbsp;
 		            	<?php } ?>
