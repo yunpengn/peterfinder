@@ -17,7 +17,7 @@ class OfferController extends Controller {
             header("Location:" . APP_URL);
             return;
         }
-        $data["offers"] = Offer::all();
+        $data["offers"] = Offer::othersOffers();
         $this->show("Offer/index", $data);
     }
 
@@ -30,7 +30,7 @@ class OfferController extends Controller {
             header("Location:" . APP_URL . "/Offer/index");
             return;
         }
-        $data["offers"] = Offer::queryOfferByProvider($_SESSION["username"]);
+        $data["offers"] = Offer::queryOfferByProvider();
         $this->show("Offer/myOffers", $data);
     }
 
@@ -51,19 +51,17 @@ class OfferController extends Controller {
             return;
     	}
 
-    	$username = $_SESSION["username"];
     	$start_date = $_POST["start_date"];
     	$end_date = $_POST["end_date"];
     	$decision_deadline = $_POST["decision_deadline"] . " 00:00:00";
     	$expected_salary = $_POST["expected_salary"];
     	$type_selected = $_POST["type_selected"];
 
-    	if (Offer::create($username, $start_date, $end_date, $decision_deadline, $expected_salary, $type_selected)) {
+    	if (Offer::create($start_date, $end_date, $decision_deadline, $expected_salary, $type_selected)) {
             $message = "?successMessage=Your service offer has been created.";
             header("Location:" . APP_URL . "/Offer/index" . $message);
     	} else {
     		$data["errorMessage"] = "Some input data is invalid. Please check again.";
-    		$data["username"] = $username;
     		$data["start_date"] = $start_date;
     		$data["end_date"] = $end_date;
     		$data["decision_deadline"] = $decision_deadline;

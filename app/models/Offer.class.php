@@ -9,20 +9,26 @@ class Offer {
     /**
      * @return array of all opening offers (has not passed decision deadline yet).
      */
-    public static function all(): array {
+    public static function othersOffers(): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
         $db = new Database();
         $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, o.expected_salary, "
             . " (SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
-            . "AS target FROM opening_offers o;";
-        return $db->query($query, array());
+            . "AS target FROM opening_offers o WHERE o.provider <> ?;";
+        return $db->query($query, array($_SESSION['username']));
     }
 
-    public static function queryOfferByProvider(string $username): array {
+    public static function queryOfferByProvider(): array {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
         $db = new Database();
         $query = "SELECT o.service_id, o.provider, o.start_date, o.end_date, o.decision_deadline, o.expected_salary, "
             . " (SELECT string_agg(type, ', ') FROM service_target t WHERE t.service_id = o.service_id) "
             . "AS target FROM opening_offers o WHERE o.provider = ?;";
-        return $db->query($query, array($username));
+        return $db->query($query, array($_SESSION['username']));
     }
 
     /**
@@ -35,13 +41,16 @@ class Offer {
      * @param array $type_selected
      * @return true if create offer success.
      */
-	public static function create(string $username, string $start_date, string $end_date,
+	public static function create(string $start_date, string $end_date,
                                     string $decision_deadline, string $expected_salary, array $type_selected): bool {
+                if (!isset($_SESSION['username'])) {
+                    return false;
+                }
 		$db = new Database();
 		// First inserts a new row into service_offers table and returns the resulting service_id.
         $query = "INSERT INTO service_offers (provider, start_date, end_date, decision_deadline, expected_salary)"
             . " VALUES (?, ?, ?, ?, ?) RETURNING service_id";
-        $params = array($username, $start_date, $end_date, $decision_deadline, $expected_salary);
+        $params = array($_SESSION['username'], $start_date, $end_date, $decision_deadline, $expected_salary);
         $service_id = $db->query($query, $params)[0]["service_id"];
 
         // Then inserts each selected type into the service_target table.
