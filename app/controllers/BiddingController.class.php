@@ -13,13 +13,14 @@ class BiddingController extends Controller {
             return;
         }
 
-        if (isset($_GET["service_id"]) && isset($_GET["bidder"])) {
-            $service_id = $_GET["service_id"];
+        if (isset($_GET["service_id"]) && isset($_GET["bidder"]) && isset($_GET["pet_name"])) {
+            $serviceID = $_GET["service_id"];
             $bidder = $_GET["bidder"];
+            $petName = $_GET["pet_name"];
             $offerProvider = $_SESSION["username"];
 
-            if (Offer::checkOfferCreator($service_id, $offerProvider)) {
-                $result = Bidding::assignSucceedForBidding($service_id, $bidder);
+            if (Offer::checkOfferCreator($serviceId, $offerProvider)) {
+                $result = Bidding::assignSucceedForBidding($serviceId, $bidder, $petName);
                 if ($result) {
                     $data["successMessage"] = "Bidding status has been updated.";
                 } else {
@@ -73,7 +74,7 @@ class BiddingController extends Controller {
      * @throws NotFoundException
      */
     public function listDetails($data = array()) {
-        if (!isset($data["service_id"])) {
+        if (!isset($data["service_id"]) || !isset($data["pet_name"])) {
             $this->index($data);
             return;
         }
@@ -91,7 +92,7 @@ class BiddingController extends Controller {
      * @throws NotFoundException
      */
     public function edit($data = array()) {
-        if (!isset($data["service_id"])) {
+        if (!isset($data["service_id"]) || !isset($data["pet_name"])) {
             $this->index($data);
             return;
         }
@@ -112,44 +113,17 @@ class BiddingController extends Controller {
     }
 
     /**
-     * Edits the bidding status of a specific bidding.
-     *
-     * @param array $data
-     * @throws NotFoundException
-     */
-    public function updateStatus($data = array()) {
-        if (!isset($data["service_id"])) {
-            $this->index($data);
-            return;
-        }
-        $serviceId = $data["service_id"];
-        $bidder = $data["bidder"];
-        $petName = $data["pet_name"];
-        if (!empty($_POST)) {
-            $bidStatus = isset($_POST["bid_status"]) ? $_POST["bid_status"] : "pending";
-            if (Bidding::updateBidStatus($bidStatus, $serviceId, $bidder, $petName)) {
-                $data["successMessage"] = "Bidding status has been updated.";
-                $this->index($data);
-                return;
-            } else {
-                $data["errorMessage"] = "Something went wrong. Bidding status cannot be updated.";
-            }
-        }
-        $data = array_merge($data, Bidding::getBidStatus($serviceId, $bidder, $petName));
-        $this->show("Bidding/updateBiddingStatus", $data);
-    }
-
-    /**
      * @param array $data
      * @throws NotFoundException
      */
     public function delete($data = array()) {
-        if (!isset($data["service_id"])) {
+        if (!isset($data["service_id"]) || !isset($data["pet_name"])) {
             $this->index($data);
             return;
         }
         $serviceId = $data["service_id"];
-        if (Bidding::delete($serviceId)) {
+        $petName = $data["pet_name"];
+        if (Bidding::delete($serviceId, $petName)) {
             $data["successMessage"] = "Your bidding has been removed.";
         } else {
             $data["errorMessage"] = "Something went wrong. Your bidding cannot be removed.";
