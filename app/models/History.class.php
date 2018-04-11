@@ -33,4 +33,28 @@ class History {
             . " b.pet_name = h.pet_name WHERE o.provider = ?;";
         return $db->query($query, array($_SESSION['username']));
     }
+
+    public static function getReviewForTaker(string $serviceId): array {
+        $db = new Database();
+        $query = "SELECT review_for_taker, rating_for_taker FROM service_history WHERE service_id = ?";
+        return $db->query($query, array($serviceId))[0];
+    }
+
+    public static function getReviewForOwner(string $serviceId): array {
+        $db = new Database();
+        $query = "SELECT review_for_owner, rating_for_owner FROM service_history WHERE service_id = ?";
+        return $db->query($query, array($serviceId))[0];
+    }
+
+    public static function updateReviewForTaker(string $serviceId, string $review, string $rating): bool {
+        $db = new Database();
+        $query = "UPDATE service_history SET review_for_taker = ?, rating_for_taker = ? WHERE service_id = ?";
+        return $db->insertOrUpdate($query, array($review, $rating, $serviceId));
+    }
+
+    public static function updateReviewForOwner(string $serviceId, string $review, string $rating): bool {
+        $db = new Database();
+        $query = "UPDATE service_history SET review_for_owner = ?, rating_for_owner = ? WHERE service_id = ?";
+        return $db->insertOrUpdate($query, array($review, $rating, $serviceId));
+    }
 }

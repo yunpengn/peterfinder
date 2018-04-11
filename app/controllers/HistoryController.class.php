@@ -24,10 +24,32 @@ class HistoryController extends Controller {
     }
 
     public function reviewForTaker($data = array()) {
-
+        if (!$this->hasLogin() || !$this->isPetOwner() || !isset($_GET["service_id"])) {
+            header("Location:" . APP_URL . "History/index");
+            return;
+        }
+        if (isset($_POST["review"]) && isset($_POST["rating"])) {
+            if(History::updateReviewForTaker($_GET["service_id"], $_POST["review"], $_POST["rating"])) {
+                $this->index($data);
+                return;
+            }
+        }
+        $data = array_merge($data, History::getReviewForTaker($_GET["service_id"]));
+        $this->show("History/reviewForTaker", $data);
     }
 
     public function reviewForOwner($data = array()) {
-        
+        if (!$this->hasLogin() || !$this->isCareTaker() || !isset($_GET["service_id"])) {
+            header("Location:" . APP_URL . "History/index");
+            return;
+        }
+        if (isset($_POST["review"]) && isset($_POST["rating"])) {
+            if(History::updateReviewForOwner($_GET["service_id"], $_POST["review"], $_POST["rating"])) {
+                $this->index($data);
+                return;
+            }
+        }
+        $data = array_merge($data, History::getReviewForOwner($_GET["service_id"]));
+        $this->show("History/reviewForOwner", $data);
     }
 }
