@@ -42,13 +42,7 @@
                     <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
                     <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><?php echo isset($bid["status"]) ? $bid["status"] : ""; ?></td>
-		            <td>
-		            	<?php if (isset($bid["status"]) && $bid["status"] == "pending") { ?>
-		            	<a role="button" class="btn btn-success btn-accept-bidding" href="<?php echo APP_URL; ?>/Bidding/index?service_id=<?php echo $bid["service_id"]; ?>&bidder=<?php echo $bid["bidder"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>">Accept</a>&nbsp;
-		            	<?php } else { ?>
-		    			Accepted&nbsp;
-		            	<?php } ?>
-		            </td>
+		            <td><a role="button" class="btn btn-success btn-accept-bidding" href="<?php echo APP_URL; ?>/Bidding/index?service_id=<?php echo $bid["service_id"]; ?>&bidder=<?php echo $bid["bidder"]; ?>&pet_name=<?php echo $bid["pet_name"]; ?>">Accept</a></td>
 		        </tr>
 		    	<?php } ?>
 		    </tbody>
@@ -65,11 +59,11 @@
         <table id="myBiddings" class="table table-responsive table-striped display" width="100%">
 		    <thead>
 		        <tr>
-		            <th>Offer Provider</th>
+		            <th>Provider</th>
 		            <th>Start Date</th>
 		            <th>End Date</th>
 		            <th>Decision Deadline</th>
-		            <th>Bid Point</th>
+		            <th>Bid Points</th>
 		            <th>Status</th>
                     <th>Action</th>
 		        </tr>
@@ -80,7 +74,7 @@
 		            <td><?php echo isset($bid["provider"]) ? $bid["provider"] : ""; ?></td>
                     <td><?php echo isset($bid["start_date"]) ? formatDate($bid["start_date"]) : ""; ?></td>
                     <td><?php echo isset($bid["end_date"]) ? formatDate($bid["end_date"]) : ""; ?></td>
-                    <td><?php echo isset($bid["decision_deadline"]) ? $bid["decision_deadline"] : ""; ?></td>
+                    <td><?php echo isset($bid["decision_deadline"]) ? formatTime($bid["decision_deadline"]) : ""; ?></td>
 		            <td><?php echo isset($bid["points"]) ? $bid["points"] : ""; ?></td>
 		            <td><?php echo isset($bid["status"]) ? ucfirst($bid["status"]) : ""; ?></td>
 		            <td><div class="row">

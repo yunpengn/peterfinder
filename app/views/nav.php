@@ -7,6 +7,10 @@ function formatDate(string $date): string {
     return date_format(date_create($date), DATE_FORMAT);
 }
 
+function formatTime(string $date): string {
+    return date_format(date_create($date), TIME_FORMAT);
+}
+
 function formatMoney(string $number): string {
     return "$" . number_format((float) $number, 2, '.', ' ');
 }
@@ -58,3 +62,8 @@ function formatMoney(string $number): string {
 </nav>
 <br id="break-after-navbar">
 
+<style type="text/css">
+    td {
+        text-align: center;
+    }
+</style>

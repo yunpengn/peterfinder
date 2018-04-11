@@ -30,7 +30,6 @@ CREATE TABLE users (
   is_admin boolean NOT NULL DEFAULT false,
   is_active boolean NOT NULL DEFAULT true,
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   CONSTRAINT "Birthday must not be in the future." CHECK (birthday <= NOW())
 );
 
@@ -39,7 +38,6 @@ CREATE TABLE user_profiles (
   type user_type NOT NULL,
   score numeric DEFAULT 0,
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   PRIMARY KEY (username, type)
 );
 
@@ -47,8 +45,7 @@ CREATE TABLE pet_types (
   type varchar(255) PRIMARY KEY,
   root_type varchar(255) REFERENCES pet_types(type) ON DELETE SET NULL ON UPDATE CASCADE,
   description varchar(255),
-  created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp
+  created_at timestamp DEFAULT current_timestamp
 );
 
 CREATE TABLE pets (
@@ -60,7 +57,6 @@ CREATE TABLE pets (
   birthday date,
   bio varchar(511),
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   PRIMARY KEY (username, pet_name),
   CONSTRAINT "Birthday must not be in the future." CHECK (birthday <= NOW())
 );
@@ -73,7 +69,6 @@ CREATE TABLE service_offers (
   decision_deadline timestamp NOT NULL,
   expected_salary numeric NOT NULL DEFAULT 100,
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > updated_at),
   CONSTRAINT "Service start time must be after decision deadline." CHECK (start_date > decision_deadline),
   CONSTRAINT "Service end time must be after start time." CHECK (end_date > start_date),
@@ -84,7 +79,6 @@ CREATE TABLE service_target (
   service_id int REFERENCES service_offers(service_id) ON DELETE CASCADE ON UPDATE CASCADE,
   type varchar(255) REFERENCES pet_types(type) ON DELETE CASCADE ON UPDATE CASCADE,
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   PRIMARY KEY (service_id, type)
 );
 
@@ -95,7 +89,6 @@ CREATE TABLE bidding (
   points numeric DEFAULT 0,
   status bidding_status DEFAULT 'pending',
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   PRIMARY KEY (service_id, bidder, pet_name),
   FOREIGN KEY (bidder, pet_name) REFERENCES pets(username, pet_name) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT "Bidding points must be positive." CHECK (points > 0)
@@ -110,16 +103,7 @@ CREATE TABLE service_history (
   rating_for_taker integer,
   review_for_taker varchar(511),
   created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp,
   FOREIGN KEY (service_id, owner, pet_name) REFERENCES bidding(service_id, bidder, pet_name) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT "Rating for pet owner is not valid." CHECK (rating_for_owner > 0 AND rating_for_owner <= 5),
   CONSTRAINT "Rating for care taker is not valid." CHECK (rating_for_taker > 0 AND rating_for_taker <= 5)
-);
-
-CREATE TABLE notification (
-  username varchar(255) REFERENCES users(username) ON DELETE SET NULL ON UPDATE CASCADE,
-  message varchar(511),
-  status notification_status DEFAULT 'unread',
-  created_at timestamp DEFAULT current_timestamp,
-  updated_at timestamp DEFAULT current_timestamp
 );

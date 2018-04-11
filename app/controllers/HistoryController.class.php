@@ -17,7 +17,17 @@ class HistoryController extends Controller {
             header("Location:" . APP_URL);
             return;
         }
-        $data["history"] = $this->isPetOwner() ? History::getOwnerHistory() : History::getTakerHistory();
+
+        $data["ownerHistory"] = $this->isPetOwner() ? History::getOwnerHistory() : array();
+        $data["takerHistory"] = $this->isCareTaker() ? History::getTakerHistory() : array();
         $this->show("History/index", $data);
+    }
+
+    public function reviewForTaker($data = array()) {
+
+    }
+
+    public function reviewForOwner($data = array()) {
+        
     }
 }

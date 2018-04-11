@@ -12,7 +12,7 @@ class History {
      */
     public static function getOwnerHistory(): array {
         $db = new Database();
-        $query = "SELECT o.provider AS person, h.pet_name, o.start_date, o.end_date "
+        $query = "SELECT o.service_id, o.provider AS person, h.pet_name, o.start_date, o.end_date "
             . ", b.points, h.review_for_taker AS review, h.rating_for_taker AS rating "
             ."FROM service_offers o INNER JOIN bidding b ON o.service_id = b.service_id "
             . "INNER JOIN service_history h ON b.service_id = h.service_id AND b.bidder = h.owner AND "
@@ -26,7 +26,7 @@ class History {
      */
     public static function getTakerHistory(): array {
         $db = new Database();
-        $query = "SELECT h.owner AS person, h.pet_name, o.start_date, o.end_date "
+        $query = "SELECT o.service_id, h.owner AS person, h.pet_name, o.start_date, o.end_date "
             . ", b.points, h.review_for_owner AS review, h.rating_for_owner AS rating "
             ."FROM service_offers o INNER JOIN bidding b ON o.service_id = b.service_id "
             . "INNER JOIN service_history h ON b.service_id = h.service_id AND b.bidder = h.owner AND "

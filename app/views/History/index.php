@@ -10,15 +10,14 @@
         <?php } ?>
 
     	<h1>Service History</h1>
+
+    	<?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
+    	<h3><i>As Pet Owner</i></h3>
     	<br>
-        <table id="history" class="table table-responsive table-striped display">
+        <table id="ownerHistory" class="table table-responsive table-striped display">
 		    <thead>
 		        <tr>
-		        	<?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
 		            <th>Care Taker</th>
-		            <?php } else { ?>
-		            <th>Pet Owner</th>
-		            <?php } ?>
 		            <th>Pet Name</th>
 		            <th>Start Date</th>
 		            <th>End Date</th>
@@ -29,16 +28,61 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		    	<?php foreach ($history as $record) { ?>
+		    	<?php foreach ($ownerHistory as $record) { ?>
 		    	<tr>
-		            
+		            <td><?php echo isset($record["person"]) ? $record["person"] : ""; ?></td>
+		            <td><?php echo isset($record["pet_name"]) ? $record["pet_name"] : ""; ?></td>
+		            <td><?php echo isset($record["start_date"]) ? formatDate($record["start_date"]) : ""; ?></td>
+		            <td><?php echo isset($record["end_date"]) ? formatDate($record["end_date"]) : ""; ?></td>
+		            <td><?php echo isset($record["points"]) ? formatMoney($record["points"]) : ""; ?></td>
+		            <td><?php echo isset($record["review"]) ? $record["review"] : "N/A"; ?></td>
+		            <td><?php echo isset($record["rating"]) ? $record["rating"] : "N/A"; ?></td>
+		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/History/reviewForTaker?service_id=<?php echo $record['service_id']; ?>"><i class="far fa-comments"></i></a></td>
 		        </tr>
 		    	<?php } ?>
 		    </tbody>
 		</table>
+		<br>
+		<?php } ?>
+
+		<?php if (isset($_SESSION["isPeter"]) && $_SESSION["isPeter"]) { ?>
+    	<h3><i>As Care Taker</i></h3>
+    	<br>
+        <table id="takerHistory" class="table table-responsive table-striped display">
+		    <thead>
+		        <tr>
+		            <th>Pet Owner</th>
+		            <th>Pet Name</th>
+		            <th>Start Date</th>
+		            <th>End Date</th>
+		            <th>Salary</th>
+		            <th>Review</th>
+		            <th>Rating</th>
+                    <th>Add Review</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	<?php foreach ($takerHistory as $record) { ?>
+		    	<tr>
+		            <td><?php echo isset($record["person"]) ? $record["person"] : ""; ?></td>
+		            <td><?php echo isset($record["pet_name"]) ? $record["pet_name"] : ""; ?></td>
+		            <td><?php echo isset($record["start_date"]) ? formatDate($record["start_date"]) : ""; ?></td>
+		            <td><?php echo isset($record["end_date"]) ? formatDate($record["end_date"]) : ""; ?></td>
+		            <td><?php echo isset($record["points"]) ? formatMoney($record["points"]) : ""; ?></td>
+		            <td><?php echo isset($record["review"]) ? $record["review"] : "N/A"; ?></td>
+		            <td><?php echo isset($record["rating"]) ? $record["rating"] : "N/A"; ?></td>
+		            <td><a role="button" class="btn btn-success" href="<?php echo APP_URL; ?>/History/reviewForOwner?service_id=<?php echo $record['service_id']; ?>"><i class="far fa-comments"></i></a></td>
+		        </tr>
+		    	<?php } ?>
+		    </tbody>
+		</table>
+		<br>
+		<?php } ?>
+
 		<script type="text/javascript">
 			$(document).ready(function () {
-    			$('#history').DataTable();
+				$('#ownerHistory').DataTable();
+    			$('#takerHistory').DataTable();
 			});
 		</script>
     </div>

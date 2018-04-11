@@ -14,7 +14,7 @@ class BiddingController extends Controller {
         }
 
         if (isset($_GET["service_id"]) && isset($_GET["bidder"]) && isset($_GET["pet_name"])) {
-            $serviceID = $_GET["service_id"];
+            $serviceId = $_GET["service_id"];
             $bidder = $_GET["bidder"];
             $petName = $_GET["pet_name"];
             $offerProvider = $_SESSION["username"];
