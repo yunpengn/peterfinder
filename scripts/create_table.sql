@@ -69,7 +69,7 @@ CREATE TABLE service_offers (
   decision_deadline timestamp NOT NULL,
   expected_salary numeric NOT NULL DEFAULT 100,
   created_at timestamp DEFAULT current_timestamp,
-  CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > updated_at),
+  CONSTRAINT "Decision deadline must be in the future." CHECK (decision_deadline > created_at),
   CONSTRAINT "Service start time must be after decision deadline." CHECK (start_date > decision_deadline),
   CONSTRAINT "Service end time must be after start time." CHECK (end_date > start_date),
   CONSTRAINT "Expected salary must be positive." CHECK (expected_salary > 0)
