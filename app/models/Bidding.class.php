@@ -101,31 +101,15 @@ class Bidding {
         return $db->insertOrUpdate($query, array($bidPoint, $serviceId, $_SESSION['username'], $petName));
     }
 
-    public static function getBidStatus(int $serviceId, string $bidder, string $petName): array {
-        if (!isset($_SESSION['username'])) {
-            return array();
-        }
-        $db = new Database();
-        $query = "SELECT * FROM bidding WHERE service_id = ? AND bidder = ? AND pet_name = ?";
-        $result = $db->query($query, array($serviceId, $bidder, $petName));
-        return $result[0];
-    }
-
-    public static function updateBidStatus(string $bidStatus, int $serviceId, string $bidder, string $petName): bool {
-        if (!isset($_SESSION['username'])) {
-            return false;
-        }
-        $db = new Database();
-        $query = "UPDATE bidding SET status = ? WHERE service_id = ? AND bidder = ? AND pet_name = ?";
-        return $db->insertOrUpdate($query, array($bidStatus, $serviceId, $bidder, $petName));
-    }
-
     /**
      * Assign succeed for the given bidder, while assign fail to other bidders who bid for the same offer.
      *
      * @return bool
      */
-    public static function assignSucceedForBidding(string $service_id, string $bidder): bool {
+    public static function assignSucceedForBidding(string $service_id, string $bidder, string $pet_name): bool {
+        if (!isset($_SESSION['username'])) {
+            return false;
+        }
         $db = new Database();
 
         // First update one bidding to 'succeed' and else to 'fail'.
@@ -135,10 +119,10 @@ class Bidding {
         $params = array(array($bidder, $service_id));
 
         // Then create the service history for this service offer.
-        array_push($queries, "INSERT INTO service_history (service_id, owner, pet_name) VALUES ()");
-        array_push($params, array());
+        array_push($queries, "INSERT INTO service_history (service_id, owner, pet_name) VALUES (?, ?, ?)");
+        array_push($params, array($service_id, $bidder, $pet_name));
 
-        return $db->insertOrUpdate($queries, $params);
+        return $db->transact($queries, $params);
     }
 
     /**
@@ -147,14 +131,14 @@ class Bidding {
      * @param int $service_id
      * @return bool
      */
-    public static function delete(int $service_id) {
+    public static function delete(int $service_id, string $pet_name) {
         if (!isset($_SESSION['username'])) {
             return false;
         }
         $db = new Database();
         // Makes sure this pet belongs to the current user.
-        $query = "DELETE FROM bidding WHERE service_id = ?";
-        return $db->insertOrUpdate($query, array($service_id));
+        $query = "DELETE FROM bidding WHERE service_id = ? AND bidder = ? AND pet_name = ?";
+        return $db->insertOrUpdate($query, array($service_id, $_SESSION['username'], $pet_name));
     }
 }
 
