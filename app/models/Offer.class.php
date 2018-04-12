@@ -49,7 +49,7 @@ class Offer {
 		$db = new Database();
 		// First inserts a new row into service_offers table and returns the resulting service_id.
         $query = "INSERT INTO service_offers (provider, start_date, end_date, decision_deadline, expected_salary)"
-            . " VALUES (?, ?, ?, ?, ?) RETURNING service_id";
+            . " VALUES (?, ?, ?, ?, ?) RETURNING service_id;";
         $params = array($_SESSION['username'], $start_date, $end_date, $decision_deadline, $expected_salary);
         $service_id = $db->query($query, $params)[0]["service_id"];
 
@@ -57,7 +57,7 @@ class Offer {
         $queries = array();
         $params = array();
         foreach ($type_selected as $type) {
-            array_push($queries, "INSERT INTO service_target (service_id, type) VALUES (?, ?)");
+            array_push($queries, "INSERT INTO service_target (service_id, type) VALUES (?, ?);");
             array_push($params, array($service_id, $type));
         }
         return $db->transact($queries, $params);
@@ -65,7 +65,7 @@ class Offer {
 
 	public static function queryOffer(string $service_id):array {
 		$db = new Database();
-		$query = "SELECT * FROM service_offers WHERE service_id = ?";
+		$query = "SELECT * FROM service_offers WHERE service_id = ?;";
 		$params = array($service_id);
 
 		return $db->query($query, $params)[0];
@@ -77,14 +77,14 @@ class Offer {
 
         // First updates the row in the service_offers table.
 		$queries = array("UPDATE service_offers SET start_date = ?, end_date = ?, decision_deadline = ?, ".
-			"expected_salary = ? WHERE service_id = ?");
+			"expected_salary = ? WHERE service_id = ?;");
 		$params = array(array($start_date, $end_date, $decision_deadline, $expected_salary, $service_id));
 
         // Then updates the related rows in the service_target table.
-        array_push($queries, "DELETE FROM service_target WHERE service_id = ?");
+        array_push($queries, "DELETE FROM service_target WHERE service_id = ?;");
         array_push($params, array($service_id));
         foreach ($type_selected as $type) {
-            array_push($queries, "INSERT INTO service_target (service_id, type) VALUES (?, ?)");
+            array_push($queries, "INSERT INTO service_target (service_id, type) VALUES (?, ?);");
             array_push($params, array($service_id, $type));
         }
         return $db->transact($queries, $params);
@@ -92,7 +92,7 @@ class Offer {
 
 	public static function checkOfferCreator(string $service_id, string $username): bool {
 		$db = new Database();
-		$query = "SELECT provider FROM service_offers WHERE service_id = ?";
+		$query = "SELECT provider FROM service_offers WHERE service_id = ?;";
 		$result = $db->query($query, array($service_id));
 		return !empty($result) && $result[0]["provider"] == $username;
 	}
@@ -105,13 +105,13 @@ class Offer {
      */
     public static function delete(string $service_id): bool {
 		$db = new Database();
-		$query = "DELETE FROM service_offers WHERE service_id = ? AND provider = ?";
+		$query = "DELETE FROM service_offers WHERE service_id = ? AND provider = ?;";
 		return $db->insertOrUpdate($query, array($service_id, $_SESSION['username']));
 	}
 
 	public static function queryServiceTarget($service_id): array {
 		$db = new Database();
-		$query = "SELECT * FROM service_target WHERE service_id = ?";
+		$query = "SELECT * FROM service_target WHERE service_id = ?;";
 		$result = $db->query($query, array($service_id));
 		return array_map(function($target) { return $target["type"]; }, $result);
 	}

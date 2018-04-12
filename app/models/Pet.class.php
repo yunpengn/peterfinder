@@ -14,7 +14,7 @@ class Pet {
             return array();
         }
         $db = new Database();
-        $query = "SELECT * FROM pets WHERE username = ?";
+        $query = "SELECT * FROM pets WHERE username = ?;";
         $result = $db->query($query, array($_SESSION['username']));
         return $result;
     }
@@ -30,7 +30,7 @@ class Pet {
             return false;
         }
         $db = new Database();
-        $query = "SELECT * FROM pets WHERE username = ? AND pet_name = ?";
+        $query = "SELECT * FROM pets WHERE username = ? AND pet_name = ?;";
         $result = $db->query($query, array($_SESSION['username'], $petName));
         return !empty($result);
     }
@@ -41,7 +41,7 @@ class Pet {
         }
         $db = new Database();
         // Makes sure this pet belongs to the current user.
-        $query = "INSERT INTO pets (username, pet_name, gender, type, birthday, bio) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO pets (username, pet_name, gender, type, birthday, bio) VALUES (?, ?, ?, ?, ?, ?);";
         return $db->insertOrUpdate($query, array($_SESSION['username'], $petName, $gender, $type, $birthday, $bio));
     }
 
@@ -51,7 +51,7 @@ class Pet {
         }
         $db = new Database();
         // Makes sure this pet belongs to the current user.
-        $query = "SELECT * FROM pets WHERE username = ? AND pet_name = ?";
+        $query = "SELECT * FROM pets WHERE username = ? AND pet_name = ?;";
         $result = $db->query($query, array($_SESSION['username'], $petName));
         return $result[0];
     }
@@ -62,7 +62,7 @@ class Pet {
         }
         $db = new Database();
         // Makes sure this pet belongs to the current user.
-        $query = "UPDATE pets SET gender = ?, type = ?, birthday = ?, bio = ? WHERE username = ? AND pet_name = ?";
+        $query = "UPDATE pets SET gender = ?, type = ?, birthday = ?, bio = ? WHERE username = ? AND pet_name = ?;";
         return $db->insertOrUpdate($query, array($gender, $type, $birthday, $bio, $_SESSION['username'], $petName));
     }
 
@@ -78,7 +78,7 @@ class Pet {
         }
         $db = new Database();
         // Makes sure this pet belongs to the current user.
-        $query = "DELETE FROM pets WHERE username = ? AND pet_name = ?";
+        $query = "DELETE FROM pets WHERE username = ? AND pet_name = ?;";
         return $db->insertOrUpdate($query, array($_SESSION['username'], $petName));
     }
 }
