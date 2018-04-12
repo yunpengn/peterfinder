@@ -42,6 +42,28 @@ ON service_offers
 FOR EACH ROW
 EXECUTE PROCEDURE check_service_provider_type();
 
+-- Forbids any update to bidding if there already exists a service history.
+CREATE OR REPLACE FUNCTION forbid_further_bidding()
+RETURNS TRIGGER AS $$
+DECLARE
+	count integer;
+BEGIN
+	SELECT COUNT(*) INTO count FROM service_history h WHERE h.service_id = NEW.service_id;
+	IF count > 0 THEN
+		RAISE EXCEPTION 'This service offer is already confirmed. No further bidding is allowed.';
+		RETURN NULL;
+	END IF;
+	RETURN NEW;
+END; $$
+LANGUAGE PLPGSQL;
+
+--- Checks whether the new biddiing is created/updated after a service history already exists.
+CREATE TRIGGER service_provider_valid_type
+BEFORE INSERT OR UPDATE
+ON bidding
+FOR EACH ROW
+EXECUTE PROCEDURE forbid_further_bidding();
+
 -- Checks that the status of the bidding for a history is 'succeed'.
 CREATE OR REPLACE FUNCTION check_service_history_type()
 RETURNS TRIGGER AS $$
