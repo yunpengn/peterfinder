@@ -65,7 +65,7 @@ if (!hasLogin()) {
 
             <div class="form-group">
                 <label for="score">Average Rating</label>
-                <input type="number" name="score" class="form-control" id="score" value="<?php if (isset($score)) { echo $score; } ?>" accesskey="s" tabindex="7" required autofocus disabled>
+                <input type="text" name="score" class="form-control" id="score" value="<?php if (isset($score)) { echo $score; } ?>" accesskey="s" tabindex="7" required autofocus disabled>
             </div>
 
             <br>

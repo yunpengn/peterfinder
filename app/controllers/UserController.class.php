@@ -153,6 +153,7 @@ class UserController extends Controller {
             User::updateCurrentUserInfo($last_name, $first_name, $gender, $telephone, $bio);
         }
         $info = User::getCurrentUserInfo();
+        $info["score"] = User::getCurrentUserScore();
         // We should not reveal the hashed password to the client side. This can be dangerous.
         unset($info["password"]);
         if (!empty($_POST)) {
