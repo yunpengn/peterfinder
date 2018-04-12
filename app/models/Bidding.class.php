@@ -92,13 +92,14 @@ class Bidding {
         return $result[0];
     }
 
-    public static function updateBidPoint(int $bidPoint, int $serviceId, string $petName): bool {
+    public static function updateBidPoint(float $bidPoint, int $serviceId, string $petName): bool {
         if (!isset($_SESSION['username'])) {
             return false;
         }
         $db = new Database();
+        $newBidPoint = round($bidPoint, 2);
         $query = "UPDATE bidding SET points = ? WHERE service_id = ? AND bidder = ? AND pet_name = ?;";
-        return $db->insertOrUpdate($query, array($bidPoint, $serviceId, $_SESSION['username'], $petName));
+        return $db->insertOrUpdate($query, array($newBidPoint, $serviceId, $_SESSION['username'], $petName));
     }
 
     /**
