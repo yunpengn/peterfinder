@@ -128,6 +128,21 @@ class User {
         return $result[0];
     }
 
+    public static function getCurrentUserScore(): string {
+        if (!isset($_SESSION['username'])) {
+            return array();
+        }
+        $db = new Database();
+        $query = "SELECT * FROM user_profiles WHERE username = ?;";
+        $result = $db->query($query, array($_SESSION['username']));
+        if (count($result) == 2) {
+            $score1 = isset($result[0]["score"]) ? number_format((float)$result[0]["score"], 2, '.', '') : "Unknown";
+            $score2 = isset($result[1]["score"]) ? number_format((float)$result[1]["score"], 2, '.', '') : "Unknown";
+            return $score1 . " / ". $score2;
+        }
+        return $result[0]["score"];
+    }
+
     public static function updateCurrentUserInfo(string $last_name, string $first_name, string $gender, string $telephone, string $bio): bool {
         if (!isset($_SESSION['username'])) {
             return false;
