@@ -8,7 +8,7 @@
 class PetType {
     public static function getAllTypes(): array {
         $db = new Database();
-        $query = "SELECT type, root_type FROM pet_types";
+        $query = "SELECT type, root_type FROM pet_types;";
         $result = $db->query($query, array());
         return $result;
     }

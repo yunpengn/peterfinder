@@ -13,7 +13,7 @@ class User {
      */
     public static function hasByName(string $username): bool {
         $db = new Database();
-        $query = "SELECT * FROM users WHERE username = ?";
+        $query = "SELECT * FROM users WHERE username = ?;";
         $result = $db->query($query, array($username));
         return !empty($result);
     }
@@ -25,7 +25,7 @@ class User {
      */
     public static function hasByEmail(string $email): bool {
         $db = new Database();
-        $query = "SELECT * FROM users WHERE email = ?";
+        $query = "SELECT * FROM users WHERE email = ?;";
         $result = $db->query($query, array($email));
         return !empty($result);
     }
@@ -38,7 +38,7 @@ class User {
      */
     public static function validateByName(string $username, string $password): array {
         $db = new Database();
-        $query = "SELECT * FROM users WHERE username = ?";
+        $query = "SELECT * FROM users WHERE username = ?;";
         $result = $db->query($query, array($username));
 
         // There should exist one row in the result. Otherwise, it means the user does not exist.
@@ -64,7 +64,7 @@ class User {
      */
     public static function validateByEmail(string $email, string $password): array {
         $db = new Database();
-        $query = "SELECT * FROM users WHERE email = ?";
+        $query = "SELECT * FROM users WHERE email = ?;";
         $result = $db->query($query, array($email));
 
         // There should exist one row in the result. Otherwise, it means the user does not exist.
@@ -96,18 +96,18 @@ class User {
         $params = array();
 
         // Creates a new row in the user table.
-        array_push($query, "INSERT INTO users(username, password, email) VALUES (?, ?, ?)");
+        array_push($query, "INSERT INTO users(username, password, email) VALUES (?, ?, ?);");
         array_push($params, array($username, password_hash($password, PASSWORD_BCRYPT), $email));
 
         // Creates a new owner row in the profile table.
         if ($type == "owner" || $type == "both") {
-            array_push($query, "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?)");
+            array_push($query, "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?);");
             array_push($params, array($username, "owner", 0));
         }
 
         // Creates a new care taker row in the profile table.
         if ($type == "peter" || $type == "both") {
-            array_push($query, "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?)");
+            array_push($query, "INSERT INTO user_profiles(username, type, score) VALUES (?, ?, ?);");
             array_push($params, array($username, "peter", 0));
         }
 
@@ -123,7 +123,7 @@ class User {
             return array();
         }
         $db = new Database();
-        $query = "SELECT * FROM users WHERE username = ?";
+        $query = "SELECT * FROM users WHERE username = ?;";
         $result = $db->query($query, array($_SESSION['username']));
         return $result[0];
     }
@@ -133,14 +133,14 @@ class User {
             return false;
         }
         $db = new Database();
-        $query = "UPDATE users SET last_name = ?, first_name = ?, gender = ?, telephone = ?, bio = ? WHERE username = ?";
+        $query = "UPDATE users SET last_name = ?, first_name = ?, gender = ?, telephone = ?, bio = ? WHERE username = ?;";
         $params = array($last_name, $first_name, $gender, $telephone, $bio, $_SESSION['username']);
         return $db->insertOrUpdate($query, $params);
     }
 
     public static function getUserType(string $username):array {
         $db = new Database();
-        $query = "SELECT type FROM user_profiles WHERE username = ?";
+        $query = "SELECT type FROM user_profiles WHERE username = ?;";
         return $db->query($query, array($username));
     }
 }
