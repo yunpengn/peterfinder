@@ -63,6 +63,11 @@ if (!hasLogin()) {
 				<textarea name="bio" class="form-control" id="bio" value="<?php if (isset($bio)) { echo $bio; } ?>" placeholder="Introduce yourself here" accesskey="b" tabindex="6" rows="3"></textarea>
 			</div>
 
+            <div class="form-group">
+                <label for="score">Average Rating</label>
+                <input type="number" name="score" class="form-control" id="score" value="<?php if (isset($score)) { echo $score; } ?>" accesskey="s" tabindex="7" required autofocus disabled>
+            </div>
+
             <br>
             <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="<?php echo APP_URL; ?>" class="btn btn-info">Cancel</a>

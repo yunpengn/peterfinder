@@ -123,7 +123,7 @@ class User {
             return array();
         }
         $db = new Database();
-        $query = "SELECT * FROM users WHERE username = ?;";
+        $query = "SELECT us.username as username, us.email as email, us.password as password, us.avatar as avatar, us.last_name as last_name, us.first_name as first_name, us.gender as gender, us.birthday as birthday, us.telephone as telephone, us.bio as bio, up.score as score FROM (users us INNER JOIN user_profiles up ON us.username = up.username) WHERE us.username = ?;";
         $result = $db->query($query, array($_SESSION['username']));
         return $result[0];
     }
