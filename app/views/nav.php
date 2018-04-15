@@ -1,6 +1,18 @@
 <?php
-function hasLogin() {
+function hasLogin(): bool {
     return isset($_SESSION['authorized']) && $_SESSION['authorized'] == true;
+}
+
+function formatDate(string $date): string {
+    return date_format(date_create($date), DATE_FORMAT);
+}
+
+function formatTime(string $date): string {
+    return date_format(date_create($date), TIME_FORMAT);
+}
+
+function formatMoney(string $number): string {
+    return "$" . number_format((float) $number, 2, '.', ' ');
 }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -12,17 +24,19 @@ function hasLogin() {
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mr-auto">
         <?php if (hasLogin()) { ?>
+            <?php if (isset($_SESSION["isOwner"]) && $_SESSION["isOwner"]) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Pet/index">My Pets</a>
             </li>
+            <?php } ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo APP_URL; ?>/Offer/index">Service Offers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">Service Biddings</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/Bidding/index">Service Biddings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo APP_URL; ?>">Service History</a>
+                <a class="nav-link" href="<?php echo APP_URL; ?>/History/index">Service History</a>
             </li>
         <?php } ?>
         </ul>
@@ -48,3 +62,8 @@ function hasLogin() {
 </nav>
 <br id="break-after-navbar">
 
+<style type="text/css">
+    td {
+        text-align: center;
+    }
+</style>

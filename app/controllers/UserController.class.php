@@ -37,18 +37,31 @@ class UserController extends Controller {
             $authorized = true;
         }
 
+        if ($authorized) {
+            $_SESSION["isOwner"] = $_SESSION["isPeter"] = false;
+            $user_result = User::getUserType($_SESSION['username']);
+
+            for ($i = 0; $i < count($user_result); $i++) {
+                if ($user_result[$i]["type"] == "owner") {
+                    $_SESSION["isOwner"] = true;
+                } else if ($user_result[$i]["type"] == "peter") {
+                    $_SESSION["isPeter"] = true;
+                }
+            }
+        }
+
         if (!$authorized) {
             $data["errorMessage"] = "You have entered an invalid username/email address or password";
             $data["username"] = $usernameOrEmail;
             $data["password"] = $password;
             $this->show("User/login", $data);
         } else {
-            $this->show("index", $data);
+            header("Location:" . APP_URL);
         }
     }
 
     /**
-     * Handles the user signup logic.
+     * Handles the user sign-up logic.
      *
      * @param array $data is the parameters passed in.
      * @throws NotFoundException when the page is not found.
@@ -121,7 +134,7 @@ class UserController extends Controller {
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_destroy();
         }
-        $this->show("index", $data);
+        header("Location:" . APP_URL);
     }
 
     /**
@@ -140,6 +153,7 @@ class UserController extends Controller {
             User::updateCurrentUserInfo($last_name, $first_name, $gender, $telephone, $bio);
         }
         $info = User::getCurrentUserInfo();
+        $info["score"] = User::getCurrentUserScore();
         // We should not reveal the hashed password to the client side. This can be dangerous.
         unset($info["password"]);
         if (!empty($_POST)) {

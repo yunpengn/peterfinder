@@ -13,6 +13,10 @@ class PetController extends Controller {
      * @throws NotFoundException when the page is not found.
      */
     public function index($data = array()) {
+        if (!$this->hasLogin() || !$this->isPetOwner()) {
+            header("Location:" . APP_URL);
+            return;
+        }
         $data["pets"] = Pet::myPets();
         $this->show("Pet/index", $data);
     }
@@ -22,6 +26,10 @@ class PetController extends Controller {
      * @throws NotFoundException
      */
     public function new($data = array()) {
+        if (!$this->hasLogin() || !$this->isPetOwner()) {
+            header("Location:" . APP_URL);
+            return;
+        }
         if (!empty($_POST)) {
             if (!isset($_POST["pet_name"])) {
                 $this->index($data);
@@ -55,8 +63,12 @@ class PetController extends Controller {
      * @throws NotFoundException
      */
     public function edit($data = array()) {
+        if (!$this->hasLogin() || !$this->isPetOwner()) {
+            header("Location:" . APP_URL);
+            return;
+        }
         if (!isset($data["pet_name"])) {
-            $this->index($data);
+            header("Location:" . APP_URL . "/Pet/index");
             return;
         }
         $petName = $data["pet_name"];
@@ -83,8 +95,12 @@ class PetController extends Controller {
      * @throws NotFoundException
      */
     public function delete($data = array()) {
+        if (!$this->hasLogin() || !$this->isPetOwner()) {
+            header("Location:" . APP_URL);
+            return;
+        }
         if (!isset($data["pet_name"])) {
-            $this->index($data);
+            header("Location:" . APP_URL . "/Pet/index");
             return;
         }
         $petName = $data["pet_name"];
