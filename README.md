@@ -36,6 +36,24 @@ Include "C:/WAPP/apps/peterfinder/config/httpd.conf"
 
 We suggest you using [PhpStorm](https://www.jetbrains.com/phpstorm/) by JetBrains.
 
+## To deploy the project
+
+- We are currently using [Heroku](https://www.heroku.com/)'s PaaS (platform-as-a-service). It provides a basic free plan which allows to experiement in a limited sandbox.
+- To deploy the project, make sure you have installed the latest version of [Heroku command-line tool](https://devcenter.heroku.com/articles/heroku-cli) and [Composer](https://devcenter.heroku.com/articles/heroku-cli). Here, we assume you have also installed the latest version of [Git](https://git-scm.com/). You can run the following command to check
+```bash
+heroku -v
+composer --version
+git --version
+```
+- Make sure you have already created a Heroku project on the Heroku control panel. Navigate to your local project repository and add the Heroku project
+```bash
+heroku git:remote -a <your_heroku_project_name>
+```
+- Push the changes to the Heroku server.
+```bash
+git push heroku master
+```
+
 ## Small tips
 
 We have prepared the following tips to help you with the development:
@@ -48,6 +66,7 @@ We hope you are happy with development!
 ## Acknowledgements
 
 - Pexels [https://www.pexels.com/]
+- Heroku [https://www.heroku.com/]
 
 ## Licence
 
