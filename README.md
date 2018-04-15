@@ -45,6 +45,10 @@ heroku -v
 composer --version
 git --version
 ```
+- Run Composer to install all the dependencies and update the `composer.lock` file.
+```bash
+composer update
+```
 - Make sure you have already created a Heroku project on the Heroku control panel. Navigate to your local project repository and add the Heroku project
 ```bash
 heroku git:remote -a <your_heroku_project_name>
@@ -52,6 +56,14 @@ heroku git:remote -a <your_heroku_project_name>
 - Push the changes to the Heroku server.
 ```bash
 git push heroku master
+```
+- To ensure there is at least one instance running:
+```bash
+heroku ps:scale web=1
+```
+- To open the web app in production:
+```bash
+heroku open
 ```
 
 ## Small tips
