@@ -49,6 +49,7 @@ git --version
 ```bash
 composer update
 ```
+- Make sure you have modified `config.php` correctly.
 - Make sure you have already created a Heroku project on the Heroku control panel. Navigate to your local project repository and add the Heroku project
 ```bash
 heroku git:remote -a <your_heroku_project_name>
@@ -57,13 +58,21 @@ heroku git:remote -a <your_heroku_project_name>
 ```bash
 git push heroku master
 ```
-- To ensure there is at least one instance running:
+The command above will _by default_ push the local master branch to Heroku server. If you want to use a local non-master, use the following command instead
 ```bash
-heroku ps:scale web=1
+git push heroku <your_branch_name>:master
+```
+- To check the instances that are running now:
+```bash
+heroku ps
 ```
 - To open the web app in production:
 ```bash
 heroku open
+```
+- To start a remote interactive shell on Heroku server:
+```bash
+heroku run bash
 ```
 
 ## Small tips
