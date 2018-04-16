@@ -19,7 +19,7 @@
         <?php } ?>
         <br>
         
-        <table id="myPets" class="table table-responsive table-striped table-bordered display">
+        <table id="myPets" class="table table-responsive table-striped display">
 		    <thead>
 		        <tr>
 		            <th>Pet Name</th>

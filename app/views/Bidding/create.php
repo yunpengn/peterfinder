@@ -90,7 +90,7 @@
 
             <br>
             <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="<?php echo APP_URL; ?>/Pet/index" class="btn btn-info">Cancel</a>
+            <a href="<?php echo APP_URL; ?>/Bidding/index" class="btn btn-info">Cancel</a>
         </form>
     </div>
     <br>
