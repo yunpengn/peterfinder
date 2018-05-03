@@ -1,4 +1,4 @@
-## Pet Finder
+## Peter Finder
 
 We help you find the peter for your pet. This is a standard PHP+PostgreSQL project. [Bootstrap 4](https://getbootstrap.com/) is used as the front-end framework.
 
