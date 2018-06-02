@@ -41,18 +41,17 @@
 <?php
 // Checks whether the request is on HTTPS.
 function isOnHttps(): bool {
-    // // Allow whatever traffic from localhost loopback.
-    // if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "localhost:8080") {
-    //     return true;
-    // } else if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-    //     return true;
-    // } else if (isset($_SERVER['X-Forwarded-Proto']) && $_SERVER['X-Forwarded-Proto'] == 'https') {
-    //     // Special case when deployed on platform such as Heroku.
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-    return true;
+    // Allow whatever traffic from localhost loopback.
+    if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "localhost:8080") {
+        return true;
+    } else if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+        return true;
+    } else if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+        // Special case when deployed behind a load balancer such as Heroku.
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // Redirect to HTTPS automatically (if not on localhost).
