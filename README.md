@@ -1,4 +1,4 @@
-## Pet Finder
+## Peter Finder
 
 We help you find the peter for your pet. This is a standard PHP+PostgreSQL project. [Bootstrap 4](https://getbootstrap.com/) is used as the front-end framework.
 
@@ -88,6 +88,12 @@ We hope you are happy with development!
 
 - Pexels [https://www.pexels.com/]
 - Heroku [https://www.heroku.com/]
+
+## Contribution to this project
+
+[Peter Finder](https://github.com/yunpengn/peterfinder) was initially a project for [CS2102 Database Systems](https://yunpengn.github.io/CS2102/) at the [School of Computing](https://www.comp.nus.edu.sg), the [National University of Singapore](http://www.nus.edu.sg). We decided to open-source this project on April 26, 2018.
+
+We welcome everyone to contribute to [Peter Finder](https://github.com/yunpengn/peterfinder). Please follow the [guidelines](docs/CONTRIBUTING.md) before staring your contributions.
 
 ## Licence
 
