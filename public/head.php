@@ -39,12 +39,26 @@
 </script>
 
 <?php
+// Checks whether the request is on HTTPS.
+function isOnHttps(): bool {
+    // Allow whatever traffic from localhost loopback.
+    if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "localhost:8080") {
+        return true;
+    } else if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+        return true;
+    } else if (isset($_SERVER['X-Forwarded-Proto']) && $_SERVER['X-Forwarded-Proto'] == 'https') {
+        // Special case when deployed on platform such as Heroku.
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Redirect to HTTPS automatically (if not on localhost).
-if ((!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') && $_SERVER['HTTP_HOST'] != "localhost" && $_SERVER['HTTP_HOST'] != "localhost:8080") {
+if (!isOnHttps()) {
     $redirect_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     header('HTTP/1.1 301 Moved Permanently');
     header("Location: $redirect_url");
     exit();
 }
 ?>
-

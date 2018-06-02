@@ -74,6 +74,10 @@ heroku open
 ```bash
 heroku run bash
 ```
+- To view the logs of your application:
+```bash
+heroku logs --tail
+```
 
 ## Small tips
 
