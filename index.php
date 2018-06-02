@@ -9,6 +9,10 @@
 /**
  * Acts as a router with a facade for the whole application.
  */
+if (!file_exists('config/config.php')) {
+	touch('config/config.php');
+}
+
 require_once 'core/App.class.php';
 require_once 'config/config.php';
 
