@@ -28,7 +28,7 @@ define('DSN', $dsn, true);
 
 // Defines the root path for this app.
 // Change to http://localhost:8080/peterfinder on Mac.
-define('APP_URL', 'https://peterfinder.herokuapp.com/');
+define('APP_URL', 'http://localhost/peterfinder');
 
 // Settings for sending non-reply emails.
 define('EMAIL_ADDRESS', 'random@gmail.com', true);
