@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+// Adds the configuration variables.
+if (file_exists('config/config.php')) {
+	require_once 'config/config.php';
+} else {
+	require_once 'config/config.example.php';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +19,6 @@
  * Acts as a router with a facade for the whole application.
  */
 require_once 'core/App.class.php';
-if (file_exists('config/config.php')) {
-	require_once 'config/config.php';
-} else {
-	require_once 'config/config.example.php';
-}
 
 // Utilizes auto-loading here.
 spl_autoload_register(array("App", "myAutoLoader"));
