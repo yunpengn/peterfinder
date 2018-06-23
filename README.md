@@ -71,8 +71,12 @@ heroku ps
 heroku open
 ```
 - To start a remote interactive shell on Heroku server:
+	- Notice: _This will start a new one-off dyno. In other words, it is a dyno with the same configuration as the running dyno, but they are not the same dyno._
 ```bash
 heroku run bash
+- To access the web dyno that is currently running:
+```bash
+heroku ps:exec
 ```
 - To view the logs of your application:
 ```bash

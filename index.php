@@ -10,7 +10,11 @@
  * Acts as a router with a facade for the whole application.
  */
 require_once 'core/App.class.php';
-require_once 'config/config.php';
+if (file_exists('config/config.php')) {
+	require_once 'config/config.php';
+} else {
+	require_once 'config/config.example.php';
+}
 
 // Utilizes auto-loading here.
 spl_autoload_register(array("App", "myAutoLoader"));
@@ -24,4 +28,3 @@ try {
 ?>
 </body>
 </html>
-
