@@ -27,11 +27,11 @@ define('DSN', $dsn, true);
 
 // Defines the root path for this app.
 // Change to http://localhost:8080/peterfinder on Mac.
-define('APP_URL', 'https://peterfinder.herokuapp.com');
+define('APP_URL', getenv('APP_URL'));
 
 // Settings for sending non-reply emails.
-define('EMAIL_ADDRESS', 'random@gmail.com', true);
-define('EMAIL_PASSWORD', '123456', true);
+define('EMAIL_ADDRESS', getenv('EMAIL_ADDRESS'), true);
+define('EMAIL_PASSWORD', getenv('EMAIL_PASSWORD'), true);
 
 // Settings for datetime format.
 define('DATE_FORMAT', 'd M, Y', true);
