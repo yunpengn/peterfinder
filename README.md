@@ -74,6 +74,7 @@ heroku open
 	- Notice: _This will start a new one-off dyno. In other words, it is a dyno with the same configuration as the running dyno, but they are not the same dyno._
 ```bash
 heroku run bash
+```
 - To access the web dyno that is currently running:
 ```bash
 heroku ps:exec
