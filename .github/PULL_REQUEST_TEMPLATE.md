@@ -2,7 +2,7 @@
 
 <!-- Delete as appropriate. -->
 
-This issue is a new feature implementation / bug fix / codebase refactor.
+This PR is a new feature implementation / bug fix / codebase refactor.
 
 ## Explanation
 
